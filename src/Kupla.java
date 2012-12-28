@@ -1,12 +1,7 @@
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Random;
-
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 
 /**
  * Luokka pelin t‰rkeimmille elementeille, kuplille. Luokassa m‰‰ritell‰‰n
@@ -19,10 +14,9 @@ public class Kupla {
 	private final int sade;
 	private Vari vari;
 	private boolean ehja;
-	private boolean aktiivinen;
 	public static final Random rand = new Random();
-	private int x;
-	private int y;
+	private double x;
+	private double y;
 	private ArrayList<Kupla> ryhma; 
 	private static final Image punainen = 
 			Toolkit.getDefaultToolkit().createImage("media/punainenkupla.png");
@@ -42,13 +36,12 @@ public class Kupla {
 	 * seuraavaksi ammuttavana.
 	 * @param vari
 	 */
-	public Kupla(int x, int y){
+	public Kupla(double x, double y){
 		this.sade = 30;
 		this.ehja = true;
-		this.aktiivinen = true;
 		this.ryhma = new ArrayList<Kupla>();
-		this.x = 228;
-		this.y = 450;
+		this.x = x;
+		this.y = y;
 
 		Vari[] varit = Vari.values();
 		int i = rand.nextInt(varit.length);
@@ -68,7 +61,7 @@ public class Kupla {
 	 * Palauttaa kuplan nykyisen x-koordinaatin.
 	 * @return x-koord
 	 */
-	public int annaX(){
+	public double annaX(){
 		return this.x;
 	}
 	
@@ -76,7 +69,7 @@ public class Kupla {
 	 * Palauttaa kuplan nykyisen y-koordinaatin.
 	 * @return y-koord
 	 */
-	public int annaY(){
+	public double annaY(){
 		return this.y;
 	}
 
@@ -90,14 +83,6 @@ public class Kupla {
 		} return false;
 	}
 
-	/**
-	 * Kertoo, onko kupla aktiivinen eli onko se liikkeess‰.
-	 * @return true, jos kupla aktiivinen, ja false, jos ei.
-	 */
-	public boolean onAktiivinen(){
-			return this.aktiivinen;
-	}
-
 	public boolean koskeeToista(Kupla kohde){
 		//Jos kahden kuplan keskipisteiden et‰isyys toisistaan on sama kuin
 		//kuplien halkaisija (kaikki kuplat samankokoisia), kuplat koskevat
@@ -105,15 +90,6 @@ public class Kupla {
 		//eiv‰t koske toisiaan ja palauttaa false. Nyt palauttaa true ettei
 		//herjaisi.
 		return true;
-	}
-	public void liiku(){
-		//Talla metodilla kupla pitaisi saada liikkumaan suoraan eteenp‰in
-		//sellaisen vektorin mukaan, jonka suuntaan pelaaja kuplan ampuu 
-		//(=eli mihin suuntaan ammus on asteluvun mukaan k‰‰nnetty).
-		//Taytyy myos paattya siihen, etta kupla asetetaan paikalleen kun se
-		//osuu toiseen kuplaan.
-		//ELI niin kauan kuin koskeeToista palauttaa false, liikutaan. Kun
-		//koskeeToista palauttaa true, kutsutaan kosketa()-metodia.
 	}
 
 	/**
@@ -161,6 +137,11 @@ public class Kupla {
 		}
 		return null;
 	}
+	
+	protected void asetaSijainti(double x, double y){
+		this.x = x;
+		this.y = y;
+	}
 
 	/**
 	 * Testailumetodi.
@@ -169,15 +150,5 @@ public class Kupla {
 	public static void main (String[] args){
 		Kupla kupla1 = new Kupla(1, 1);
 		System.out.println("Kuplan v‰ri on " + kupla1.annaVari() + ".");
-		//double arpa = rand.nextDouble();
-		/*if (arpa < 0.6){
-			kupla1.poksahda();
-		}
-
-		if (kupla1.onEhja()){
-			System.out.println("Kupla on ehj‰.");
-		} else {
-			System.out.println("Kupla meni rikki.");
-		}*/
 	}
 }

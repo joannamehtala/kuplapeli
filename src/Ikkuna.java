@@ -1,13 +1,5 @@
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Toolkit;
-
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -49,7 +41,6 @@ public class Ikkuna extends JFrame {
 		this.setLayout(this.asettelu);
 		this.pelipaneeli.setOpaque(false);
 		this.add(this.pelipaneeli, BorderLayout.CENTER);
-		this.pelipaneeli.setPreferredSize(new Dimension(500, 500));
 		this.pack();
 		this.setLocationRelativeTo(this);
 		
