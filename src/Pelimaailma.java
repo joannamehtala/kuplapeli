@@ -26,6 +26,7 @@ public class Pelimaailma extends JPanel implements ActionListener{
 	//private Kupla kuplat[][];
 	private Kupla kupla;
 	private long edellinenhetki;
+	private double aste;
 	private static final Image taustakuva =
 			//new ImageIcon("media/tausta.jpg", "taustakuva");
 			Toolkit.getDefaultToolkit().createImage("media/tausta.jpg");
@@ -41,6 +42,7 @@ public class Pelimaailma extends JPanel implements ActionListener{
 		this.y = 404;
 		this.kupla = new Kupla((int) this.x, (int) this.y);
 		this.edellinenhetki = 0;
+		this.aste = 170;
 		//this.tausta = new JLabel();
 		this.setOpaque(false);
 		this.setPreferredSize(new Dimension(500, 500));
@@ -78,12 +80,24 @@ public class Pelimaailma extends JPanel implements ActionListener{
 		long muutos = System.currentTimeMillis() - this.edellinenhetki;
 		this.edellinenhetki = System.currentTimeMillis();
 		
-		if (x >= 50 && x <= 405){
-			this.x -= muutos*0.1;
+		/*
+		 * Törmättiin vasempaan seinään.
+		 */
+		if (x < 50){
+			double uusiX = this.x + Math.cos(Math.toRadians(aste))*muutos*0.1;
+			double uusiY = this.y - Math.sin(Math.toRadians(aste))*muutos*0.1;
+			//aste = Math.atan2(uusiY - this.y, uusiX - this.x);
+			this.aste = 180 - this.aste;
 		}
+		
+		if (x > 405){
+			this.aste = 180 - this.aste;
+		}
+		
+		this.x += Math.cos(Math.toRadians(aste))*muutos*0.1;
 
 		if (y > 50 && y < 405){
-			this.y -= muutos*0.1;
+			this.y -= Math.sin(Math.toRadians(aste))*muutos*0.1;
 		}
 		repaint();
 	}
