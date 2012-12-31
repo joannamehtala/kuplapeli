@@ -6,5 +6,6 @@
 public enum Vari {
 	
 	KELTAINEN, LIILA, PUNAINEN, VIHREA, SININEN;
+	//TODO tee konstruktori johon saadaan ne kuvat messiin suoraan t‰‰ll‰!
 
 }

@@ -11,7 +11,7 @@ import java.util.Random;
  *
  */
 public class Kupla {
-	private final int sade;
+	private final double sade = 22.5;
 	private Vari vari;
 	private boolean ehja;
 	public static final Random rand = new Random();
@@ -37,7 +37,6 @@ public class Kupla {
 	 * @param vari
 	 */
 	public Kupla(double x, double y){
-		this.sade = 30;
 		this.ehja = true;
 		this.ryhma = new ArrayList<Kupla>();
 		this.x = x;
@@ -81,6 +80,14 @@ public class Kupla {
 		if (this.ehja){
 			return true;
 		} return false;
+	}
+	
+	/**
+	 * Palauttaa kuplan säteen.
+	 * @return sade
+	 */
+	public double annaSade(){
+		return this.sade;
 	}
 
 	public boolean koskeeToista(Kupla kohde){
