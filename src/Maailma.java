@@ -1,28 +1,84 @@
+import java.util.Random;
 
+/**
+ * Maailma-luokka, joka sisältää pelilogiikkaa maailman osalta; pidetään
+ * silmällä pelin kuplien lukumäärää, niiden värejä ja asetetaan kuplat oikeille
+ * paikoilleen.
+ * @author 345480
+ *
+ */
 
 public class Maailma {
+	
+	/**
+	 * Attribuutteina leveys, korkeus, koordinaatit x ja y sekä ammus, joita
+	 * voi olla pelissä vain yksi.
+	 */
 	private int leveys;
 	private int korkeus;
-	private int x;
-	private int y;
+	private double x;
+	private double y;
+	private Pelimaailma pelimaailma;
+	private Tykki tykki;
+	public static Random rand = new Random();
+	private int kuplienLkm;
 
-	public Maailma(){
+	/**
+	 * Maailman konstruktori. Alustetaan attribuutit ja tehdään leveyden ja
+	 * korkeuden tarkistukset, jotta pysytään halutuissa rajoissa.
+	 * @param ammus
+	 */
+	public Maailma(Pelimaailma pelimaailma){
+		/*
+		 * Alustetaan leveys ja korkeus 450:ksi pelikentän halutun koon
+		 * mukaisesti.
+		 */
+		this.pelimaailma = pelimaailma;
 		this.leveys = 450;
-		this.korkeus = 450;
+		this.korkeus = 510;
+		this.tykki = new Tykki(pelimaailma);
+		this.kuplienLkm = rand.nextInt(20);
+		this.x = 50;
+		this.y = 50;
 		
-		if (this.x > this.leveys){
-			this.x = this.leveys;
-		}
-		if (this.y > this.korkeus){
-			this.y = this.korkeus;
+		for (int i = 0; i < kuplienLkm; i++){
+			if (i == 0){
+			Kupla kupla1 = new Kupla(x, y);
+			kupla1.asetaSijainti(x, y);
+			} else if (i < 10){
+				this.x += 45;
+				Kupla kupla2 = new Kupla(x, y);
+				kupla2.asetaSijainti(x, y);
+			} else if (i < 20){
+				this.x += 50;
+				this.y += 45;
+				Kupla kupla3 = new Kupla(x, y);
+				kupla3.asetaSijainti(x, y);
+			}
 		}
 	}
 	
+	/**
+	 * Metodi palauttaa maailman leveyden.
+	 * @return int leveys
+	 */
 	public int annaLeveys(){
 		return this.leveys;
 	}
 	
+	/**
+	 * Metodi palauttaa maailman korkeuden.
+	 * @return int korkeus
+	 */
 	public int annaKorkeus(){
 		return this.korkeus;
+	}
+	
+	/**
+	 * Palauttaa tykin - pelissä saa olla vain yksi tykki.
+	 * @return tykki
+	 */
+	public Tykki annaTykki(){
+		return this.tykki;
 	}
 }

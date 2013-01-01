@@ -15,10 +15,11 @@ public class Ikkuna extends JFrame {
 	 * ja JPanel-tyyppiset paneelit, joihin tulee taustakuva ja itse graafinen
 	 * pelimaailma.
 	 */
-	private BorderLayout asettelu;
+	private BorderLayout layout;
 	private JPanel pelipaneeli;
 	private boolean peliLoppunut;
 	private Maailma maailma;
+	private Pelimaailma pelimaailma;
 	
 	/**
 	 * Ikkunan konstruktorissa alustetaan attribuutit ja asetetaan ikkunalle
@@ -28,17 +29,20 @@ public class Ikkuna extends JFrame {
 	public Ikkuna(){
 		
 		/*
-		 * Alustetaan attribuutit.
+		 * Alustetaan attribuutit; luodaan uusi layout ja asetetaan maailmaksi
+		 * uusi maailma joka ottaa parametrinaan pelipaneelin paikalle luotavan
+		 * pelimaailman.
 		 */
-		this.asettelu = new BorderLayout();
-		this.maailma = new Maailma();
-		this.pelipaneeli = new Pelimaailma(maailma, this);
+		this.layout = new BorderLayout();
+		this.maailma = new Maailma(this.pelimaailma);
+		this.pelimaailma = new Pelimaailma(this.maailma, this);
+		this.pelipaneeli = this.pelimaailma;
 		
 		/*
 		 * Asetetaan otsikko, asettelu, koko sekä aukeamiskohta.
 		 */
 		this.setTitle("Kuplapeli");
-		this.setLayout(this.asettelu);
+		this.setLayout(this.layout);
 		this.pelipaneeli.setOpaque(false);
 		this.add(this.pelipaneeli, BorderLayout.CENTER);
 		this.pack();

@@ -1,7 +1,9 @@
+
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Random;
+
 
 /**
  * Luokka pelin t‰rkeimmille elementeille, kuplille. Luokassa m‰‰ritell‰‰n
@@ -148,14 +150,5 @@ public class Kupla {
 	protected void asetaSijainti(double x, double y){
 		this.x = x;
 		this.y = y;
-	}
-
-	/**
-	 * Testailumetodi.
-	 * @param args
-	 */
-	public static void main (String[] args){
-		Kupla kupla1 = new Kupla(1, 1);
-		System.out.println("Kuplan v‰ri on " + kupla1.annaVari() + ".");
 	}
 }
