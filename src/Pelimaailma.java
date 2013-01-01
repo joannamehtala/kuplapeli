@@ -35,6 +35,7 @@ public class Pelimaailma extends JPanel implements MouseListener,
 			Toolkit.getDefaultToolkit().createImage("media/taustakuva.png");
 	public static double seurattux;
 	public static double seurattuy;
+	public double kulma;
 	private static boolean klikattu;
 
 	/**
@@ -48,7 +49,7 @@ public class Pelimaailma extends JPanel implements MouseListener,
 	public Pelimaailma(Maailma maailma, Ikkuna ikkuna){
 		this.maailma = maailma;
 		this.ikkuna = ikkuna;
-		this.kupla = new AktiivinenKupla(228, 464, this);
+		this.kupla = maailma.annaNykyinen();
 		this.ohjaaja = new Ohjaaja(this, kupla);
 		this.setOpaque(false);
 		this.setPreferredSize(new Dimension(maailma.annaLeveys() + 50,
@@ -124,17 +125,21 @@ public class Pelimaailma extends JPanel implements MouseListener,
 		int hiiriy = arg0.getY();
 		double x = hiirix - 250;
 		double y = hiiriy - 465;
-		double kulma = Math.atan(y / x);
+		this.kulma = Math.atan(y / x);
 		
 		if (hiirix >= 250){
-			seurattux = Math.cos(kulma)*15;
-			seurattuy = Math.sin(kulma)*15;
+			seurattux = Math.cos(this.kulma)*15;
+			seurattuy = Math.sin(this.kulma)*15;
 		} else {
-			seurattux = Math.cos(kulma)*-15;
-			seurattuy = Math.sin(kulma)*-15;
+			seurattux = Math.cos(this.kulma)*-15;
+			seurattuy = Math.sin(this.kulma)*-15;
 		}
 		
 		this.repaint();
 
+	}
+	
+	public double annaKulma(){
+		return this.kulma;
 	}
 }

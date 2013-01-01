@@ -40,8 +40,6 @@ public class Ohjaaja implements ActionListener{
 		this.timer = new Timer(10, this);
 		this.pelimaailma = pelimaailma;
 		this.timer.start();
-		/*this.klikattu = false;
-		this.hiirikuuntelija = this;*/
 	}
 
 	/**

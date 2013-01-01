@@ -22,6 +22,9 @@ public class Maailma {
 	private Tykki tykki;
 	public static Random rand = new Random();
 	private int kuplienLkm;
+	private boolean peliLoppunut;
+	private AktiivinenKupla nykyinen;
+	private AktiivinenKupla seuraava;
 
 	/**
 	 * Maailman konstruktori. Alustetaan attribuutit ja tehd‰‰n leveyden ja
@@ -38,6 +41,8 @@ public class Maailma {
 		this.korkeus = 510;
 		this.tykki = new Tykki(pelimaailma);
 		this.kuplienLkm = rand.nextInt(20);
+		this.nykyinen = new AktiivinenKupla(228, 464, pelimaailma);
+		this.seuraava = new AktiivinenKupla(260, 500, pelimaailma);
 		this.x = 50;
 		this.y = 50;
 		
@@ -80,5 +85,23 @@ public class Maailma {
 	 */
 	public Tykki annaTykki(){
 		return this.tykki;
+	}
+	
+	public AktiivinenKupla annaNykyinen(){
+		return this.nykyinen;
+	}
+	
+	public AktiivinenKupla annaSeuraava(){
+		return this.seuraava;
+	}
+	
+	/**
+	 * Metodi palauttaa tiedon siit‰, onko peli ohi vai ei.
+	 * @return true, jos peli on loppunut, ja false, jos se on viel‰ k‰ynniss‰.
+	 */
+	public boolean peliOhi(){
+		if (this.peliLoppunut){
+			return true;
+		} return false;
 	}
 }

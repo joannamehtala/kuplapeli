@@ -8,8 +8,6 @@ public class Tykki {
 	private Pelimaailma pelimaailma;
 	private double x;
 	private double y;
-	private static final Image kuva =
-			Toolkit.getDefaultToolkit().createImage("media/lol.png");
 	
 	public Tykki(Pelimaailma pelimaailma){
 		this.pelimaailma = pelimaailma;
@@ -17,10 +15,6 @@ public class Tykki {
 		this.y = 402;
 		this.nykyinenKupla = new AktiivinenKupla(250, 404, pelimaailma);
 		this.seuraavaKupla = new AktiivinenKupla(290, 455, pelimaailma);
-	}
-	
-	public Image annaKuva(){
-		return kuva;
 	}
 	
 	public Kupla annaNykyinen(){
