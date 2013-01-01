@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.JFrame;
@@ -11,7 +12,7 @@ import javax.swing.JPanel;
  *
  */
 @SuppressWarnings("serial")
-public class Ikkuna extends JFrame implements MouseMotionListener{
+public class Ikkuna extends JFrame implements MouseMotionListener, MouseListener{
 	
 	/**
 	 * Asetetaan attribuuteiksi asettelu, joka toteutetaan BorderLayoutilla,
@@ -25,6 +26,7 @@ public class Ikkuna extends JFrame implements MouseMotionListener{
 	private Pelimaailma pelimaailma;
 	public static double seurattux;
 	public static double seurattuy;
+	private static boolean klikattu;
 	
 	/**
 	 * Ikkunan konstruktorissa alustetaan attribuutit ja asetetaan ikkunalle
@@ -42,7 +44,9 @@ public class Ikkuna extends JFrame implements MouseMotionListener{
 		this.maailma = new Maailma(this.pelimaailma);
 		this.pelimaailma = new Pelimaailma(this.maailma, this);
 		this.pelipaneeli = this.pelimaailma;
+		klikattu = false;
 		this.addMouseMotionListener(this);
+		this.addMouseListener(this);
 		
 		/*
 		 * Asetetaan otsikko, asettelu, koko sekä aukeamiskohta.
@@ -94,6 +98,41 @@ public class Ikkuna extends JFrame implements MouseMotionListener{
 		
 		this.pelimaailma.repaint();
 
+	}
+	
+	public static boolean onKlikattu(){
+		return klikattu;
+	}
+	
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		this.klikattu = true;
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	/**

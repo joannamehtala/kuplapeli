@@ -15,7 +15,7 @@ import javax.swing.Timer;
  * @author 345480
  *
  */
-public class Ohjaaja implements ActionListener, MouseListener{
+public class Ohjaaja implements ActionListener{
 
 	/**
 	 * Asetetaan attribuuteiksi edellinenhetki, joka kertoo aikaisemman
@@ -27,7 +27,7 @@ public class Ohjaaja implements ActionListener, MouseListener{
 	private Timer timer;
 	private Pelimaailma pelimaailma;
 	private AktiivinenKupla aktiivinenkupla;
-	private Tykki tykki;
+	//private boolean klikattu;
 
 	/**
 	 * Ohjaajan konstruktori. Parametreina annetaan pelimaailma ja aktiivinen-
@@ -40,7 +40,8 @@ public class Ohjaaja implements ActionListener, MouseListener{
 		this.timer = new Timer(10, this);
 		this.pelimaailma = pelimaailma;
 		this.timer.start();
-		this.tykki = new Tykki(pelimaailma);
+		/*this.klikattu = false;
+		this.hiirikuuntelija = this;*/
 	}
 
 	/**
@@ -62,39 +63,10 @@ public class Ohjaaja implements ActionListener, MouseListener{
 		long muutos = System.currentTimeMillis() - this.edellinenhetki;
 		this.edellinenhetki = System.currentTimeMillis();
 
-		this.aktiivinenkupla.liiku(muutos);
-
-		this.pelimaailma.repaint();
-
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		if (Ikkuna.onKlikattu()){
+			this.aktiivinenkupla.liiku(muutos);
+			this.pelimaailma.repaint();
+		}
 	}
 
 	/*

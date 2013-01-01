@@ -60,9 +60,9 @@ public class Pelimaailma extends JPanel {
 		g2d.drawLine(250, 465, (int) Ikkuna.seurattux + 250, 
 				(int) Ikkuna.seurattuy + 450);
 		
-		Graphics2D g2d2 = (Graphics2D)g;
+		/*Graphics2D g2d2 = (Graphics2D)g;
 		g2d2.translate(25, 50);
 		g2d2.rotate(0, 200, 410);
-		g2d2.drawImage(this.maailma.annaTykki().annaKuva(), 200, 410, this);
+		g2d2.drawImage(this.maailma.annaTykki().annaKuva(), 200, 410, this);*/
 	}
 }
