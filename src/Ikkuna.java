@@ -1,4 +1,7 @@
 import java.awt.BorderLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -8,7 +11,7 @@ import javax.swing.JPanel;
  *
  */
 @SuppressWarnings("serial")
-public class Ikkuna extends JFrame {
+public class Ikkuna extends JFrame implements MouseMotionListener{
 	
 	/**
 	 * Asetetaan attribuuteiksi asettelu, joka toteutetaan BorderLayoutilla,
@@ -20,6 +23,8 @@ public class Ikkuna extends JFrame {
 	private boolean peliLoppunut;
 	private Maailma maailma;
 	private Pelimaailma pelimaailma;
+	public static double seurattux;
+	public static double seurattuy;
 	
 	/**
 	 * Ikkunan konstruktorissa alustetaan attribuutit ja asetetaan ikkunalle
@@ -37,6 +42,7 @@ public class Ikkuna extends JFrame {
 		this.maailma = new Maailma(this.pelimaailma);
 		this.pelimaailma = new Pelimaailma(this.maailma, this);
 		this.pelipaneeli = this.pelimaailma;
+		this.addMouseMotionListener(this);
 		
 		/*
 		 * Asetetaan otsikko, asettelu, koko sekä aukeamiskohta.
@@ -62,6 +68,32 @@ public class Ikkuna extends JFrame {
 		if (this.peliLoppunut){
 			return true;
 		} return false;
+	}
+	
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
+		int hiirix = arg0.getX();
+		int hiiriy = arg0.getY();
+		double x = hiirix - 250;
+		double y = hiiriy - 465;
+		double kulma = Math.atan(y / x);
+		
+		if (hiirix >= 250){
+			seurattux = Math.cos(kulma)*15;
+			seurattuy = Math.sin(kulma)*15;
+		} else {
+			seurattux = Math.cos(kulma)*-15;
+			seurattuy = Math.sin(kulma)*-15;
+		}
+		
+		this.pelimaailma.repaint();
+
 	}
 	
 	/**

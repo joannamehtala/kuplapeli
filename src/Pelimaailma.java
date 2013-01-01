@@ -1,4 +1,5 @@
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -55,6 +56,9 @@ public class Pelimaailma extends JPanel {
 		g2d.drawImage(taustakuva, 0, 0, this);
 		g2d.drawImage(kupla.annaKuva(),
 				(int) kupla.annaX(), (int) kupla.annaY(), this);
+		g2d.setColor(Color.WHITE);
+		g2d.drawLine(250, 465, (int) Ikkuna.seurattux + 250, 
+				(int) Ikkuna.seurattuy + 450);
 		
 		Graphics2D g2d2 = (Graphics2D)g;
 		g2d2.translate(25, 50);

@@ -1,6 +1,9 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import java.awt.event.KeyListener;
 
@@ -12,7 +15,7 @@ import javax.swing.Timer;
  * @author 345480
  *
  */
-public class Ohjaaja implements ActionListener, KeyListener{
+public class Ohjaaja implements ActionListener, MouseListener{
 
 	/**
 	 * Asetetaan attribuuteiksi edellinenhetki, joka kertoo aikaisemman
@@ -66,6 +69,36 @@ public class Ohjaaja implements ActionListener, KeyListener{
 	}
 
 	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/*
+	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_LEFT){
 			//vasenta nuolinäppäintä painettaessa
@@ -77,11 +110,9 @@ public class Ohjaaja implements ActionListener, KeyListener{
 
 		if (e.getKeyCode() == KeyEvent.VK_SPACE){
 			//spacebaria painettaessa
-			this.tykki.ammu();
 		}
-
-		this.pelimaailma.repaint();
 	}
+
 
 	@Override
 	public void keyReleased(KeyEvent e) {
@@ -93,5 +124,5 @@ public class Ohjaaja implements ActionListener, KeyListener{
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 
-	}
+	}*/
 }
