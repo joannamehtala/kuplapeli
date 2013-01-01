@@ -63,7 +63,7 @@ public class Ohjaaja implements ActionListener{
 		long muutos = System.currentTimeMillis() - this.edellinenhetki;
 		this.edellinenhetki = System.currentTimeMillis();
 
-		if (Ikkuna.onKlikattu()){
+		if (Pelimaailma.onKlikattu()){
 			this.aktiivinenkupla.liiku(muutos);
 			this.pelimaailma.repaint();
 		}

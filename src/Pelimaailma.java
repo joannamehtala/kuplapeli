@@ -5,6 +5,10 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+
 import javax.swing.JPanel;
 
 /**
@@ -13,7 +17,8 @@ import javax.swing.JPanel;
  * @author Joanna
  *
  */
-public class Pelimaailma extends JPanel {
+public class Pelimaailma extends JPanel implements MouseListener,
+			MouseMotionListener {
 
 	/**
 	 * Swingin takia tuollainen attribuutti, muuten valittaa.
@@ -28,6 +33,9 @@ public class Pelimaailma extends JPanel {
 	private AktiivinenKupla kupla;
 	private static final Image taustakuva =
 			Toolkit.getDefaultToolkit().createImage("media/taustakuva.png");
+	public static double seurattux;
+	public static double seurattuy;
+	private static boolean klikattu;
 
 	/**
 	 * Pelimaailman konstruktori, jossa alustetaan attribuutit ja asetetaan
@@ -45,6 +53,9 @@ public class Pelimaailma extends JPanel {
 		this.setOpaque(false);
 		this.setPreferredSize(new Dimension(maailma.annaLeveys() + 50,
 				maailma.annaKorkeus() + 90));
+		klikattu = false;
+		this.addMouseMotionListener(this);
+		this.addMouseListener(this);
 	}
 
 	/**
@@ -57,12 +68,73 @@ public class Pelimaailma extends JPanel {
 		g2d.drawImage(kupla.annaKuva(),
 				(int) kupla.annaX(), (int) kupla.annaY(), this);
 		g2d.setColor(Color.WHITE);
-		g2d.drawLine(250, 465, (int) Ikkuna.seurattux + 250, 
-				(int) Ikkuna.seurattuy + 450);
-		
+		g2d.drawLine(250, 465, (int) seurattux + 250, 
+				(int) seurattuy + 450);
+
 		/*Graphics2D g2d2 = (Graphics2D)g;
 		g2d2.translate(25, 50);
 		g2d2.rotate(0, 200, 410);
 		g2d2.drawImage(this.maailma.annaTykki().annaKuva(), 200, 410, this);*/
+	}
+
+	public static boolean onKlikattu(){
+		return klikattu;
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		this.klikattu = true;
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+	
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
+		int hiirix = arg0.getX();
+		int hiiriy = arg0.getY();
+		double x = hiirix - 250;
+		double y = hiiriy - 465;
+		double kulma = Math.atan(y / x);
+		
+		if (hiirix >= 250){
+			seurattux = Math.cos(kulma)*15;
+			seurattuy = Math.sin(kulma)*15;
+		} else {
+			seurattux = Math.cos(kulma)*-15;
+			seurattuy = Math.sin(kulma)*-15;
+		}
+		
+		this.repaint();
+
 	}
 }
