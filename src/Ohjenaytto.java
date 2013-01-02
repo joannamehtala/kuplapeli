@@ -19,13 +19,25 @@ public class Ohjenaytto extends JPanel {
 	private static Image ohjenakyma = 
 			Toolkit.getDefaultToolkit().createImage("media/ohjenakyma.png");
 	private Ikkuna ikkuna;
+	private JButton takaisin;
+	private static ImageIcon takaisin_normal = new ImageIcon("media/takaisin.png");
 	private Border reunus = BorderFactory.createEmptyBorder();
+	private Insets insets;
 	
 	public Ohjenaytto(Ikkuna ikkuna){
 		this.ikkuna = ikkuna;
 		this.setPreferredSize(new Dimension(500, 600));
 		this.setLayout(null);
-		Insets insets = this.getInsets();
+		this.insets = this.getInsets();
+		this.takaisin = new JButton();
+		this.takaisin.setPreferredSize(new Dimension(100, 50));
+		this.takaisin.setIcon(takaisin_normal);
+		this.takaisin.setBorder(this.reunus);
+		this.takaisin.addMouseListener(new Hiirikuuntelija_Takaisin(this, this.ikkuna));
+		this.add(this.takaisin);
+		this.takaisin.setBounds(200 + this.insets.left, 420 + this.insets.top, 
+				100, 50);
+		
 	}
 	
 	public void paintComponent(Graphics g){
@@ -34,4 +46,7 @@ public class Ohjenaytto extends JPanel {
 		g2d.drawImage(ohjenakyma, 0, 0, this);
 	}
 	
+	public void takaisin_asetaKuva(ImageIcon i){
+		this.takaisin.setIcon(i);
+	}
 }
