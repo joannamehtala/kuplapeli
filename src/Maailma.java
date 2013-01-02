@@ -37,10 +37,10 @@ public class Maailma {
 		 */
 		this.pelimaailma = pelimaailma;
 		this.leveys = 450;
-		this.korkeus = 510;
+		this.korkeus = 500;
 		this.kuplienLkm = rand.nextInt(20);
-		this.nykyinen = new AktiivinenKupla(228, 464, pelimaailma, this);
-		this.seuraava = new AktiivinenKupla(228, 509, pelimaailma, this);
+		this.nykyinen = new AktiivinenKupla(228, 454, pelimaailma, this);
+		this.seuraava = new AktiivinenKupla(228, 499, pelimaailma, this);
 		this.x = 50;
 		this.y = 50;
 		

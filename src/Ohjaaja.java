@@ -27,7 +27,6 @@ public class Ohjaaja implements ActionListener{
 	private Timer timer;
 	private Pelimaailma pelimaailma;
 	private AktiivinenKupla aktiivinenkupla;
-	//private boolean klikattu;
 
 	/**
 	 * Ohjaajan konstruktori. Parametreina annetaan pelimaailma ja aktiivinen-

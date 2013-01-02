@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -33,7 +34,7 @@ public class Pelimaailma extends JPanel implements MouseListener,
 	private AktiivinenKupla nykyinen;
 	private AktiivinenKupla seuraava;
 	private static final Image taustakuva =
-			Toolkit.getDefaultToolkit().createImage("media/taustakuva.png");
+			Toolkit.getDefaultToolkit().createImage("media/taustakuva1.png");
 	public static double seurattux;
 	public static double seurattuy;
 	public double kulma;
@@ -55,7 +56,7 @@ public class Pelimaailma extends JPanel implements MouseListener,
 		this.ohjaaja = new Ohjaaja(this, nykyinen);
 		this.setOpaque(false);
 		this.setPreferredSize(new Dimension(maailma.annaLeveys() + 50,
-				maailma.annaKorkeus() + 90));
+				maailma.annaKorkeus() + 100));
 		this.klikattu = false;
 		this.addMouseMotionListener(this);
 		this.addMouseListener(this);
@@ -73,8 +74,8 @@ public class Pelimaailma extends JPanel implements MouseListener,
 		g2d.drawImage(seuraava.annaKuva(), (int) seuraava.annaX(),
 				(int) seuraava.annaY(), this);
 		g2d.setColor(Color.WHITE);
-		g2d.drawLine(250, 465, (int) seurattux + 250, 
-				(int) seurattuy + 450);
+		g2d.drawLine(250, 475, (int) seurattux + 250, 
+				(int) seurattuy + 454);
 
 		/*Graphics2D g2d2 = (Graphics2D)g;
 		g2d2.translate(25, 50);
@@ -127,9 +128,9 @@ public class Pelimaailma extends JPanel implements MouseListener,
 	public void mouseMoved(MouseEvent arg0) {
 		int hiirix = arg0.getX();
 		int hiiriy = arg0.getY();
-		double x = hiirix - 250;
-		double y = hiiriy - 465;
-		this.kulma = Math.atan(y / x);
+		double deltax = hiirix - 250;
+		double deltay = hiiriy - 454;
+		this.kulma = Math.atan(deltay / deltax);
 		
 		if (hiirix >= 250){
 			seurattux = Math.cos(this.kulma)*15;

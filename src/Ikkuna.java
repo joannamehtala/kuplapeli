@@ -28,9 +28,12 @@ public class Ikkuna extends JFrame {
 	private CardLayout naytot;
 	private Aloitusnaytto aloitusnaytto;
 	private Pelimaailma pelimaailma;
+	private Ohjenaytto ohjenaytto;
 	private Maailma maailma;
+	private JPanel paneeli;
 	private static final String ALOITUSNAYTTO = "aloitusnaytto";
 	private static final String PELIMAAILMA = "pelimaailma";
+	private static final String OHJENAYTTO = "ohjenaytto";
 
 	/**
 	 * Ikkunan konstruktorissa alustetaan attribuutit ja asetetaan ikkunalle
@@ -50,6 +53,8 @@ public class Ikkuna extends JFrame {
 		this.aloitusnaytto = new Aloitusnaytto(this);
 		this.maailma = new Maailma(this.pelimaailma);
 		this.pelimaailma = new Pelimaailma(this.maailma, this);
+		this.ohjenaytto = new Ohjenaytto(this);
+		this.paneeli = new JPanel();
 		
 
 		/*
@@ -58,9 +63,12 @@ public class Ikkuna extends JFrame {
 		 */
 		
 		this.setTitle("Kuplapeli");
+		//this.setLayout(layout);
+		//this.add(paneeli, BorderLayout.CENTER);
 		this.setLayout(naytot);
 		this.add(this.aloitusnaytto, ALOITUSNAYTTO);
 		this.add(this.pelimaailma, PELIMAAILMA);
+		this.add(this.ohjenaytto, OHJENAYTTO);
 		this.pack();
 		this.setLocationRelativeTo(this);
 		this.setResizable(false);
@@ -82,6 +90,10 @@ public class Ikkuna extends JFrame {
 
 	public void vaihdaPelimaailmaan(){
 		this.naytot.show(this.getContentPane(), PELIMAAILMA);
+	}
+	
+	public void vaihdaOhjenayttoon(){
+		this.naytot.show(this.getContentPane(), OHJENAYTTO);
 	}
 	/**
 	 * P‰‰ohjelmametodi, jossa luodaan uusi ikkuna ja asetetaan se n‰kyv‰ksi.
