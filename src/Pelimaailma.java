@@ -30,13 +30,14 @@ public class Pelimaailma extends JPanel implements MouseListener,
 	private Maailma maailma;
 	private Ikkuna ikkuna;
 	private Ohjaaja ohjaaja;
-	private AktiivinenKupla kupla;
+	private AktiivinenKupla nykyinen;
+	private AktiivinenKupla seuraava;
 	private static final Image taustakuva =
 			Toolkit.getDefaultToolkit().createImage("media/taustakuva.png");
 	public static double seurattux;
 	public static double seurattuy;
 	public double kulma;
-	private static boolean klikattu;
+	private boolean klikattu;
 
 	/**
 	 * Pelimaailman konstruktori, jossa alustetaan attribuutit ja asetetaan
@@ -49,12 +50,13 @@ public class Pelimaailma extends JPanel implements MouseListener,
 	public Pelimaailma(Maailma maailma, Ikkuna ikkuna){
 		this.maailma = maailma;
 		this.ikkuna = ikkuna;
-		this.kupla = maailma.annaNykyinen();
-		this.ohjaaja = new Ohjaaja(this, kupla);
+		this.nykyinen = maailma.annaNykyinen();
+		this.seuraava = maailma.annaSeuraava();
+		this.ohjaaja = new Ohjaaja(this, nykyinen);
 		this.setOpaque(false);
 		this.setPreferredSize(new Dimension(maailma.annaLeveys() + 50,
 				maailma.annaKorkeus() + 90));
-		klikattu = false;
+		this.klikattu = false;
 		this.addMouseMotionListener(this);
 		this.addMouseListener(this);
 	}
@@ -66,8 +68,10 @@ public class Pelimaailma extends JPanel implements MouseListener,
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.drawImage(taustakuva, 0, 0, this);
-		g2d.drawImage(kupla.annaKuva(),
-				(int) kupla.annaX(), (int) kupla.annaY(), this);
+		g2d.drawImage(nykyinen.annaKuva(),
+				(int) nykyinen.annaX(), (int) nykyinen.annaY(), this);
+		g2d.drawImage(seuraava.annaKuva(), (int) seuraava.annaX(),
+				(int) seuraava.annaY(), this);
 		g2d.setColor(Color.WHITE);
 		g2d.drawLine(250, 465, (int) seurattux + 250, 
 				(int) seurattuy + 450);
@@ -78,8 +82,8 @@ public class Pelimaailma extends JPanel implements MouseListener,
 		g2d2.drawImage(this.maailma.annaTykki().annaKuva(), 200, 410, this);*/
 	}
 
-	public static boolean onKlikattu(){
-		return klikattu;
+	public boolean onKlikattu(){
+		return this.klikattu;
 	}
 
 	@Override

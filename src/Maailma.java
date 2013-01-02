@@ -19,7 +19,6 @@ public class Maailma {
 	private double x;
 	private double y;
 	private Pelimaailma pelimaailma;
-	private Tykki tykki;
 	public static Random rand = new Random();
 	private int kuplienLkm;
 	private boolean peliLoppunut;
@@ -39,10 +38,9 @@ public class Maailma {
 		this.pelimaailma = pelimaailma;
 		this.leveys = 450;
 		this.korkeus = 510;
-		this.tykki = new Tykki(pelimaailma);
 		this.kuplienLkm = rand.nextInt(20);
-		this.nykyinen = new AktiivinenKupla(228, 464, pelimaailma);
-		this.seuraava = new AktiivinenKupla(260, 500, pelimaailma);
+		this.nykyinen = new AktiivinenKupla(228, 464, pelimaailma, this);
+		this.seuraava = new AktiivinenKupla(228, 509, pelimaailma, this);
 		this.x = 50;
 		this.y = 50;
 		
@@ -77,14 +75,6 @@ public class Maailma {
 	 */
 	public int annaKorkeus(){
 		return this.korkeus;
-	}
-	
-	/**
-	 * Palauttaa tykin - pelissä saa olla vain yksi tykki.
-	 * @return tykki
-	 */
-	public Tykki annaTykki(){
-		return this.tykki;
 	}
 	
 	public AktiivinenKupla annaNykyinen(){

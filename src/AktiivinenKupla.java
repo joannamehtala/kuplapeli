@@ -3,12 +3,13 @@ import java.util.Random;
 
 public class AktiivinenKupla extends Kupla {
 	private double aste;
-	private double lahtokulma;
 	public static Random rand = new Random();
+	private Maailma maailma;
 
-	public AktiivinenKupla(double x, double y, Pelimaailma p){
+	public AktiivinenKupla(double x, double y, Pelimaailma p, Maailma m){
 		super(x, y);
 		this.aste = rand.nextInt(181);
+		this.maailma = m;
 	}
 
 	/**
