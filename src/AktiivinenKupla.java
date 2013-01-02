@@ -12,6 +12,7 @@ public class AktiivinenKupla extends Kupla {
 		this.maailma = m;
 		this.pelimaailma = m.annaPelimaailma();
 		//this.aste = rand.nextInt(181);
+		//this.aste = 45;
 	}
 
 	/**

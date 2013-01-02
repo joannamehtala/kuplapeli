@@ -126,7 +126,11 @@ MouseMotionListener {
 		this.kulma = Math.toDegrees(Math.atan2(deltay, deltax));
 		
 		if (this.kulma < 0){
-			kulma += 360;
+			kulma = 1;
+		}
+		
+		if (this.kulma > 180){
+			kulma = 179;
 		}
 
 		/*if (hiirix >= 250){

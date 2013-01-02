@@ -4,8 +4,6 @@ import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.Image;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -13,9 +11,19 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-
+/**
+ * Ohjen‰ytˆn luokka. Ohjen‰ytˆll‰ n‰kyv‰t pelin ohjeet ja lis‰ksi se sis‰lt‰‰
+ * nappulan, josta voi palata takaisin aloitusn‰yttˆˆn.
+ * @author Joanna
+ *
+ */
+@SuppressWarnings("serial")
 public class Ohjenaytto extends JPanel {
 	
+	/**
+	 * Attribuuteiksi annetaan ohjen‰kym‰n taustakuva ja takaisin-nappulan kuva.
+	 * Lis‰ksi annetaan itse nappula, ikkuna, tyhj‰ reunus ja insetsit.
+	 */
 	private static Image ohjenakyma = 
 			Toolkit.getDefaultToolkit().createImage("media/ohjenakyma.png");
 	private Ikkuna ikkuna;
@@ -24,10 +32,23 @@ public class Ohjenaytto extends JPanel {
 	private Border reunus = BorderFactory.createEmptyBorder();
 	private Insets insets;
 	
+	/**
+	 * Konstruktorissa alustetaan attribuutit, asetetaan haluttu koko,
+	 * asetetaan tyhj‰ LayoutManager jotta voidaan m‰‰ritell‰ pikseleiden
+	 * avulla nappulan paikka ja lis‰t‰‰n nappula ominaisuuksineen.
+	 * @param ikkuna
+	 */
 	public Ohjenaytto(Ikkuna ikkuna){
+		
+		/*
+		 * Asetetaan paneelille koko ja tyhj‰ asettelija.
+		 */
 		this.ikkuna = ikkuna;
 		this.setPreferredSize(new Dimension(500, 600));
 		this.setLayout(null);
+		/*
+		 * M‰‰ritell‰‰n ominaisuuksia napille.
+		 */
 		this.insets = this.getInsets();
 		this.takaisin = new JButton();
 		this.takaisin.setPreferredSize(new Dimension(100, 50));
@@ -40,12 +61,21 @@ public class Ohjenaytto extends JPanel {
 		
 	}
 	
+	/**
+	 * Piirret‰‰n ruudulle taustakuva.
+	 */
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.drawImage(ohjenakyma, 0, 0, this);
 	}
 	
+	/**
+	 * Metodi, jolla voidaan asettaa takaisin-nappulalle kuva. T‰t‰ tarvitaan,
+	 * jotta hiirikuuntelijaluokassa voidaan asettaa uusi kuva kun hiiri
+	 * liikutetaan nappulan p‰‰lle.
+	 * @param i
+	 */
 	public void takaisin_asetaKuva(ImageIcon i){
 		this.takaisin.setIcon(i);
 	}
