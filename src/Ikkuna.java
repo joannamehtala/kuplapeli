@@ -51,8 +51,7 @@ public class Ikkuna extends JFrame {
 		this.layout = new BorderLayout();
 		this.naytot = new CardLayout();
 		this.aloitusnaytto = new Aloitusnaytto(this);
-		this.maailma = new Maailma(this.pelimaailma);
-		this.pelimaailma = new Pelimaailma(this.maailma, this);
+		this.pelimaailma = new Pelimaailma(this);
 		this.ohjenaytto = new Ohjenaytto(this);
 		this.paneeli = new JPanel();
 		

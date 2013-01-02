@@ -48,10 +48,11 @@ public class Pelimaailma extends JPanel implements MouseListener,
 	 * @param maailma
 	 * @param ikkuna
 	 */
-	public Pelimaailma(Maailma maailma, Ikkuna ikkuna){
-		this.maailma = maailma;
+	public Pelimaailma(Ikkuna ikkuna){
+		this.maailma = new Maailma(this);
 		this.ikkuna = ikkuna;
 		this.nykyinen = maailma.annaNykyinen();
+		System.out.println("Nykyinen " + this.nykyinen);
 		this.seuraava = maailma.annaSeuraava();
 		this.ohjaaja = new Ohjaaja(this, nykyinen);
 		this.setOpaque(false);
@@ -69,7 +70,7 @@ public class Pelimaailma extends JPanel implements MouseListener,
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.drawImage(taustakuva, 0, 0, this);
-		g2d.drawImage(nykyinen.annaKuva(),
+		g2d.drawImage(this.nykyinen.annaKuva(),
 				(int) nykyinen.annaX(), (int) nykyinen.annaY(), this);
 		g2d.drawImage(seuraava.annaKuva(), (int) seuraava.annaX(),
 				(int) seuraava.annaY(), this);

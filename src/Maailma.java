@@ -28,19 +28,22 @@ public class Maailma {
 	/**
 	 * Maailman konstruktori. Alustetaan attribuutit ja tehd‰‰n leveyden ja
 	 * korkeuden tarkistukset, jotta pysyt‰‰n halutuissa rajoissa.
-	 * @param ammus
+	 * @param 
 	 */
 	public Maailma(Pelimaailma pelimaailma){
 		/*
 		 * Alustetaan leveys ja korkeus 450:ksi pelikent‰n halutun koon
 		 * mukaisesti.
 		 */
-		this.pelimaailma = pelimaailma;
 		this.leveys = 450;
 		this.korkeus = 500;
 		this.kuplienLkm = rand.nextInt(20);
-		this.nykyinen = new AktiivinenKupla(228, 454, pelimaailma, this);
-		this.seuraava = new AktiivinenKupla(228, 499, pelimaailma, this);
+		this.pelimaailma = pelimaailma;
+		this.nykyinen = new AktiivinenKupla(228, 454, this.pelimaailma, this);
+		this.seuraava = new AktiivinenKupla(228, 499, this.pelimaailma, this);
+		
+		System.out.println("Maailman alussa se on " + this.nykyinen);
+		
 		this.x = 50;
 		this.y = 50;
 		
@@ -78,6 +81,7 @@ public class Maailma {
 	}
 	
 	public AktiivinenKupla annaNykyinen(){
+		System.out.println("Maailmassa on "+ this.nykyinen);
 		return this.nykyinen;
 	}
 	
