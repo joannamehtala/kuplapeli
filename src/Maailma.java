@@ -11,8 +11,9 @@ import java.util.Random;
 public class Maailma {
 	
 	/**
-	 * Attribuutteina leveys, korkeus, koordinaatit x ja y sek‰ ammus, joita
-	 * voi olla peliss‰ vain yksi.
+	 * Attribuutteina leveys, korkeus, koordinaatit x ja y, pelimaailma,
+	 * maailman nykyinen ja seuraava aktiivinen kupla, boolean pelin loppumisen
+	 * tarkastelulle sek‰ kuplien lukum‰‰r‰‰ kuvaava int.
 	 */
 	private int leveys;
 	private int korkeus;
@@ -26,19 +27,27 @@ public class Maailma {
 	private AktiivinenKupla seuraava;
 
 	/**
-	 * Maailman konstruktori. Alustetaan attribuutit ja tehd‰‰n leveyden ja
-	 * korkeuden tarkistukset, jotta pysyt‰‰n halutuissa rajoissa.
+	 * Maailman konstruktori. Alustetaan attribuutit ja luodaan jonkin verran
+	 * kuplia ruudun yl‰reunaan.
 	 * @param 
 	 */
 	public Maailma(Pelimaailma pelimaailma){
+		
 		/*
-		 * Alustetaan leveys ja korkeus 450:ksi pelikent‰n halutun koon
-		 * mukaisesti.
+		 * Alustetaan leveys ja korkeus pelikent‰n halutun koon mukaisesti.
 		 */
 		this.leveys = 450;
 		this.korkeus = 500;
+		
+		/*
+		 * Arvotaan max. 19 kuplaa aluksi yl‰reunaan.
+		 */
 		this.kuplienLkm = rand.nextInt(20);
 		this.pelimaailma = pelimaailma;
+		
+		/*
+		 * Luodaan aktiiviset kuplat.
+		 */
 		this.nykyinen = new AktiivinenKupla(228, 454, this.pelimaailma, this);
 		this.seuraava = new AktiivinenKupla(228, 499, this.pelimaailma, this);
 		
@@ -62,6 +71,10 @@ public class Maailma {
 		}
 	}
 	
+	/**
+	 * Palauttaa maailmalle parametrina annetun pelimaailman.
+	 * @return
+	 */
 	public Pelimaailma annaPelimaailma(){
 		return this.pelimaailma;
 	}
@@ -82,10 +95,18 @@ public class Maailma {
 		return this.korkeus;
 	}
 	
+	/**
+	 * Palauttaa nykyisen aktiivisen kuplan.
+	 * @return this.nykyinen
+	 */
 	public AktiivinenKupla annaNykyinen(){
 		return this.nykyinen;
 	}
 	
+	/**
+	 * Palauttaa seuraavan aktiivisen kuplan.
+	 * @return this.seuraava;
+	 */
 	public AktiivinenKupla annaSeuraava(){
 		return this.seuraava;
 	}

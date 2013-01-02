@@ -14,7 +14,7 @@ import javax.swing.border.Border;
 /**
  * Ohjenäytön luokka. Ohjenäytöllä näkyvät pelin ohjeet ja lisäksi se sisältää
  * nappulan, josta voi palata takaisin aloitusnäyttöön.
- * @author Joanna
+ * @author 345480
  *
  */
 @SuppressWarnings("serial")

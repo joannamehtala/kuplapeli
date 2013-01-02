@@ -15,7 +15,7 @@ import javax.swing.border.Border;
  * Aloitusnäytön luokka. Aloitusnäytöllä on taustakuva ja nappulat, joita
  * painamalla voi aloittaa pelin, saada ohjeet näkyviin tai lopettaa ohjelman
  * suorituksen.
- * @author Joanna
+ * @author 345480
  *
  */
 @SuppressWarnings("serial")
