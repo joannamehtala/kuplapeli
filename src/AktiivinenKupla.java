@@ -11,7 +11,7 @@ public class AktiivinenKupla extends Kupla {
 		super(x, y);
 		this.maailma = m;
 		this.pelimaailma = m.annaPelimaailma();
-		this.aste = rand.nextInt(181);
+		//this.aste = rand.nextInt(181);
 	}
 
 	/**
@@ -23,6 +23,8 @@ public class AktiivinenKupla extends Kupla {
 	public void liiku(long muutos){
 		double x = this.annaX();
 		double y = this.annaY();
+		
+		this.aste = this.pelimaailma.annaKulma();
 		
 		/*
 		 * Törmättiin vasempaan seinään.

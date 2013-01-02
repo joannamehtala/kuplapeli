@@ -36,7 +36,7 @@ MouseMotionListener {
 	private Ikkuna ikkuna;
 	private AktiivinenKupla nykyinen;
 	private AktiivinenKupla seuraava;
-	public double kulma;
+	private double kulma;
 	private boolean klikattu;
 	public static double seurattux;
 	public static double seurattuy;
@@ -122,16 +122,20 @@ MouseMotionListener {
 		int hiirix = arg0.getX();
 		int hiiriy = arg0.getY();
 		double deltax = hiirix - 250;
-		double deltay = hiiriy - 454;
-		this.kulma = Math.atan(deltay / deltax);
+		double deltay = 454 - hiiriy;
+		this.kulma = Math.toDegrees(Math.atan2(deltay, deltax));
+		
+		if (this.kulma < 0){
+			kulma += 360;
+		}
 
-		if (hiirix >= 250){
+		/*if (hiirix >= 250){
 			seurattux = Math.cos(this.kulma)*15;
 			seurattuy = Math.sin(this.kulma)*15;
 		} else {
 			seurattux = Math.cos(this.kulma)*-15;
 			seurattuy = Math.sin(this.kulma)*-15;
-		}
+		}*/
 
 		this.repaint();
 
