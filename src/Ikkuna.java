@@ -1,15 +1,7 @@
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
+import java.awt.CardLayout;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+
 
 /**
  * Pelin ikkunan luokka. Kaikki pelissä tapahtuu ikkunan sisällä.
