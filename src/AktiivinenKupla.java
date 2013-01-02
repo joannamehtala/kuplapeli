@@ -2,14 +2,16 @@ import java.util.Random;
 
 
 public class AktiivinenKupla extends Kupla {
-	private double aste;
 	public static Random rand = new Random();
 	private Maailma maailma;
+	private Pelimaailma pelimaailma;
+	private double aste;
 
 	public AktiivinenKupla(double x, double y, Pelimaailma p, Maailma m){
 		super(x, y);
-		this.aste = rand.nextInt(181);
 		this.maailma = m;
+		this.pelimaailma = m.annaPelimaailma();
+		this.aste = rand.nextInt(181);
 	}
 
 	/**
@@ -21,24 +23,25 @@ public class AktiivinenKupla extends Kupla {
 	public void liiku(long muutos){
 		double x = this.annaX();
 		double y = this.annaY();
+		
 		/*
 		 * Törmättiin vasempaan seinään.
 		 */
 		if (x < 50){
-			this.aste = 180 - this.aste;
+			aste = 180 - aste;
 		}
 
 		/*
 		 * Törmättiin oikeaan seinään.
 		 */
 		if (x > 405){
-			this.aste = 180 - this.aste;
+			aste = 180 - aste;
 		}
 
 		/*
 		 * Liikutetaan.
 		 */
-		x += Math.cos(Math.toRadians(this.aste))*muutos*0.1;
+		x += Math.cos(Math.toRadians(aste))*muutos*0.1;
 
 		/*
 		 * Y:n muutokset (ei koskaan kimpoa y-suunnassa, vaan pysähtyy ylös
@@ -49,9 +52,5 @@ public class AktiivinenKupla extends Kupla {
 		}
 
 		this.asetaSijainti(x, y);
-	}
-
-	public double annaKulma(){
-		return this.aste;
 	}
 }

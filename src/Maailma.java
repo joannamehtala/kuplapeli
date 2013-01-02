@@ -42,8 +42,6 @@ public class Maailma {
 		this.nykyinen = new AktiivinenKupla(228, 454, this.pelimaailma, this);
 		this.seuraava = new AktiivinenKupla(228, 499, this.pelimaailma, this);
 		
-		System.out.println("Maailman alussa se on " + this.nykyinen);
-		
 		this.x = 50;
 		this.y = 50;
 		
@@ -64,6 +62,10 @@ public class Maailma {
 		}
 	}
 	
+	public Pelimaailma annaPelimaailma(){
+		return this.pelimaailma;
+	}
+	
 	/**
 	 * Metodi palauttaa maailman leveyden.
 	 * @return int leveys
@@ -81,7 +83,6 @@ public class Maailma {
 	}
 	
 	public AktiivinenKupla annaNykyinen(){
-		System.out.println("Maailmassa on "+ this.nykyinen);
 		return this.nykyinen;
 	}
 	

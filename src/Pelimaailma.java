@@ -13,49 +13,51 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.JPanel;
 
 /**
- * Pelimaailma on Maailma-luokan graafinen vastine, k‰ytt‰j‰lle n‰kyv‰ versio.
+ * Pelimaailma-luokassa luodaan graafinen pelipaneeli, jossa pelaaminen
+ * tapahtuu.
  * 
- * @author Joanna
+ * @author 345480
  *
  */
 public class Pelimaailma extends JPanel implements MouseListener,
-			MouseMotionListener {
+MouseMotionListener {
 
 	/**
-	 * Swingin takia tuollainen attribuutti, muuten valittaa.
-	 * Muiksi attribuuteiksi annetaan maailma, ikkuna, ohjaaja ja aktiivinen
-	 * kupla, koska pelimaailma tarvitsee tietoja kaikilta n‰ilt‰. Lis‰ksi
-	 * annetaan taustakuva.
+	 * Ensimm‰inen attribuutti on Swingin takia, muuten alkaa valittamaan.
+	 * Muiksi attribuuteiksi annetaan maailma, ikkuna, maailman nykyinen ja
+	 * seuraava aktiivinen kupla, sek‰ kulma, joka kertoo mihin suuntaan
+	 * hiirt‰ seuraava viiva piirret‰‰n k‰ytt‰j‰lle. Hiirt‰ seurataan
+	 * tallentamalla sen sijainti seurattux ja seurattuy -attribuutteihin.
+	 * Asetetaan myˆs boolean-tyyppinen attribuutti klikattu, joka kertoo, 
+	 * onko ruutua klikattu (jos on, ammutaan kupla). 
 	 */
 	private static final long serialVersionUID = -2718553638694558080L;
 	private Maailma maailma;
 	private Ikkuna ikkuna;
-	private Ohjaaja ohjaaja;
 	private AktiivinenKupla nykyinen;
 	private AktiivinenKupla seuraava;
-	private static final Image taustakuva =
-			Toolkit.getDefaultToolkit().createImage("media/taustakuva1.png");
-	public static double seurattux;
-	public static double seurattuy;
 	public double kulma;
 	private boolean klikattu;
+	public static double seurattux;
+	public static double seurattuy;
+	public Ohjaaja ohjaaja;
+	private static final Image taustakuva =
+			Toolkit.getDefaultToolkit().createImage("media/taustakuva1.png");
+
 
 	/**
-	 * Pelimaailman konstruktori, jossa alustetaan attribuutit ja asetetaan
-	 * paneeli taustakuvan n‰kyvyyden takia l‰pin‰kyv‰ksi. Lis‰ksi annetaan
-	 * paneelille haluttu koko.
+	 * Pelimaailman konstruktori, jossa alustetaan attribuutit. 
+	 * Lis‰ksi annetaan paneelille haluttu koko ja lis‰t‰‰n pelimaailmalle
+	 * mouselistenerit.
 	 * 
-	 * @param maailma
 	 * @param ikkuna
 	 */
 	public Pelimaailma(Ikkuna ikkuna){
-		this.maailma = new Maailma(this);
 		this.ikkuna = ikkuna;
+		this.maailma = new Maailma(this);
 		this.nykyinen = maailma.annaNykyinen();
-		System.out.println("Nykyinen " + this.nykyinen);
 		this.seuraava = maailma.annaSeuraava();
-		this.ohjaaja = new Ohjaaja(this, nykyinen);
-		this.setOpaque(false);
+		this.ohjaaja = new Ohjaaja(this, this.nykyinen);
 		this.setPreferredSize(new Dimension(maailma.annaLeveys() + 50,
 				maailma.annaKorkeus() + 100));
 		this.klikattu = false;
@@ -64,67 +66,57 @@ public class Pelimaailma extends JPanel implements MouseListener,
 	}
 
 	/**
-	 * Piirret‰‰n maailmaan taustakuva ja kupla.
+	 * Piirret‰‰n maailmaan taustakuva, kuplat ja suuntaviiva.
 	 */
 	public void paintComponent(Graphics g)  {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D)g;
+		/*
+		 * Piirret‰‰n taustakuva.
+		 */
 		g2d.drawImage(taustakuva, 0, 0, this);
+		/*
+		 * Piirret‰‰n nykyinen kupla.
+		 */
 		g2d.drawImage(this.nykyinen.annaKuva(),
 				(int) nykyinen.annaX(), (int) nykyinen.annaY(), this);
+		/*
+		 * Piirret‰‰n seuraava kupla.
+		 */
 		g2d.drawImage(seuraava.annaKuva(), (int) seuraava.annaX(),
 				(int) seuraava.annaY(), this);
-		g2d.setColor(Color.WHITE);
+		/*
+		 * Piirret‰‰n viiva.
+		 */
+		g2d.setColor(Color.BLACK);
 		g2d.drawLine(250, 475, (int) seurattux + 250, 
 				(int) seurattuy + 454);
-
-		/*Graphics2D g2d2 = (Graphics2D)g;
-		g2d2.translate(25, 50);
-		g2d2.rotate(0, 200, 410);
-		g2d2.drawImage(this.maailma.annaTykki().annaKuva(), 200, 410, this);*/
 	}
 
+	/**
+	 * Metodi kertoo, onko peliruutua klikattu. Jos on, palauttaa true, jos ei,
+	 * palauttaa false.
+	 * @return this.klikattu
+	 */
 	public boolean onKlikattu(){
 		return this.klikattu;
 	}
 
+	/**
+	 * Asetetaan klikkauksen yhteydess‰ attribuutti klikattu todeksi.
+	 */
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 		this.klikattu = true;
 
 	}
 
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-	
-	@Override
-	public void mouseDragged(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
+	/**
+	 * Metodi m‰‰ritt‰‰, mit‰ tapahtuu, kun hiirt‰ liikutetaan ruudulla.
+	 * Seurataan hiiren koordinaatteja ja tallennetaan ne muuttujiin. Niiden
+	 * avulla lasketaan kulma, jonka mukaisesti hiirt‰ seuraava suuntaviiva 
+	 * liikkuu.
+	 */
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
 		int hiirix = arg0.getX();
@@ -132,7 +124,7 @@ public class Pelimaailma extends JPanel implements MouseListener,
 		double deltax = hiirix - 250;
 		double deltay = hiiriy - 454;
 		this.kulma = Math.atan(deltay / deltax);
-		
+
 		if (hiirix >= 250){
 			seurattux = Math.cos(this.kulma)*15;
 			seurattuy = Math.sin(this.kulma)*15;
@@ -140,12 +132,66 @@ public class Pelimaailma extends JPanel implements MouseListener,
 			seurattux = Math.cos(this.kulma)*-15;
 			seurattuy = Math.sin(this.kulma)*-15;
 		}
-		
+
 		this.repaint();
 
 	}
-	
+
+	/**
+	 * Palauttaa kulman, jossa suuntaviivaa k‰‰nnell‰‰n.
+	 * @return
+	 */
 	public double annaKulma(){
 		return this.kulma;
+	}
+
+	/**
+	 * MouseListenerin implementointi vaatii t‰m‰n metodin, vaikkei sit‰
+	 * ylikirjoiteta t‰ss‰.
+	 */
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * MouseListenerin implementointi vaatii t‰m‰n metodin, vaikkei sit‰
+	 * ylikirjoiteta t‰ss‰.
+	 */
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * MouseListenerin implementointi vaatii t‰m‰n metodin, vaikkei sit‰
+	 * ylikirjoiteta t‰ss‰.
+	 */
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * MouseListenerin implementointi vaatii t‰m‰n metodin, vaikkei sit‰
+	 * ylikirjoiteta t‰ss‰.
+	 */
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * MouseMotionListenerin implementointi vaatii t‰m‰n metodin, vaikkei sit‰
+	 * ylikirjoiteta t‰ss‰.
+	 */
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
 	}
 }

@@ -61,37 +61,9 @@ public class Ohjaaja implements ActionListener{
 		this.edellinenhetki = System.currentTimeMillis();
 
 		if (this.pelimaailma.onKlikattu()){
+			System.out.println();
 			this.aktiivinenkupla.liiku(muutos);
 			this.pelimaailma.repaint();
 		}
 	}
-
-	/*
-	@Override
-	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_LEFT){
-			//vasenta nuolinäppäintä painettaessa
-		}
-
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT){
-			//oikeata nuolinäppäintä painettaessa
-		}
-
-		if (e.getKeyCode() == KeyEvent.VK_SPACE){
-			//spacebaria painettaessa
-		}
-	}
-
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-
-	}*/
 }

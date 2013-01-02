@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- * Pelin ikkunan luokka.
+ * Pelin ikkunan luokka. Kaikki pelissä tapahtuu ikkunan sisällä.
  * @author 345480
  *
  */
@@ -20,77 +20,76 @@ import javax.swing.JPanel;
 public class Ikkuna extends JFrame {
 
 	/**
-	 * Asetetaan attribuuteiksi asettelu, joka toteutetaan BorderLayoutilla,
-	 * ja JPanel-tyyppiset paneelit, joihin tulee taustakuva ja itse graafinen
-	 * pelimaailma.
+	 * Asetetaan attribuuteiksi asettelu, joka toteutetaan CardLayoutilla,
+	 * eri näkymät sekä CardLayoutia varten tarvittavat näkymiä kuvaavat 
+	 * merkkijonot.
 	 */
-	private BorderLayout layout;
+	
 	private CardLayout naytot;
 	private Aloitusnaytto aloitusnaytto;
 	private Pelimaailma pelimaailma;
 	private Ohjenaytto ohjenaytto;
-	private Maailma maailma;
-	private JPanel paneeli;
 	private static final String ALOITUSNAYTTO = "aloitusnaytto";
 	private static final String PELIMAAILMA = "pelimaailma";
 	private static final String OHJENAYTTO = "ohjenaytto";
 
 	/**
-	 * Ikkunan konstruktorissa alustetaan attribuutit ja asetetaan ikkunalle
-	 * otsikko. Pelipaneelille asetetaan myös suositeltava koko ja asetetaan
-	 * ikkuna aukeamaan keskelle ruutua.
+	 * Ikkunan konstruktorissa alustetaan attribuutit ja lisätään ikkunaan
+	 * eri näkymät. Lisäksi asetetaan ikkunan koko ja otsikko ja laitetaan
+	 * se aukeamaan keskeltä. Asetetaan myös ohjelman suoritus loppumaan, kun
+	 * ikkuna suljetaan.
 	 */
 	public Ikkuna(){
 
 		/*
-		 * Alustetaan attribuutit; luodaan uusi layout ja eri näytöt. Lisäksi
-		 * alustetaan maailmaksi uusi maailma, joka ottaa pelimaailman
-		 * attribuuttinaan.
+		 * Alustetaan attribuutit; luodaan uusi layout ja eri näytöt.
 		 */
 		
-		this.layout = new BorderLayout();
 		this.naytot = new CardLayout();
 		this.aloitusnaytto = new Aloitusnaytto(this);
 		this.pelimaailma = new Pelimaailma(this);
 		this.ohjenaytto = new Ohjenaytto(this);
-		this.paneeli = new JPanel();
-		
 
 		/*
 		 * Asetetaan otsikko, layout, koko sekä aukeamiskohta. Lisätään
-		 * ikkunaan eri näytöt.
+		 * ikkunaan eri näytöt. Asetetaan pelin ajo loppumaan, kun painetaan 
+		 * lopetusnappia.
 		 */
 		
 		this.setTitle("Kuplapeli");
-		//this.setLayout(layout);
-		//this.add(paneeli, BorderLayout.CENTER);
 		this.setLayout(naytot);
 		this.add(this.aloitusnaytto, ALOITUSNAYTTO);
 		this.add(this.pelimaailma, PELIMAAILMA);
 		this.add(this.ohjenaytto, OHJENAYTTO);
+		this.setResizable(false);
 		this.pack();
 		this.setLocationRelativeTo(this);
-		this.setResizable(false);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		/*
 		 * Laitetaan pelin alussa näkymään aloitusnäyttö.
 		 */
 		this.vaihdaAloitusnayttoon();
-
-		/*
-		 * Asetetaan pelin ajo loppumaan, kun painetaan lopetusnappia.
-		 */
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 	}
 	
+	/**
+	 * Metodi näyttää aloitusnäytön ottamalla sen esille CardLayoutissa.
+	 */
 	public void vaihdaAloitusnayttoon(){
 		this.naytot.show(this.getContentPane(), ALOITUSNAYTTO);
 	}
 
+	/**
+	 * Metodi näyttää pelimaailman ottamalla sen esille CardLayoutissa.
+	 */
 	public void vaihdaPelimaailmaan(){
 		this.naytot.show(this.getContentPane(), PELIMAAILMA);
 	}
 	
+	/**
+	 * Metodi näyttää ohjenäkymän ottamalla sen esille CardLayoutissa.
+	 */
 	public void vaihdaOhjenayttoon(){
 		this.naytot.show(this.getContentPane(), OHJENAYTTO);
 	}
