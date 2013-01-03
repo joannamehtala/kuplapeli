@@ -171,11 +171,6 @@ MouseMotionListener {
 	public AktiivinenKupla annaSeuraava(){
 		return this.seuraava;
 	}
-	
-	/*public void passivoi(AktiivinenKupla kupla){
-		this.nykyinen = this.seuraava;
-		this.klikattu = false;
-	}*/
 
 	/**
 	 * MouseListenerin implementointi vaatii tämän metodin, vaikkei sitä

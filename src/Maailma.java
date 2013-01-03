@@ -9,7 +9,7 @@ import java.util.Random;
  */
 
 public class Maailma {
-	
+
 	/**
 	 * Attribuutteina leveys, korkeus, koordinaatit x ja y, pelimaailma,
 	 * maailman nykyinen ja seuraava aktiivinen kupla, boolean pelin loppumisen
@@ -32,30 +32,37 @@ public class Maailma {
 	 * @param 
 	 */
 	public Maailma(Pelimaailma pelimaailma){
-		
+
 		/*
 		 * Alustetaan leveys ja korkeus pelikentän halutun koon mukaisesti.
 		 */
 		this.leveys = 450;
 		this.korkeus = 500;
-		
+
 		/*
 		 * Arvotaan max. 19 kuplaa aluksi yläreunaan.
 		 */
 		this.kuplienLkm = rand.nextInt(20);
 		this.pelimaailma = pelimaailma;
-		
+
 		/*
 		 * Luodaan aktiiviset kuplat.
 		 */
 		this.nykyinen = new AktiivinenKupla(228, 454, this.pelimaailma, this);
 		this.seuraava = new AktiivinenKupla(228, 499, this.pelimaailma, this);
-		
+
 		this.x = 50;
 		this.y = 50;
-		
-		for (int i = 0; i < kuplienLkm; i++){
-			if (i == 0){
+
+		for (int i = 1; i < 10; i++){
+			if (i % 2 == 1){
+				//parittomille riveille luodaan 10 kuplaa alkaen x=50
+			} else {
+				//parillisille riveille luodaan 9 kuplaa alkaen x=72.5
+			}
+			
+			
+			/*if (i == 0){
 			Kupla kupla1 = new Kupla(x, y);
 			kupla1.asetaSijainti(x, y);
 			} else if (i < 10){
@@ -66,11 +73,10 @@ public class Maailma {
 				this.x += 50;
 				this.y += 45;
 				Kupla kupla3 = new Kupla(x, y);
-				kupla3.asetaSijainti(x, y);
-			}
+				kupla3.asetaSijainti(x, y);*/
 		}
 	}
-	
+
 	/**
 	 * Palauttaa maailmalle parametrina annetun pelimaailman.
 	 * @return
@@ -78,7 +84,7 @@ public class Maailma {
 	public Pelimaailma annaPelimaailma(){
 		return this.pelimaailma;
 	}
-	
+
 	/**
 	 * Metodi palauttaa maailman leveyden.
 	 * @return int leveys
@@ -86,7 +92,7 @@ public class Maailma {
 	public int annaLeveys(){
 		return this.leveys;
 	}
-	
+
 	/**
 	 * Metodi palauttaa maailman korkeuden.
 	 * @return int korkeus
@@ -94,7 +100,7 @@ public class Maailma {
 	public int annaKorkeus(){
 		return this.korkeus;
 	}
-	
+
 	/**
 	 * Palauttaa nykyisen aktiivisen kuplan.
 	 * @return this.nykyinen
@@ -102,7 +108,7 @@ public class Maailma {
 	public AktiivinenKupla annaNykyinen(){
 		return this.nykyinen;
 	}
-	
+
 	/**
 	 * Palauttaa seuraavan aktiivisen kuplan.
 	 * @return this.seuraava;
@@ -110,7 +116,7 @@ public class Maailma {
 	public AktiivinenKupla annaSeuraava(){
 		return this.seuraava;
 	}
-	
+
 	/**
 	 * Metodi palauttaa tiedon siitä, onko peli ohi vai ei.
 	 * @return true, jos peli on loppunut, ja false, jos se on vielä käynnissä.

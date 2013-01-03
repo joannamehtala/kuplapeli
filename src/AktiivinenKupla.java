@@ -43,7 +43,9 @@ public class AktiivinenKupla extends Kupla {
 		/*
 		 * Liikutetaan.
 		 */
+		if (y > 50){
 		x += Math.cos(Math.toRadians(aste))*muutos*0.1;
+		}
 
 		/*
 		 * Y:n muutokset (ei koskaan kimpoa y-suunnassa, vaan pysähtyy ylös

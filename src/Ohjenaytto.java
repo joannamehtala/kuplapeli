@@ -54,7 +54,8 @@ public class Ohjenaytto extends JPanel {
 		this.takaisin.setPreferredSize(new Dimension(100, 50));
 		this.takaisin.setIcon(takaisin_normal);
 		this.takaisin.setBorder(this.reunus);
-		this.takaisin.addMouseListener(new Hiirikuuntelija_Takaisin(this, this.ikkuna));
+		this.takaisin.addMouseListener(new Hiirikuuntelija_Takaisin(this, 
+				this.ikkuna));
 		this.add(this.takaisin);
 		this.takaisin.setBounds(200 + this.insets.left, 420 + this.insets.top, 
 				100, 50);
