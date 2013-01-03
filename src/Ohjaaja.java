@@ -29,9 +29,9 @@ public class Ohjaaja implements ActionListener{
 	 * @param aktiivinenkupla
 	 */
 	public Ohjaaja(Pelimaailma pelimaailma, AktiivinenKupla aktiivinenkupla){
-		this.aktiivinenkupla = aktiivinenkupla;
 		this.timer = new Timer(10, this);
 		this.pelimaailma = pelimaailma;
+		this.aktiivinenkupla = this.pelimaailma.annaNykyinen();
 		this.timer.start();
 	}
 
@@ -62,6 +62,13 @@ public class Ohjaaja implements ActionListener{
 		
 		this.pelimaailma.repaint();
 		this.pelimaailma.asetaKulma(this.aktiivinenkupla.annaAste());
+		if (this.aktiivinenkupla.annaY() < 409){
+			this.pelimaailma.annaSeuraava().asetaSijainti(228, 454);
+		}
+		
+		/*if (this.aktiivinenkupla.onPysahtynyt()){
+			this.
+		}*/
 		
 	}
 }

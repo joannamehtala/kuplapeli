@@ -163,6 +163,19 @@ MouseMotionListener {
 	public void asetaKulma(double kulma){
 		this.kulma = kulma;
 	}
+	
+	public AktiivinenKupla annaNykyinen(){
+		return this.nykyinen;
+	}
+	
+	public AktiivinenKupla annaSeuraava(){
+		return this.seuraava;
+	}
+	
+	/*public void passivoi(AktiivinenKupla kupla){
+		this.nykyinen = this.seuraava;
+		this.klikattu = false;
+	}*/
 
 	/**
 	 * MouseListenerin implementointi vaatii tämän metodin, vaikkei sitä

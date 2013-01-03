@@ -6,6 +6,7 @@ public class AktiivinenKupla extends Kupla {
 	private Maailma maailma;
 	private Pelimaailma pelimaailma;
 	private double aste;
+	private boolean pysahtynyt;
 
 	public AktiivinenKupla(double x, double y, Pelimaailma p, Maailma m){
 		super(x, y);
@@ -51,8 +52,20 @@ public class AktiivinenKupla extends Kupla {
 		if (y > 50 && y < 465){
 			y -= Math.sin(Math.toRadians(aste))*muutos*0.1;
 		}
+		
+		if (y == 50){
+			this.pysahdy();
+		}
 
 		this.asetaSijainti(x, y);
+	}
+	
+	/**
+	 * Kupla pysähtyy, kun sen y-koord. on 50 eli se saapuu ruudun yläreunaan
+	 * tai kun se törmää toiseen kuplaan. Kun kupla pysähtyy, 
+	 */
+	public void pysahdy(){
+		this.pysahtynyt = true;
 	}
 	
 	/**
@@ -62,5 +75,9 @@ public class AktiivinenKupla extends Kupla {
 	 */
 	public double annaAste(){
 		return this.aste;
+	}
+	
+	public boolean onPysahtynyt(){
+		return this.pysahtynyt;
 	}
 }
