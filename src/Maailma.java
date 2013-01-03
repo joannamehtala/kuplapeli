@@ -48,11 +48,8 @@ public class Maailma {
 		/*
 		 * Luodaan aktiiviset kuplat.
 		 */
-		this.nykyinen = new AktiivinenKupla(228, 454, this.pelimaailma, this);
-		this.seuraava = new AktiivinenKupla(228, 499, this.pelimaailma, this);
-
-		this.x = 50;
-		this.y = 50;
+		this.nykyinen = new AktiivinenKupla(this.pelimaailma, this, true);
+		this.seuraava = new AktiivinenKupla(this.pelimaailma, this, false);
 
 		for (int i = 1; i < 10; i++){
 			if (i % 2 == 1){
@@ -115,6 +112,12 @@ public class Maailma {
 	 */
 	public AktiivinenKupla annaSeuraava(){
 		return this.seuraava;
+	}
+	
+	public void asetaNykyiseksi(){
+		this.nykyinen = this.seuraava;
+		this.nykyinen.asetaNykyiseksi();
+		this.seuraava = new AktiivinenKupla(this.pelimaailma, this, false);
 	}
 
 	/**

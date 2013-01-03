@@ -41,7 +41,7 @@ MouseMotionListener {
 	public static double seurattuy;
 	private double deltax;
 	private double deltay;
-	public Ohjaaja ohjaaja;
+	private Ohjaaja ohjaaja;
 	private static final Image taustakuva =
 			Toolkit.getDefaultToolkit().createImage("media/taustakuva1.png");
 
@@ -84,7 +84,7 @@ MouseMotionListener {
 		/*
 		 * Piirretään seuraava kupla.
 		 */
-		g2d.drawImage(seuraava.annaKuva(), (int) seuraava.annaX(),
+		g2d.drawImage(this.seuraava.annaKuva(), (int) seuraava.annaX(),
 				(int) seuraava.annaY(), this);
 		/*
 		 * Piirretään viiva.
@@ -170,6 +170,14 @@ MouseMotionListener {
 	
 	public AktiivinenKupla annaSeuraava(){
 		return this.seuraava;
+	}
+	
+	public Maailma annaMaailma(){
+		return this.maailma;
+	}
+	
+	public void asetaKlikattu(boolean klikattu){
+		this.klikattu = klikattu;
 	}
 
 	/**

@@ -38,7 +38,7 @@ public class Kupla {
 	 * seuraavaksi ammuttavana.
 	 * @param vari
 	 */
-	public Kupla(double x, double y){
+	public Kupla(){
 		this.ehja = true;
 		this.ryhma = new ArrayList<Kupla>();
 		this.x = x;
@@ -107,7 +107,8 @@ public class Kupla {
 	 * naapurilistan kuplat poksahtavat.
 	 */
 	public void kosketa(int x, int y){
-		Kupla kohde = new Kupla(x, y);
+		Kupla kohde = new Kupla();
+		kohde.asetaSijainti(x, y);
 		//Oikeasti kosketettava kupla t‰ytyy antaa jotenkin koordinaateilla tms,
 		//on laskettava se x- ja y-koordinaatti mihin vektori p‰‰ttyy. ei voi
 		//vaan luoda uutta
