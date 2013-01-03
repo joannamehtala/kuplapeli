@@ -30,9 +30,11 @@ public class Aloitusnaytto extends JPanel {
 			Toolkit.getDefaultToolkit().createImage("media/kuplapeli.png");
 	private static final ImageIcon aloita_normal = 
 			new ImageIcon("media/aloita.png");
-	private static ImageIcon ohjeet_normal = new ImageIcon("media/ohjeet.png");
+	private static final ImageIcon ohjeet_normal = new ImageIcon("media/ohjeet.png");
+	private static final ImageIcon lopeta_normal = new ImageIcon("media/lopeta.png");
 	private JButton aloitus;
 	private JButton ohjeet;
+	private JButton lopeta;
 	private Ikkuna ikkuna;
 	private Border reunus = BorderFactory.createEmptyBorder();
 	private Insets insets;
@@ -73,8 +75,21 @@ public class Aloitusnaytto extends JPanel {
 		this.ohjeet.addMouseListener(new Hiirikuuntelija_Ohjeet(this, 
 				this.ikkuna));
 		this.add(this.ohjeet);
-		this.ohjeet.setBounds(205 + this.insets.left, 170 + this.insets.top, 
+		this.ohjeet.setBounds(205 + this.insets.left, 180 + this.insets.top, 
 				93, 37);
+		
+		/*
+		 * Lopetusnapin ominaisuudet.
+		 */
+		this.lopeta = new JButton();
+		this.lopeta.setIcon(lopeta_normal);
+		this.lopeta.setPreferredSize(new Dimension(89,50));
+		this.lopeta.setBorder(reunus);
+		this.lopeta.addMouseListener(new Hiirikuuntelija_Lopeta(this,
+				this.ikkuna));
+		this.add(this.lopeta);
+		this.lopeta.setBounds(310 + this.insets.left, 155 + this.insets.top,
+				89, 50);
 
 	}
 
@@ -105,5 +120,9 @@ public class Aloitusnaytto extends JPanel {
 	 */
 	public void ohjeet_asetaKuva(ImageIcon i){
 		this.ohjeet.setIcon(i);
+	}
+	
+	public void lopeta_asetaKuva(ImageIcon i){
+		this.lopeta.setIcon(i);
 	}
 }

@@ -4,12 +4,17 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 /**
  * Pelimaailma-luokassa luodaan graafinen pelipaneeli, jossa pelaaminen
@@ -44,6 +49,11 @@ MouseMotionListener {
 	private Ohjaaja ohjaaja;
 	private static final Image taustakuva =
 			Toolkit.getDefaultToolkit().createImage("media/taustakuva1.png");
+	private ImageIcon valikkoon_normal = new ImageIcon("media/valikkoon.png");
+	private ImageIcon valikkoon_hiiri = new ImageIcon("media/valikkoon2.png");
+	private Border reunus = BorderFactory.createEmptyBorder();
+	private Insets insets;
+	private JButton valikkoon;
 
 
 	/**
@@ -64,6 +74,26 @@ MouseMotionListener {
 		this.klikattu = false;
 		this.addMouseMotionListener(this);
 		this.addMouseListener(this);
+		this.setLayout(null);
+		
+		/*
+		 * Valikkonappi.
+		 */
+		this.valikkoon = new JButton();
+		this.insets = this.getInsets();
+		this.valikkoon = new JButton();
+		this.valikkoon.setPreferredSize(new Dimension(130, 50));
+		this.valikkoon.setIcon(valikkoon_normal);
+		this.valikkoon.setBorder(this.reunus);
+		this.valikkoon.addMouseListener(new Hiirikuuntelija_Valikkoon(this, 
+				this.ikkuna));
+		this.add(this.valikkoon);
+		this.valikkoon.setBounds(280 + this.insets.left, 530 + this.insets.top, 
+				130, 50);
+	}
+	
+	public void valikkoon_asetaKuva(ImageIcon i){
+		this.valikkoon.setIcon(i);
 	}
 
 	/**
