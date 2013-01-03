@@ -11,8 +11,6 @@ public class AktiivinenKupla extends Kupla {
 		super(x, y);
 		this.maailma = m;
 		this.pelimaailma = m.annaPelimaailma();
-		//this.aste = rand.nextInt(181);
-		//this.aste = 45;
 	}
 
 	/**
@@ -33,7 +31,7 @@ public class AktiivinenKupla extends Kupla {
 		if (x < 50){
 			aste = 180 - aste;
 		}
-
+		
 		/*
 		 * Törmättiin oikeaan seinään.
 		 */
@@ -55,5 +53,14 @@ public class AktiivinenKupla extends Kupla {
 		}
 
 		this.asetaSijainti(x, y);
+	}
+	
+	/**
+	 * Antaa sen asteen, johon on liiku-metodissa päädytty mahdollisen törmäilyn
+	 * seurauksena.
+	 * @return
+	 */
+	public double annaAste(){
+		return this.aste;
 	}
 }

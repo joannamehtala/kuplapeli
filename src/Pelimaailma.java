@@ -39,6 +39,8 @@ MouseMotionListener {
 	private boolean klikattu;
 	public static double seurattux;
 	public static double seurattuy;
+	private double deltax;
+	private double deltay;
 	public Ohjaaja ohjaaja;
 	private static final Image taustakuva =
 			Toolkit.getDefaultToolkit().createImage("media/taustakuva1.png");
@@ -106,8 +108,22 @@ MouseMotionListener {
 	 */
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		this.klikattu = true;
 
+		int hiirix = arg0.getX();
+		int hiiriy = arg0.getY();
+		double cos = hiirix - 250;
+		double sin = 454 - hiiriy;
+		this.kulma = Math.toDegrees(Math.atan2(sin, cos));
+
+		if (this.kulma > -90 && this.kulma < 0){
+			kulma = 15;
+		}
+
+		if (this.kulma < -90){
+			kulma = 165;
+		}
+
+		this.klikattu = true;
 	}
 
 	/**
@@ -120,25 +136,17 @@ MouseMotionListener {
 	public void mouseMoved(MouseEvent arg0) {
 		int hiirix = arg0.getX();
 		int hiiriy = arg0.getY();
-		double deltax = hiirix - 250;
-		double deltay = 454 - hiiriy;
-		this.kulma = Math.toDegrees(Math.atan2(deltay, deltax));
-		
-		if (this.kulma < 0){
-			kulma = 1;
-		}
-		
-		if (this.kulma > 180){
-			kulma = 179;
-		}
+		this.deltax = hiirix - 250;
+		this.deltay = hiiriy - 454;
+		double viivakulma = Math.atan(deltay / deltax);
 
-		/*if (hiirix >= 250){
-			seurattux = Math.cos(this.kulma)*15;
-			seurattuy = Math.sin(this.kulma)*15;
+		if (hiirix >= 250){
+			seurattux = Math.cos(viivakulma)*15;
+			seurattuy = Math.sin(viivakulma)*15;
 		} else {
-			seurattux = Math.cos(this.kulma)*-15;
-			seurattuy = Math.sin(this.kulma)*-15;
-		}*/
+			seurattux = Math.cos(viivakulma)*-15;
+			seurattuy = Math.sin(viivakulma)*-15;
+		}
 
 		this.repaint();
 
@@ -150,6 +158,10 @@ MouseMotionListener {
 	 */
 	public double annaKulma(){
 		return this.kulma;
+	}
+	
+	public void asetaKulma(double kulma){
+		this.kulma = kulma;
 	}
 
 	/**

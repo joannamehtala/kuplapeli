@@ -42,7 +42,9 @@ public class Ohjaaja implements ActionListener{
 	 * (näin kuplan liikkuminen ei ole riippuvaista koneen suoritustehoista,
 	 * vaan se liikkuu tasaisesti huolimatta jumituksista). Tämän jälkeen
 	 * liikutetaan kuplaa parametrilla muutos ja piirretään uusi näkymä
-	 * käyttäjälle.
+	 * käyttäjälle. Lisäksi asetetaan kuplan uudeksi liikkumiskulmaksi se
+	 * kulma, johon on liiku-metodissa päädytty mahdollisten törmäilyjen
+	 * seurauksena.
 	 * 
 	 */
 	@Override
@@ -55,9 +57,11 @@ public class Ohjaaja implements ActionListener{
 		this.edellinenhetki = System.currentTimeMillis();
 
 		if (this.pelimaailma.onKlikattu()){
-			System.out.println();
 			this.aktiivinenkupla.liiku(muutos);
-			this.pelimaailma.repaint();
 		}
+		
+		this.pelimaailma.repaint();
+		this.pelimaailma.asetaKulma(this.aktiivinenkupla.annaAste());
+		
 	}
 }
