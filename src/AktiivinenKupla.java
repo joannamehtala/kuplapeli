@@ -8,6 +8,7 @@ public class AktiivinenKupla extends Kupla {
 	private double aste;
 	private boolean pysahtynyt;
 	private boolean nykyinen;
+	private boolean ammuttu;
 	private double x;
 	private double y;
 
@@ -24,6 +25,14 @@ public class AktiivinenKupla extends Kupla {
 		}
 	}
 
+	public void ammu(double aste){
+		if (this.ammuttu){
+			throw new RuntimeException("Oli jo ammuttu");
+		}
+		this.ammuttu = true;
+		this.aste = aste;
+	}
+
 	/**
 	 * Metodi, jolla kuplaa liikutetaan. Kupla kimpoaa vasemmasta ja oikeasta
 	 * seinästä kulmassa, jonka asteluku on 180 - tulokulma. Liikkuminen
@@ -33,16 +42,15 @@ public class AktiivinenKupla extends Kupla {
 	public void liiku(long muutos){
 		double x = this.annaX();
 		double y = this.annaY();
-		
-		this.aste = this.pelimaailma.annaKulma();
-		
+
+
 		/*
 		 * Törmättiin vasempaan seinään.
 		 */
 		if (x < 50){
 			aste = 180 - aste;
 		}
-		
+
 		/*
 		 * Törmättiin oikeaan seinään.
 		 */
@@ -53,14 +61,14 @@ public class AktiivinenKupla extends Kupla {
 		/*
 		 * Liikutetaan.
 		 */
-		
+
 		if (y > 50){
-		x += Math.cos(Math.toRadians(aste))*muutos*0.1;
-		
+			x += Math.cos(Math.toRadians(aste))*muutos*0.1;
+
 		} else {
 			this.pelimaailma.asetaKlikattu(false);
 			this.pysahtynyt = true;
-			
+
 		}
 
 		/*
@@ -68,25 +76,16 @@ public class AktiivinenKupla extends Kupla {
 		 * tai kuplaan osuessaan).
 		 */
 		if (y > 50 && y < 465){
-			y -= Math.sin(Math.toRadians(aste))*muutos*0.1;
+			y += Math.sin(Math.toRadians(aste))*muutos*0.1;
 		}
 
 		this.asetaSijainti(x, y);
 	}
-	
-	/**
-	 * Antaa sen asteen, johon on liiku-metodissa päädytty mahdollisen törmäilyn
-	 * seurauksena.
-	 * @return
-	 */
-	public double annaAste(){
-		return this.aste;
-	}
-	
+
 	public boolean onPysahtynyt(){
 		return this.pysahtynyt;
 	}
-	
+
 	public void asetaNykyiseksi(){
 		this.nykyinen = true;
 		this.asetaSijainti(228, 454);

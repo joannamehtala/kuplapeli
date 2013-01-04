@@ -122,12 +122,8 @@ public class Maailma {
 	public void asetaNykyiseksi(AktiivinenKupla kupla){
 		kupla = this.seuraava;
 		this.nykyinen = kupla;
-		System.out.println("Nykyinen kupla on " + this.nykyinen);
-		System.out.println("Seuraava kupla on " + this.seuraava);
 		this.seuraava = new AktiivinenKupla(this.pelimaailma, this, false);
-		System.out.println("Seuraava kupla on luomisen jälkeen " + this.seuraava);
 		this.nykyinen.asetaNykyiseksi();
-		System.out.println("Kun ollaan asetettu nykyiseksi, nykyinen on: " + this.nykyinen);
 		this.pelimaailma.repaint();
 		
 	}

@@ -42,10 +42,6 @@ MouseMotionListener {
 	private AktiivinenKupla seuraava;
 	private double kulma;
 	private boolean klikattu;
-	public static double seurattux;
-	public static double seurattuy;
-	private double deltax;
-	private double deltay;
 	private Ohjaaja ohjaaja;
 	private static final Image taustakuva =
 			Toolkit.getDefaultToolkit().createImage("media/taustakuva1.png");
@@ -54,6 +50,8 @@ MouseMotionListener {
 	private Border reunus = BorderFactory.createEmptyBorder();
 	private Insets insets;
 	private JButton valikkoon;
+	private static final int LAHTO_X = 250;
+	private static final int LAHTO_Y = 475;
 
 
 	/**
@@ -112,6 +110,7 @@ MouseMotionListener {
 		 */
 		g2d.drawImage(this.nykyinen.annaKuva(),
 				(int) nykyinen.annaX(), (int) nykyinen.annaY(), this);
+		
 		/*
 		 * Piirretään seuraava kupla.
 		 */
@@ -120,9 +119,12 @@ MouseMotionListener {
 		/*
 		 * Piirretään viiva.
 		 */
+		double radkulma = Math.toRadians(this.kulma);
+		double loppuX = LAHTO_X + Math.cos(radkulma)*35;
+		double loppuY = LAHTO_Y + Math.sin(radkulma)*35;
+		
 		g2d.setColor(Color.BLACK);
-		g2d.drawLine(250, 475, (int) seurattux + 250, 
-				(int) seurattuy + 454);
+		g2d.drawLine(LAHTO_X, LAHTO_Y, (int) loppuX, (int) loppuY);
 	}
 
 	/**
@@ -139,21 +141,7 @@ MouseMotionListener {
 	 */
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-
-		int hiirix = arg0.getX();
-		int hiiriy = arg0.getY();
-		double cos = hiirix - 250;
-		double sin = 454 - hiiriy;
-		this.kulma = Math.toDegrees(Math.atan2(sin, cos));
-
-		if (this.kulma > -90 && this.kulma < 0){
-			kulma = 15;
-		}
-
-		if (this.kulma < -90){
-			kulma = 165;
-		}
-
+		this.nykyinen.ammu(this.kulma);
 		this.klikattu = true;
 	}
 
@@ -167,20 +155,10 @@ MouseMotionListener {
 	public void mouseMoved(MouseEvent arg0) {
 		int hiirix = arg0.getX();
 		int hiiriy = arg0.getY();
-		this.deltax = hiirix - 250;
-		this.deltay = hiiriy - 454;
-		double viivakulma = Math.atan(deltay / deltax);
-
-		if (hiirix >= 250){
-			seurattux = Math.cos(viivakulma)*15;
-			seurattuy = Math.sin(viivakulma)*15;
-		} else {
-			seurattux = Math.cos(viivakulma)*-15;
-			seurattuy = Math.sin(viivakulma)*-15;
-		}
-
+		
+		double radkulma = Math.atan2(hiiriy - LAHTO_Y, hiirix - LAHTO_X );
+		this.kulma = Math.toDegrees(radkulma);
 		this.repaint();
-
 	}
 
 	/**
@@ -189,14 +167,6 @@ MouseMotionListener {
 	 */
 	public double annaKulma(){
 		return this.kulma;
-	}
-	
-	/**
-	 * Asettaa kulman, jossa kupla liikkuu.
-	 * @param kulma
-	 */
-	public void asetaKulma(double kulma){
-		this.kulma = kulma;
 	}
 	
 	/**

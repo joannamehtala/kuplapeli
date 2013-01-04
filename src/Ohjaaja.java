@@ -63,7 +63,6 @@ public class Ohjaaja implements ActionListener{
 		}
 		
 		this.pelimaailma.repaint();
-		this.pelimaailma.asetaKulma(this.nykyinen.annaAste());
 		if (this.nykyinen.annaY() < 409){
 			this.pelimaailma.annaMaailma().asetaNykyiseksi(this.seuraava);
 			this.pelimaailma.repaint();
