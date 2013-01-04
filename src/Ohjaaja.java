@@ -62,10 +62,7 @@ public class Ohjaaja implements ActionListener{
 			return;
 		}
 		
-		this.maailma.annaNykyinen().liiku(muutos);
-		if (this.maailma.annaNykyinen().onPysahtynyt()){
-			this.maailma.arvoUusi();
-		}
+		this.maailma.liikutaNykyista(muutos);
 		
 		this.pelimaailma.repaint();
 		

@@ -99,6 +99,13 @@ public class Maailma {
 				this.pelimaailma);
 		this.kuplat.push(arvottu);
 	}
+	
+	public void liikutaNykyista(long muutos){
+		this.annaNykyinen().liiku(muutos);
+		if (this.annaNykyinen().onPysahtynyt()){
+			this.arvoUusi();
+		}
+	}
 
 	/**
 	 * Metodi palauttaa tiedon siitä, onko peli ohi vai ei.
