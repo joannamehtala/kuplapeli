@@ -20,7 +20,7 @@ public class Maailma {
 	private int korkeus;
 	public static Random rand = new Random();
 	private boolean peliLoppunut;
-	private Stack kuplat;
+	private Stack<Kupla> kuplat;
 	private AktiivinenKupla nykyinen;
 	
 
@@ -37,13 +37,12 @@ public class Maailma {
 		this.leveys = 450;
 		this.korkeus = 500;
 		
-		this.kuplat = new Stack();
+		this.kuplat = new Stack<Kupla>();
+		this.kuplat.push(new AktiivinenKupla(pelimaailma));
 
 		/*
 		 * Luodaan aktiiviset kuplat.
 		 */
-		this.nykyinen = new AktiivinenKupla(pelimaailma);
-		this.nykyinen.asetaSijainti(228, 454);
 
 		for (int i = 1; i < 10; i++){
 			if (i % 2 == 1){
@@ -51,20 +50,6 @@ public class Maailma {
 			} else {
 				//parillisille riveille luodaan 9 kuplaa alkaen x=72.5
 			}
-			
-			
-			/*if (i == 0){
-			Kupla kupla1 = new Kupla(x, y);
-			kupla1.asetaSijainti(x, y);
-			} else if (i < 10){
-				this.x += 45;
-				Kupla kupla2 = new Kupla(x, y);
-				kupla2.asetaSijainti(x, y);
-			} else if (i < 20){
-				this.x += 50;
-				this.y += 45;
-				Kupla kupla3 = new Kupla(x, y);
-				kupla3.asetaSijainti(x, y);*/
 		}
 	}
 
@@ -89,7 +74,7 @@ public class Maailma {
 	 * @return this.nykyinen
 	 */
 	public AktiivinenKupla annaNykyinen(){
-		return this.nykyinen;
+		return (AktiivinenKupla) this.kuplat.peek();
 	}
 
 	/**

@@ -7,12 +7,12 @@ public class AktiivinenKupla extends Kupla {
 	private double aste;
 	private boolean pysahtynyt;
 	private boolean ammuttu;
-	private double x;
-	private double y;
 
 	public AktiivinenKupla(Pelimaailma p){
 		super();
 		this.pelimaailma = p;
+		this.asetaSijainti(Pelimaailma.LAHTO_X - this.annaSade(),
+				Pelimaailma.LAHTO_Y - this.annaSade());
 	}
 
 	public void ammu(double aste){

@@ -46,8 +46,8 @@ MouseMotionListener {
 	private Border reunus = BorderFactory.createEmptyBorder();
 	private Insets insets;
 	private JButton valikkoon;
-	private static final int LAHTO_X = 250;
-	private static final int LAHTO_Y = 475;
+	public static final int LAHTO_X = 250;
+	public static final int LAHTO_Y = 475;
 
 
 	/**
