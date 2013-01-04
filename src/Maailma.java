@@ -24,7 +24,6 @@ public class Maailma {
 	private int kuplienLkm;
 	private boolean peliLoppunut;
 	private AktiivinenKupla nykyinen;
-	private AktiivinenKupla seuraava;
 
 	/**
 	 * Maailman konstruktori. Alustetaan attribuutit ja luodaan jonkin verran
@@ -49,7 +48,6 @@ public class Maailma {
 		 * Luodaan aktiiviset kuplat.
 		 */
 		this.nykyinen = new AktiivinenKupla(this.pelimaailma, this, true);
-		this.seuraava = new AktiivinenKupla(this.pelimaailma, this, false);
 
 		for (int i = 1; i < 10; i++){
 			if (i % 2 == 1){
@@ -104,28 +102,6 @@ public class Maailma {
 	 */
 	public AktiivinenKupla annaNykyinen(){
 		return this.nykyinen;
-	}
-
-	/**
-	 * Palauttaa seuraavan aktiivisen kuplan.
-	 * @return this.seuraava;
-	 */
-	public AktiivinenKupla annaSeuraava(){
-		return this.seuraava;
-	}
-	
-	/**
-	 * Asettaa odottavan kuplan nykyiseksi ammuttavaksi kuplaksi. Kutsutaan
-	 * myös aktiivisen kuplan asetaNykyiseksi-metodia, jossa asetetaan sen
-	 * nykyinen-attribuutti todeksi ja asetetaan sen sijainti pelimaailmassa.
-	 */
-	public void asetaNykyiseksi(AktiivinenKupla kupla){
-		kupla = this.seuraava;
-		this.nykyinen = kupla;
-		this.seuraava = new AktiivinenKupla(this.pelimaailma, this, false);
-		this.nykyinen.asetaNykyiseksi();
-		this.pelimaailma.repaint();
-		
 	}
 
 	/**

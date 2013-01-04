@@ -38,8 +38,6 @@ MouseMotionListener {
 	private static final long serialVersionUID = -2718553638694558080L;
 	private Maailma maailma;
 	private Ikkuna ikkuna;
-	private AktiivinenKupla nykyinen;
-	private AktiivinenKupla seuraava;
 	private double kulma;
 	private boolean klikattu;
 	private Ohjaaja ohjaaja;
@@ -65,9 +63,7 @@ MouseMotionListener {
 	public Pelimaailma(Ikkuna ikkuna){
 		this.ikkuna = ikkuna;
 		this.maailma = new Maailma(this);
-		this.nykyinen = maailma.annaNykyinen();
-		this.seuraava = maailma.annaSeuraava();
-		this.ohjaaja = new Ohjaaja(this, this.nykyinen);
+		this.ohjaaja = new Ohjaaja(this, this.maailma.annaNykyinen());
 		this.setPreferredSize(new Dimension(maailma.annaLeveys() + 50,
 				maailma.annaKorkeus() + 100));
 		this.klikattu = false;
@@ -108,14 +104,10 @@ MouseMotionListener {
 		/*
 		 * Piirret‰‰n nykyinen kupla.
 		 */
-		g2d.drawImage(this.nykyinen.annaKuva(),
+		AktiivinenKupla nykyinen = this.maailma.annaNykyinen();
+		g2d.drawImage(nykyinen.annaKuva(),
 				(int) nykyinen.annaX(), (int) nykyinen.annaY(), this);
 		
-		/*
-		 * Piirret‰‰n seuraava kupla.
-		 */
-		g2d.drawImage(this.seuraava.annaKuva(), (int) seuraava.annaX(),
-				(int) seuraava.annaY(), this);
 		/*
 		 * Piirret‰‰n viiva.
 		 */
@@ -141,7 +133,7 @@ MouseMotionListener {
 	 */
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		this.nykyinen.ammu(this.kulma);
+		this.maailma.annaNykyinen().ammu(this.kulma);
 		this.klikattu = true;
 	}
 
@@ -167,30 +159,6 @@ MouseMotionListener {
 	 */
 	public double annaKulma(){
 		return this.kulma;
-	}
-	
-	/**
-	 * Palauttaa nykyisen aktiivisen kuplan (ammuttavana olevan).
-	 * @return
-	 */
-	public AktiivinenKupla annaNykyinen(){
-		return this.nykyinen;
-	}
-	
-	/**
-	 * Palauttaa seuraavan aktiivisen kuplan (joka odottaa ampumisvuoroa).
-	 * @return
-	 */
-	public AktiivinenKupla annaSeuraava(){
-		return this.seuraava;
-	}
-	
-	/**
-	 * Palauttaa maailman.
-	 * @return
-	 */
-	public Maailma annaMaailma(){
-		return this.maailma;
 	}
 	
 	/**

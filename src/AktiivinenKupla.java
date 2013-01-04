@@ -85,9 +85,4 @@ public class AktiivinenKupla extends Kupla {
 	public boolean onPysahtynyt(){
 		return this.pysahtynyt;
 	}
-
-	public void asetaNykyiseksi(){
-		this.nykyinen = true;
-		this.asetaSijainti(228, 454);
-	}
 }
