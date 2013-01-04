@@ -59,7 +59,8 @@ MouseMotionListener {
 	/**
 	 * Pelimaailman konstruktori, jossa alustetaan attribuutit. 
 	 * Lis‰ksi annetaan paneelille haluttu koko ja lis‰t‰‰n pelimaailmalle
-	 * mouselistenerit.
+	 * mouselistenerit. Luodaan myˆs valikkoon-nappi ja asetetaan sille
+	 * ominaisuuksia.
 	 * 
 	 * @param ikkuna
 	 */
@@ -77,7 +78,7 @@ MouseMotionListener {
 		this.setLayout(null);
 		
 		/*
-		 * Valikkonappi.
+		 * Valikkonapin ominaisuudet.
 		 */
 		this.valikkoon = new JButton();
 		this.insets = this.getInsets();
@@ -183,29 +184,49 @@ MouseMotionListener {
 	}
 
 	/**
-	 * Palauttaa kulman, jossa suuntaviivaa k‰‰nnell‰‰n.
+	 * Palauttaa kulman, jossa kupla l‰htee liikkeelle.
 	 * @return
 	 */
 	public double annaKulma(){
 		return this.kulma;
 	}
 	
+	/**
+	 * Asettaa kulman, jossa kupla liikkuu.
+	 * @param kulma
+	 */
 	public void asetaKulma(double kulma){
 		this.kulma = kulma;
 	}
 	
+	/**
+	 * Palauttaa nykyisen aktiivisen kuplan (ammuttavana olevan).
+	 * @return
+	 */
 	public AktiivinenKupla annaNykyinen(){
 		return this.nykyinen;
 	}
 	
+	/**
+	 * Palauttaa seuraavan aktiivisen kuplan (joka odottaa ampumisvuoroa).
+	 * @return
+	 */
 	public AktiivinenKupla annaSeuraava(){
 		return this.seuraava;
 	}
 	
+	/**
+	 * Palauttaa maailman.
+	 * @return
+	 */
 	public Maailma annaMaailma(){
 		return this.maailma;
 	}
 	
+	/**
+	 * Asettaa pelimaailman klikattu-attribuutin arvon.
+	 * @param klikattu
+	 */
 	public void asetaKlikattu(boolean klikattu){
 		this.klikattu = klikattu;
 	}

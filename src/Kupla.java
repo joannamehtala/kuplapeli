@@ -41,8 +41,6 @@ public class Kupla {
 	public Kupla(){
 		this.ehja = true;
 		this.ryhma = new ArrayList<Kupla>();
-		this.x = x;
-		this.y = y;
 
 		Vari[] varit = Vari.values();
 		int i = rand.nextInt(varit.length);
