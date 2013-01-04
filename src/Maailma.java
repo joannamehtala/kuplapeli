@@ -17,9 +17,6 @@ public class Maailma {
 	 */
 	private int leveys;
 	private int korkeus;
-	private double x;
-	private double y;
-	private Pelimaailma pelimaailma;
 	public static Random rand = new Random();
 	private int kuplienLkm;
 	private boolean peliLoppunut;
@@ -42,12 +39,11 @@ public class Maailma {
 		 * Arvotaan max. 19 kuplaa aluksi yläreunaan.
 		 */
 		this.kuplienLkm = rand.nextInt(20);
-		this.pelimaailma = pelimaailma;
 
 		/*
 		 * Luodaan aktiiviset kuplat.
 		 */
-		this.nykyinen = new AktiivinenKupla(this.pelimaailma, this, true);
+		this.nykyinen = new AktiivinenKupla(pelimaailma, this, true);
 
 		for (int i = 1; i < 10; i++){
 			if (i % 2 == 1){
@@ -70,14 +66,6 @@ public class Maailma {
 				Kupla kupla3 = new Kupla(x, y);
 				kupla3.asetaSijainti(x, y);*/
 		}
-	}
-
-	/**
-	 * Palauttaa maailmalle parametrina annetun pelimaailman.
-	 * @return
-	 */
-	public Pelimaailma annaPelimaailma(){
-		return this.pelimaailma;
 	}
 
 	/**

@@ -16,7 +16,7 @@ public class AktiivinenKupla extends Kupla {
 			boolean nykyinen){
 		super();
 		this.maailma = m;
-		this.pelimaailma = m.annaPelimaailma();
+		this.pelimaailma = p;
 		this.nykyinen = nykyinen;
 		if (this.nykyinen){
 			this.asetaSijainti(228, 454);
