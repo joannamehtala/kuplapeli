@@ -1,3 +1,4 @@
+import java.util.Iterator;
 import java.util.Random;
 import java.util.Stack;
 
@@ -75,6 +76,10 @@ public class Maailma {
 	 */
 	public AktiivinenKupla annaNykyinen(){
 		return (AktiivinenKupla) this.kuplat.peek();
+	}
+	
+	public Iterator<Kupla> kuplaiteraattori(){
+		return this.kuplat.iterator();
 	}
 
 	/**

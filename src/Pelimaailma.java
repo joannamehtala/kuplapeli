@@ -9,6 +9,7 @@ import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.Iterator;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -67,7 +68,7 @@ MouseMotionListener {
 		this.addMouseMotionListener(this);
 		this.addMouseListener(this);
 		this.setLayout(null);
-		
+
 		/*
 		 * Valikkonapin ominaisuudet.
 		 */
@@ -83,7 +84,7 @@ MouseMotionListener {
 		this.valikkoon.setBounds(280 + this.insets.left, 530 + this.insets.top, 
 				130, 50);
 	}
-	
+
 	public void valikkoon_asetaKuva(ImageIcon i){
 		this.valikkoon.setIcon(i);
 	}
@@ -101,17 +102,21 @@ MouseMotionListener {
 		/*
 		 * Piirret‰‰n nykyinen kupla.
 		 */
-		AktiivinenKupla nykyinen = this.maailma.annaNykyinen();
-		g2d.drawImage(nykyinen.annaKuva(),
-				(int) nykyinen.annaX(), (int) nykyinen.annaY(), this);
-		
+
+		Iterator<Kupla> iteraattori = this.maailma.kuplaiteraattori();
+		while (iteraattori.hasNext()){
+			Kupla kupla = iteraattori.next();
+			g2d.drawImage(kupla.annaKuva(),
+					(int) kupla.annaX(), (int) kupla.annaY(), this);
+		}
+
 		/*
 		 * Piirret‰‰n viiva.
 		 */
 		double radkulma = Math.toRadians(this.kulma);
 		double loppuX = LAHTO_X + Math.cos(radkulma)*35;
 		double loppuY = LAHTO_Y + Math.sin(radkulma)*35;
-		
+
 		g2d.setColor(Color.BLACK);
 		g2d.drawLine(LAHTO_X, LAHTO_Y, (int) loppuX, (int) loppuY);
 	}
@@ -136,7 +141,7 @@ MouseMotionListener {
 	public void mouseMoved(MouseEvent arg0) {
 		int hiirix = arg0.getX();
 		int hiiriy = arg0.getY();
-		
+
 		double radkulma = Math.atan2(hiiriy - LAHTO_Y, hiirix - LAHTO_X );
 		this.kulma = Math.toDegrees(radkulma);
 		this.repaint();
