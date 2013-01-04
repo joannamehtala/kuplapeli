@@ -8,11 +8,11 @@ public class AktiivinenKupla extends Kupla {
 	private boolean pysahtynyt;
 	private boolean ammuttu;
 
-	public AktiivinenKupla(Pelimaailma p){
-		super();
+	public AktiivinenKupla(double x, double y, Pelimaailma p){
+		super(x, y);
 		this.pelimaailma = p;
-		this.asetaSijainti(Pelimaailma.LAHTO_X - this.annaSade(),
-				Pelimaailma.LAHTO_Y - this.annaSade());
+		/*this.asetaSijainti(Pelimaailma.LAHTO_X - this.annaSade(),
+				Pelimaailma.LAHTO_Y - this.annaSade());*/
 	}
 
 	public void ammu(double aste){
@@ -32,7 +32,6 @@ public class AktiivinenKupla extends Kupla {
 	public void liiku(long muutos){
 		double x = this.annaX();
 		double y = this.annaY();
-
 
 		/*
 		 * Törmättiin vasempaan seinään.
@@ -73,5 +72,9 @@ public class AktiivinenKupla extends Kupla {
 
 	public boolean onPysahtynyt(){
 		return this.pysahtynyt;
+	}
+	
+	public boolean onAmmuttu(){
+		return this.ammuttu;
 	}
 }

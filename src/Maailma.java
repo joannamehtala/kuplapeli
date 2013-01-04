@@ -22,7 +22,8 @@ public class Maailma {
 	public static Random rand = new Random();
 	private boolean peliLoppunut;
 	private Stack<Kupla> kuplat;
-	private AktiivinenKupla nykyinen;
+	private Pelimaailma pelimaailma;
+	private Ohjaaja ohjaaja;
 	
 
 	/**
@@ -37,9 +38,15 @@ public class Maailma {
 		 */
 		this.leveys = 450;
 		this.korkeus = 500;
+		this.pelimaailma = pelimaailma;
+		
 		
 		this.kuplat = new Stack<Kupla>();
-		this.kuplat.push(new AktiivinenKupla(pelimaailma));
+		AktiivinenKupla kupla_nykyinen = 
+				new AktiivinenKupla(Pelimaailma.LAHTO_X - 22.5,
+				Pelimaailma.LAHTO_Y - 22.5, this.pelimaailma);
+		this.kuplat.push(kupla_nykyinen);
+		this.ohjaaja = new Ohjaaja(this, this.pelimaailma, this.annaNykyinen());
 
 		/*
 		 * Luodaan aktiiviset kuplat.
@@ -80,6 +87,17 @@ public class Maailma {
 	
 	public Iterator<Kupla> kuplaiteraattori(){
 		return this.kuplat.iterator();
+	}
+	
+	public void ammuNykyinen(double kulma){
+		this.annaNykyinen().ammu(kulma);
+	}
+	
+	public void arvoUusi(){
+		AktiivinenKupla arvottu = new AktiivinenKupla(Pelimaailma.LAHTO_X - 22.5,
+				Pelimaailma.LAHTO_Y - 22.5, 
+				this.pelimaailma);
+		this.kuplat.push(arvottu);
 	}
 
 	/**

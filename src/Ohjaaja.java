@@ -19,8 +19,8 @@ public class Ohjaaja implements ActionListener{
 	 */
 	private long edellinenhetki;
 	private Timer timer;
+	private Maailma maailma;
 	private Pelimaailma pelimaailma;
-	private AktiivinenKupla ohjattava;
 
 	/**
 	 * Ohjaajan konstruktori. Parametreina annetaan pelimaailma ja aktiivinen-
@@ -28,18 +28,12 @@ public class Ohjaaja implements ActionListener{
 	 * @param pelimaailma
 	 * @param aktiivinenkupla
 	 */
-	public Ohjaaja(Pelimaailma pelimaailma, AktiivinenKupla ohjattava){
+	public Ohjaaja(Maailma maailma, Pelimaailma pelimaailma, 
+			AktiivinenKupla ohjattava){
 		this.timer = new Timer(10, this);
+		this.maailma = maailma;
 		this.pelimaailma = pelimaailma;
-		this.asetaOhjattava(ohjattava);
-	}
-
-	public void kaynnista(){
 		this.timer.start();
-	}
-
-	public void asetaOhjattava(AktiivinenKupla uusi){
-		this.ohjattava = uusi;
 	}
 
 	/**
@@ -63,8 +57,17 @@ public class Ohjaaja implements ActionListener{
 		long muutos = System.currentTimeMillis() - this.edellinenhetki;
 		this.edellinenhetki = System.currentTimeMillis();
 
-		this.ohjattava.liiku(muutos);
-
+		if (!this.maailma.annaNykyinen().onAmmuttu()){
+			this.pelimaailma.repaint();
+			return;
+		}
+		
+		this.maailma.annaNykyinen().liiku(muutos);
+		if (this.maailma.annaNykyinen().onPysahtynyt()){
+			this.maailma.arvoUusi();
+		}
+		
 		this.pelimaailma.repaint();
+		
 	}
 }

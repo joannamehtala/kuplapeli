@@ -40,7 +40,6 @@ MouseMotionListener {
 	private Maailma maailma;
 	private Ikkuna ikkuna;
 	private double kulma;
-	private Ohjaaja ohjaaja;
 	private static final Image taustakuva =
 			Toolkit.getDefaultToolkit().createImage("media/taustakuva1.png");
 	private ImageIcon valikkoon_normal = new ImageIcon("media/valikkoon.png");
@@ -62,7 +61,6 @@ MouseMotionListener {
 	public Pelimaailma(Ikkuna ikkuna){
 		this.ikkuna = ikkuna;
 		this.maailma = new Maailma(this);
-		this.ohjaaja = new Ohjaaja(this, this.maailma.annaNykyinen());
 		this.setPreferredSize(new Dimension(maailma.annaLeveys() + 50,
 				maailma.annaKorkeus() + 100));
 		this.addMouseMotionListener(this);
@@ -127,8 +125,7 @@ MouseMotionListener {
 	 */
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		this.maailma.annaNykyinen().ammu(this.kulma);
-		this.ohjaaja.kaynnista();
+		this.maailma.ammuNykyinen(this.kulma);
 	}
 
 	/**
