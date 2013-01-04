@@ -66,7 +66,6 @@ public class AktiivinenKupla extends Kupla {
 			x += Math.cos(Math.toRadians(aste))*muutos*0.1;
 
 		} else {
-			this.pelimaailma.asetaKlikattu(false);
 			this.pysahtynyt = true;
 
 		}

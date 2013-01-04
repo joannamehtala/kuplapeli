@@ -39,12 +39,10 @@ MouseMotionListener {
 	private Maailma maailma;
 	private Ikkuna ikkuna;
 	private double kulma;
-	private boolean klikattu;
 	private Ohjaaja ohjaaja;
 	private static final Image taustakuva =
 			Toolkit.getDefaultToolkit().createImage("media/taustakuva1.png");
 	private ImageIcon valikkoon_normal = new ImageIcon("media/valikkoon.png");
-	private ImageIcon valikkoon_hiiri = new ImageIcon("media/valikkoon2.png");
 	private Border reunus = BorderFactory.createEmptyBorder();
 	private Insets insets;
 	private JButton valikkoon;
@@ -66,7 +64,6 @@ MouseMotionListener {
 		this.ohjaaja = new Ohjaaja(this, this.maailma.annaNykyinen());
 		this.setPreferredSize(new Dimension(maailma.annaLeveys() + 50,
 				maailma.annaKorkeus() + 100));
-		this.klikattu = false;
 		this.addMouseMotionListener(this);
 		this.addMouseListener(this);
 		this.setLayout(null);
@@ -119,14 +116,6 @@ MouseMotionListener {
 		g2d.drawLine(LAHTO_X, LAHTO_Y, (int) loppuX, (int) loppuY);
 	}
 
-	/**
-	 * Metodi kertoo, onko peliruutua klikattu. Jos on, palauttaa true, jos ei,
-	 * palauttaa false.
-	 * @return this.klikattu
-	 */
-	public boolean onKlikattu(){
-		return this.klikattu;
-	}
 
 	/**
 	 * Asetetaan klikkauksen yhteydessä attribuutti klikattu todeksi.
@@ -134,7 +123,7 @@ MouseMotionListener {
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		this.maailma.annaNykyinen().ammu(this.kulma);
-		this.klikattu = true;
+		this.ohjaaja.kaynnista();
 	}
 
 	/**
@@ -159,14 +148,6 @@ MouseMotionListener {
 	 */
 	public double annaKulma(){
 		return this.kulma;
-	}
-	
-	/**
-	 * Asettaa pelimaailman klikattu-attribuutin arvon.
-	 * @param klikattu
-	 */
-	public void asetaKlikattu(boolean klikattu){
-		this.klikattu = klikattu;
 	}
 
 	/**
