@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Stack;
 
 /**
  * Maailma-luokka, joka sis‰lt‰‰ pelilogiikkaa maailman osalta; pidet‰‰n
@@ -18,9 +19,10 @@ public class Maailma {
 	private int leveys;
 	private int korkeus;
 	public static Random rand = new Random();
-	private int kuplienLkm;
 	private boolean peliLoppunut;
+	private Stack kuplat;
 	private AktiivinenKupla nykyinen;
+	
 
 	/**
 	 * Maailman konstruktori. Alustetaan attribuutit ja luodaan jonkin verran
@@ -34,16 +36,14 @@ public class Maailma {
 		 */
 		this.leveys = 450;
 		this.korkeus = 500;
-
-		/*
-		 * Arvotaan max. 19 kuplaa aluksi yl‰reunaan.
-		 */
-		this.kuplienLkm = rand.nextInt(20);
+		
+		this.kuplat = new Stack();
 
 		/*
 		 * Luodaan aktiiviset kuplat.
 		 */
-		this.nykyinen = new AktiivinenKupla(pelimaailma, this, true);
+		this.nykyinen = new AktiivinenKupla(pelimaailma);
+		this.nykyinen.asetaSijainti(228, 454);
 
 		for (int i = 1; i < 10; i++){
 			if (i % 2 == 1){

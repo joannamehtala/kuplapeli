@@ -3,26 +3,16 @@ import java.util.Random;
 
 public class AktiivinenKupla extends Kupla {
 	public static Random rand = new Random();
-	private Maailma maailma;
 	private Pelimaailma pelimaailma;
 	private double aste;
 	private boolean pysahtynyt;
-	private boolean nykyinen;
 	private boolean ammuttu;
 	private double x;
 	private double y;
 
-	public AktiivinenKupla(Pelimaailma p, Maailma m, 
-			boolean nykyinen){
+	public AktiivinenKupla(Pelimaailma p){
 		super();
-		this.maailma = m;
 		this.pelimaailma = p;
-		this.nykyinen = nykyinen;
-		if (this.nykyinen){
-			this.asetaSijainti(228, 454);
-		} else {
-			this.asetaSijainti(228, 499);
-		}
 	}
 
 	public void ammu(double aste){
