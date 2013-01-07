@@ -93,12 +93,14 @@ MouseMotionListener {
 	public void paintComponent(Graphics g)  {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D)g;
+		
 		/*
 		 * Piirret‰‰n taustakuva.
 		 */
 		g2d.drawImage(taustakuva, 0, 0, this);
+		
 		/*
-		 * Piirret‰‰n nykyinen kupla.
+		 * Piirret‰‰n maailman kuplat.
 		 */
 
 		Iterator<Kupla> iteraattori = this.maailma.kuplaiteraattori();
@@ -107,7 +109,7 @@ MouseMotionListener {
 			g2d.drawImage(kupla.annaKuva(),
 					(int) kupla.annaX(), (int) kupla.annaY(), this);
 		}
-
+		
 		/*
 		 * Piirret‰‰n viiva.
 		 */
@@ -150,6 +152,10 @@ MouseMotionListener {
 	 */
 	public double annaKulma(){
 		return this.kulma;
+	}
+	
+	public Maailma annaMaailma(){
+		return this.maailma;
 	}
 
 	/**

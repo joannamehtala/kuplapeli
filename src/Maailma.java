@@ -24,7 +24,9 @@ public class Maailma {
 	private Stack<Kupla> kuplat;
 	private Pelimaailma pelimaailma;
 	private Ohjaaja ohjaaja;
-	
+	private double alkupiste_x;
+	private double alkupiste_y;
+
 
 	/**
 	 * Maailman konstruktori. Alustetaan attribuutit ja luodaan jonkin verran
@@ -39,26 +41,35 @@ public class Maailma {
 		this.leveys = 450;
 		this.korkeus = 500;
 		this.pelimaailma = pelimaailma;
-		
-		
+
 		this.kuplat = new Stack<Kupla>();
-		AktiivinenKupla kupla_nykyinen = 
-				new AktiivinenKupla(Pelimaailma.LAHTO_X - 22.5,
-				Pelimaailma.LAHTO_Y - 22.5, this.pelimaailma);
-		this.kuplat.push(kupla_nykyinen);
-		this.ohjaaja = new Ohjaaja(this, this.pelimaailma, this.annaNykyinen());
 
-		/*
-		 * Luodaan aktiiviset kuplat.
-		 */
+		this.alkupiste_x = 50;
+		this.alkupiste_y = 50;
 
-		for (int i = 1; i < 10; i++){
-			if (i % 2 == 1){
+		for (int i = 0; i < 4; i++){
+			if (i % 2 == 0){
 				//parittomille riveille luodaan 10 kuplaa alkaen x=50
+				for (int a = 0; a < 9; a++){
+					Kupla kupla2 = new Kupla(this.alkupiste_x+(a*45), 
+							this.alkupiste_y+(i*45));
+					this.kuplat.push(kupla2);
+				}
 			} else {
 				//parillisille riveille luodaan 9 kuplaa alkaen x=72.5
+				for (int a = 0; a < 8; a++){
+						Kupla kupla = new Kupla(this.alkupiste_x+22.5+(a*45),
+								this.alkupiste_y+(i*45));
+						this.kuplat.push(kupla);
+				}
 			}
 		}
+
+		AktiivinenKupla kupla_nykyinen = 
+				new AktiivinenKupla(Pelimaailma.LAHTO_X - 22.5,
+						Pelimaailma.LAHTO_Y - 22.5, this.pelimaailma);
+		this.kuplat.push(kupla_nykyinen);
+		this.ohjaaja = new Ohjaaja(this, this.pelimaailma, this.annaNykyinen());
 	}
 
 	/**
@@ -84,22 +95,22 @@ public class Maailma {
 	public AktiivinenKupla annaNykyinen(){
 		return (AktiivinenKupla) this.kuplat.peek();
 	}
-	
+
 	public Iterator<Kupla> kuplaiteraattori(){
 		return this.kuplat.iterator();
 	}
-	
+
 	public void ammuNykyinen(double kulma){
 		this.annaNykyinen().ammu(kulma);
 	}
-	
+
 	public void arvoUusi(){
 		AktiivinenKupla arvottu = new AktiivinenKupla(Pelimaailma.LAHTO_X - 22.5,
 				Pelimaailma.LAHTO_Y - 22.5, 
 				this.pelimaailma);
 		this.kuplat.push(arvottu);
 	}
-	
+
 	public void liikutaNykyista(long muutos){
 		this.annaNykyinen().liiku(muutos);
 		if (this.annaNykyinen().onPysahtynyt()){

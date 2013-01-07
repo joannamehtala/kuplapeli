@@ -1,3 +1,4 @@
+import java.util.Iterator;
 import java.util.Random;
 
 
@@ -21,6 +22,14 @@ public class AktiivinenKupla extends Kupla {
 		}
 		this.ammuttu = true;
 		this.aste = aste;
+	}
+
+	public boolean koskeeToista(AktiivinenKupla aktiivinen, Kupla kohde){
+		if (kohde.annaY() - aktiivinen.annaY() == 45){
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -50,7 +59,10 @@ public class AktiivinenKupla extends Kupla {
 		/*
 		 * Liikutetaan.
 		 */
-
+		/*Iterator<Kupla> iteraattori = 
+				this.pelimaailma.annaMaailma().kuplaiteraattori();
+		while (iteraattori.hasNext()){
+			Kupla kohde = iteraattori.next();*/
 		if (y > 50){
 			x += Math.cos(Math.toRadians(aste))*muutos*0.1;
 
@@ -58,6 +70,7 @@ public class AktiivinenKupla extends Kupla {
 			this.pysahtynyt = true;
 
 		}
+
 
 		/*
 		 * Y:n muutokset (ei koskaan kimpoa y-suunnassa, vaan pysähtyy ylös
@@ -73,7 +86,7 @@ public class AktiivinenKupla extends Kupla {
 	public boolean onPysahtynyt(){
 		return this.pysahtynyt;
 	}
-	
+
 	public boolean onAmmuttu(){
 		return this.ammuttu;
 	}
