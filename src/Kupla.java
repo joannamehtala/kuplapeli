@@ -1,5 +1,6 @@
 
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Random;
@@ -92,21 +93,12 @@ public class Kupla {
 		return this.sade;
 	}
 
-	public boolean koskeeToista(Kupla kohde){
-		//Jos kahden kuplan keskipisteiden et‰isyys toisistaan on sama kuin
-		//kuplien halkaisija (kaikki kuplat samankokoisia), kuplat koskevat
-		//toisiaan ja palauttaa true. Jos et‰isyys on suurempi kuin halkaisija,
-		//eiv‰t koske toisiaan ja palauttaa false. Nyt palauttaa true ettei
-		//herjaisi.
-		return true;
-	}
-
 	/**
 	 * Jos samanv‰rinen kupla osuu toiseen, se lis‰t‰‰n kyseisen kuplan naapuri-
 	 * listaan. Kun naapurilistan koko kasvaa kolmeen tai suuremmaksi, kaikki
 	 * naapurilistan kuplat poksahtavat.
 	 */
-	public void kosketa(int x, int y){
+	/*public void kosketa(int x, int y){
 		Kupla kohde = new Kupla(x, y);
 		kohde.asetaSijainti(x, y);
 		//Oikeasti kosketettava kupla t‰ytyy antaa jotenkin koordinaateilla tms,
@@ -125,7 +117,7 @@ public class Kupla {
 				}
 			}
 		}
-	}
+	}*/
 
 	public void poksahda(){
 		this.ehja = false;
@@ -152,4 +144,9 @@ public class Kupla {
 		this.x = x;
 		this.y = y;
 	}
+	
+	public Rectangle annaMitat(){
+		return new Rectangle((int) this.annaX(), (int) this.annaY(), 45, 45);
+	}
+	
 }

@@ -90,20 +90,32 @@ public class Maailma {
 
 	/**
 	 * Palauttaa nykyisen aktiivisen kuplan.
-	 * @return this.nykyinen
+	 * @return kuplat-pinon p‰‰llimm‰inen kupla
 	 */
 	public AktiivinenKupla annaNykyinen(){
 		return (AktiivinenKupla) this.kuplat.peek();
 	}
 
+	/**
+	 * Iteroidaan maailman kuplia.
+	 * @return kuplaiteraattori
+	 */
 	public Iterator<Kupla> kuplaiteraattori(){
 		return this.kuplat.iterator();
 	}
 
+	/**
+	 * Ampuu nykyisen kuplan halutussa kulmassa.
+	 * @param kulma, jossa kupla ammutaan liikkeelle
+	 */
 	public void ammuNykyinen(double kulma){
 		this.annaNykyinen().ammu(kulma);
 	}
 
+	/**
+	 * Arvotaan uusi kupla seuraavaksi ammuttavaksi ja lis‰t‰‰n se maailman
+	 * kuplien pinoon.
+	 */
 	public void arvoUusi(){
 		AktiivinenKupla arvottu = new AktiivinenKupla(Pelimaailma.LAHTO_X - 22.5,
 				Pelimaailma.LAHTO_Y - 22.5, 
@@ -111,11 +123,25 @@ public class Maailma {
 		this.kuplat.push(arvottu);
 	}
 
+	/**
+	 * Liikutetaan nykyist‰ kuplaa. Jos kupla on pys‰htynyt, arvotaan uusi
+	 * kupla.
+	 * @param muutos
+	 */
 	public void liikutaNykyista(long muutos){
 		this.annaNykyinen().liiku(muutos);
 		if (this.annaNykyinen().onPysahtynyt()){
 			this.arvoUusi();
 		}
+	}
+	
+	//TODO ‰l‰ mielell‰‰n pid‰ t‰t‰ metodia t‰‰ll‰
+	/**
+	 * Palauttaa kuplien pinon.
+	 * @return
+	 */
+	public Stack<Kupla> annaKuplat(){
+		return this.kuplat;
 	}
 
 	/**

@@ -1,3 +1,4 @@
+
 import java.util.Iterator;
 import java.util.Random;
 
@@ -8,12 +9,11 @@ public class AktiivinenKupla extends Kupla {
 	private double aste;
 	private boolean pysahtynyt;
 	private boolean ammuttu;
+	private Kupla kohde;
 
 	public AktiivinenKupla(double x, double y, Pelimaailma p){
 		super(x, y);
 		this.pelimaailma = p;
-		/*this.asetaSijainti(Pelimaailma.LAHTO_X - this.annaSade(),
-				Pelimaailma.LAHTO_Y - this.annaSade());*/
 	}
 
 	public void ammu(double aste){
@@ -24,13 +24,32 @@ public class AktiivinenKupla extends Kupla {
 		this.aste = aste;
 	}
 
-	public boolean koskeeToista(AktiivinenKupla aktiivinen, Kupla kohde){
-		if (kohde.annaY() - aktiivinen.annaY() == 45){
-			return true;
-		} else {
-			return false;
+	public boolean koskeeToista(){
+		Kupla aktiivinen = this.pelimaailma.annaMaailma().annaNykyinen();
+		Iterator<Kupla> iteraattori = 
+				this.pelimaailma.annaMaailma().kuplaiteraattori();
+		while (iteraattori.hasNext()){
+
+
+			/*for (int i = 0; i < this.pelimaailma.annaMaailma().annaKuplat().size() - 1; i++){
+			this.kohde = this.pelimaailma.annaMaailma().annaKuplat().get(i);*/
+
+			this.kohde = iteraattori.next();
+			double etaisyys = Math.sqrt(Math.pow(((this.kohde.annaX() + 
+					this.kohde.annaSade()) - (aktiivinen.annaX() + 
+							aktiivinen.annaSade())),2) + 
+							Math.pow(((this.kohde.annaY() + 
+									this.kohde.annaSade()) - (aktiivinen.annaY()
+											+ aktiivinen.annaSade())), 2));
+			if (etaisyys == this.kohde.annaSade() + aktiivinen.annaSade()){
+				System.out.println("koskee");
+				return true;
+			}
 		}
+		System.out.println("ei koske");
+		return false;
 	}
+
 
 	/**
 	 * Metodi, jolla kuplaa liikutetaan. Kupla kimpoaa vasemmasta ja oikeasta
@@ -59,25 +78,14 @@ public class AktiivinenKupla extends Kupla {
 		/*
 		 * Liikutetaan.
 		 */
-		/*Iterator<Kupla> iteraattori = 
-				this.pelimaailma.annaMaailma().kuplaiteraattori();
-		while (iteraattori.hasNext()){
-			Kupla kohde = iteraattori.next();*/
-		if (y > 50){
-			x += Math.cos(Math.toRadians(aste))*muutos*0.1;
+		if (y > 50 && y < 465){
+			if (!this.pelimaailma.annaMaailma().annaNykyinen().koskeeToista()){
+				x += Math.cos(Math.toRadians(aste))*muutos*0.1;
+				y += Math.sin(Math.toRadians(aste))*muutos*0.1;
+			}
 
 		} else {
 			this.pysahtynyt = true;
-
-		}
-
-
-		/*
-		 * Y:n muutokset (ei koskaan kimpoa y-suunnassa, vaan pysähtyy ylös
-		 * tai kuplaan osuessaan).
-		 */
-		if (y > 50 && y < 465){
-			y += Math.sin(Math.toRadians(aste))*muutos*0.1;
 		}
 
 		this.asetaSijainti(x, y);
