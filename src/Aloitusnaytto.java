@@ -85,8 +85,7 @@ public class Aloitusnaytto extends JPanel {
 		this.lopeta.setIcon(lopeta_normal);
 		this.lopeta.setPreferredSize(new Dimension(89,50));
 		this.lopeta.setBorder(reunus);
-		this.lopeta.addMouseListener(new Hiirikuuntelija_Lopeta(this,
-				this.ikkuna));
+		this.lopeta.addMouseListener(new Hiirikuuntelija_Lopeta(this));
 		this.add(this.lopeta);
 		this.lopeta.setBounds(310 + this.insets.left, 155 + this.insets.top,
 				89, 50);

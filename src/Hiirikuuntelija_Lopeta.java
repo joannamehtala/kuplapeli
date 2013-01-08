@@ -11,11 +11,9 @@ public class Hiirikuuntelija_Lopeta implements MouseListener{
 	private static final ImageIcon lopeta_hiiri = 
 			new ImageIcon("media/lopeta2.png");
 	private Aloitusnaytto aloitusnaytto;
-	private Ikkuna ikkuna;
 	
-	public Hiirikuuntelija_Lopeta(Aloitusnaytto aloitusnaytto, Ikkuna ikkuna){
+	public Hiirikuuntelija_Lopeta(Aloitusnaytto aloitusnaytto){
 		this.aloitusnaytto = aloitusnaytto;
-		this.ikkuna = ikkuna;
 	}
 
 	@Override
