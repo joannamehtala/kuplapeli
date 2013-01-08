@@ -26,27 +26,26 @@ public class AktiivinenKupla extends Kupla {
 
 	public boolean koskeeToista(){
 		Kupla aktiivinen = this.pelimaailma.annaMaailma().annaNykyinen();
-		Iterator<Kupla> iteraattori = 
+		/*Iterator<Kupla> iteraattori = 
 				this.pelimaailma.annaMaailma().kuplaiteraattori();
-		while (iteraattori.hasNext()){
+		while (iteraattori.hasNext()){*/
 
+		for (int i = 0; i < 
+				this.pelimaailma.annaMaailma().annaKuplat().size() - 1; 
+				i++){
+			this.kohde = this.pelimaailma.annaMaailma().annaKuplat().get(i);
 
-			/*for (int i = 0; i < this.pelimaailma.annaMaailma().annaKuplat().size() - 1; i++){
-			this.kohde = this.pelimaailma.annaMaailma().annaKuplat().get(i);*/
-
-			this.kohde = iteraattori.next();
+			//this.kohde = iteraattori.next();
 			double etaisyys = Math.sqrt(Math.pow(((this.kohde.annaX() + 
 					this.kohde.annaSade()) - (aktiivinen.annaX() + 
 							aktiivinen.annaSade())),2) + 
 							Math.pow(((this.kohde.annaY() + 
 									this.kohde.annaSade()) - (aktiivinen.annaY()
 											+ aktiivinen.annaSade())), 2));
-			if (etaisyys == this.kohde.annaSade() + aktiivinen.annaSade()){
-				System.out.println("koskee");
+			if (etaisyys <= 45){
 				return true;
 			}
 		}
-		System.out.println("ei koske");
 		return false;
 	}
 
@@ -78,11 +77,10 @@ public class AktiivinenKupla extends Kupla {
 		/*
 		 * Liikutetaan.
 		 */
-		if (y > 50 && y < 465){
-			if (!this.pelimaailma.annaMaailma().annaNykyinen().koskeeToista()){
-				x += Math.cos(Math.toRadians(aste))*muutos*0.1;
-				y += Math.sin(Math.toRadians(aste))*muutos*0.1;
-			}
+		if (y > 50 && y < 465 && 
+				!this.pelimaailma.annaMaailma().annaNykyinen().koskeeToista()){
+			x += Math.cos(Math.toRadians(aste))*muutos*0.1;
+			y += Math.sin(Math.toRadians(aste))*muutos*0.1;
 
 		} else {
 			this.pysahtynyt = true;
