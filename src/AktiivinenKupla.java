@@ -1,4 +1,5 @@
 
+import java.util.Iterator;
 import java.util.Random;
 
 
@@ -48,6 +49,28 @@ public class AktiivinenKupla extends Kupla {
 		return false;
 	}
 
+	public double annaEtaisyys(Kupla kupla, Piste piste){
+		double etaisyys = Math.sqrt(Math.pow((piste.annaX() - 
+				kupla.annaX()),2) + Math.pow((piste.annaY() - 
+						kupla.annaY()), 2));
+		return etaisyys;
+	}
+
+	public void tasaaSijainti(Kupla kupla){
+		Piste piste;
+		Piste lahin = null;
+		Iterator<Piste> iteraattori = 
+				this.pelimaailma.annaMaailma().pisteiteraattori();
+		while (iteraattori.hasNext()){
+			piste = iteraattori.next();
+			if (lahin == null || this.annaEtaisyys(kupla, piste) 
+					< this.annaEtaisyys(kupla, lahin)){
+				lahin = piste;
+			}
+		}
+		kupla.asetaSijainti(lahin.annaX(), lahin.annaY());
+	}
+
 
 	/**
 	 * Metodi, jolla kuplaa liikutetaan. Kupla kimpoaa vasemmasta ja oikeasta
@@ -83,6 +106,8 @@ public class AktiivinenKupla extends Kupla {
 
 		} else {
 			this.pysahtynyt = true;
+			this.tasaaSijainti(this);
+			return;
 		}
 
 		this.asetaSijainti(x, y);

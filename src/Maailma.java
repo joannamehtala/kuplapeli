@@ -1,3 +1,5 @@
+
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.Stack;
@@ -26,6 +28,7 @@ public class Maailma {
 	private Ohjaaja ohjaaja;
 	private double alkupiste_x;
 	private double alkupiste_y;
+	private ArrayList<Piste> pisteet;
 
 
 	/**
@@ -43,9 +46,27 @@ public class Maailma {
 		this.pelimaailma = pelimaailma;
 
 		this.kuplat = new Stack<Kupla>();
+		this.pisteet = new ArrayList<Piste>();
 
 		this.alkupiste_x = 50;
 		this.alkupiste_y = 50;
+		
+		for (int i = 0; i < 10; i++){
+			if (i % 2 == 0){
+				for (int a = 0; a < 9; a++){
+					Piste piste = new Piste(this.alkupiste_x+(a*45),
+							this.alkupiste_y+(i*45));
+					this.pisteet.add(piste);
+				}
+			} else {
+				for (int a = 0; a < 8; a++){
+					Piste piste2 = new Piste(this.alkupiste_x+22.5+(a*45),
+							this.alkupiste_y+(i*45));
+					this.pisteet.add(piste2);
+					
+				}
+			}
+		}
 
 		for (int i = 0; i < 4; i++){
 			if (i % 2 == 0){
@@ -102,6 +123,14 @@ public class Maailma {
 	 */
 	public Iterator<Kupla> kuplaiteraattori(){
 		return this.kuplat.iterator();
+	}
+	
+	/**
+	 * Iteroidaan maailman pisteitä.
+	 * @return pisteiteraattori
+	 */
+	public Iterator<Piste> pisteiteraattori(){
+		return this.pisteet.iterator();
 	}
 
 	/**
