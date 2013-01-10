@@ -31,21 +31,15 @@ public class AktiivinenKupla extends Kupla {
 				this.pelimaailma.annaMaailma().annaKuplat().size() - 1; 
 				i++){
 			this.kohde = this.pelimaailma.annaMaailma().annaKuplat().get(i);
+			
+			double deltaX = this.kohde.annaKeskiX() - aktiivinen.annaKeskiX();
+			double deltaY = this.kohde.annaKeskiY() - aktiivinen.annaKeskiY();
 
-			double etaisyys = Math.sqrt(Math.pow(((this.kohde.annaX() + 
-					this.kohde.annaSade()) - (aktiivinen.annaX() + 
-							aktiivinen.annaSade())),2) + 
-							Math.pow(((this.kohde.annaY() + 
-									this.kohde.annaSade()) - (aktiivinen.annaY()
-											+ aktiivinen.annaSade())), 2));
-			if (etaisyys <= 45){
-				/*if (this.kohde.annaVari() == aktiivinen.annaVari()){
-					/*aktiivinen.annaRyhma().add(this.kohde);
-					//TODO Lisataan ryhmaan myos naapurin ryhman jasenet
-					//Lisataan itsemme naapurin ryhmaan
-					this.kohde.annaRyhma().add(aktiivinen);
-					System.out.println("Listaan lisätty kupla " + this.kohde);
-				}*/
+			double etaisyysNelio = (deltaX * deltaX) + (deltaY * deltaY);
+			
+			double sade = 2 * this.kohde.annaSade();
+					
+			if (etaisyysNelio <= sade * sade){
 				return true;
 			}
 		}
@@ -53,26 +47,28 @@ public class AktiivinenKupla extends Kupla {
 	}
 
 	public double annaEtaisyys(Kupla kupla, Piste piste){
-		double etaisyys = Math.sqrt(Math.pow((piste.annaX() - 
-				kupla.annaX()),2) + 
-				Math.pow((piste.annaY() - 
-						kupla.annaY()), 2));
-		return etaisyys;
+		double deltaX = piste.annaX() - kupla.annaKeskiX();
+		double deltaY = piste.annaY() - kupla.annaKeskiY();
+		
+		double etaisyysNelio = (deltaX * deltaX) + (deltaY * deltaY);
+		
+		return etaisyysNelio;
 	}
 
 	public void tasaaSijainti(Kupla kupla){
-		Piste piste;
+		Piste tutkittava;
 		Piste lahin = null;
 		Iterator<Piste> iteraattori = 
 				this.pelimaailma.annaMaailma().pisteiteraattori();
 		while (iteraattori.hasNext()){
-			piste = iteraattori.next();
-			if (lahin == null || this.annaEtaisyys(kupla, piste) 
+			tutkittava = iteraattori.next();
+			if (lahin == null || this.annaEtaisyys(kupla, tutkittava) 
 					< this.annaEtaisyys(kupla, lahin)){
-				lahin = piste;
+				lahin = tutkittava;
 			}
 		}
-		kupla.asetaSijainti(lahin.annaX(), lahin.annaY());
+		kupla.asetaSijainti(lahin.annaX() - kupla.annaSade(), lahin.annaY() - 
+				kupla.annaSade());
 	}
 
 
@@ -111,11 +107,6 @@ public class AktiivinenKupla extends Kupla {
 		} else {
 			this.pysahtynyt = true;
 			this.tasaaSijainti(this);
-			Kupla nykyinen = this.pelimaailma.annaMaailma().annaNykyinen();
-			nykyinen.annaNaapurit();
-			for(int i = 0; i < nykyinen.annaNaapurit().size(); i++){
-				System.out.println(nykyinen.annaNaapurit().get(i));
-			}
 			return;
 		}
 

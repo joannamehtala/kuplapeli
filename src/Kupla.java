@@ -78,6 +78,22 @@ public class Kupla {
 	public double annaY(){
 		return this.y;
 	}
+	
+	/**
+	 * Palauttaa kuplan keskipisteen x-koordinaatin.
+	 * @return double keskipisteen x-koordinaatti
+	 */
+	public double annaKeskiX(){
+		return this.x + 22.5;
+	}
+	
+	/**
+	 * Palauttaa kuplan keskipisteen y-koordinaatin.
+	 * @return double keskipisteen y-koordinaatti
+	 */
+	public double annaKeskiY(){
+		return this.y + 22.5;
+	}
 
 	/**
 	 * Kertoo, onko kupla ehjä.
