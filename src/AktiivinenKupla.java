@@ -12,7 +12,7 @@ public class AktiivinenKupla extends Kupla {
 	private Kupla kohde;
 
 	public AktiivinenKupla(double x, double y, Pelimaailma p){
-		super(x, y);
+		super(x, y, p.annaMaailma());
 		this.pelimaailma = p;
 	}
 
@@ -26,16 +26,12 @@ public class AktiivinenKupla extends Kupla {
 
 	public boolean koskeeToista(){
 		Kupla aktiivinen = this.pelimaailma.annaMaailma().annaNykyinen();
-		/*Iterator<Kupla> iteraattori = 
-				this.pelimaailma.annaMaailma().kuplaiteraattori();
-		while (iteraattori.hasNext()){*/
 
 		for (int i = 0; i < 
 				this.pelimaailma.annaMaailma().annaKuplat().size() - 1; 
 				i++){
 			this.kohde = this.pelimaailma.annaMaailma().annaKuplat().get(i);
 
-			//this.kohde = iteraattori.next();
 			double etaisyys = Math.sqrt(Math.pow(((this.kohde.annaX() + 
 					this.kohde.annaSade()) - (aktiivinen.annaX() + 
 							aktiivinen.annaSade())),2) + 
@@ -43,6 +39,13 @@ public class AktiivinenKupla extends Kupla {
 									this.kohde.annaSade()) - (aktiivinen.annaY()
 											+ aktiivinen.annaSade())), 2));
 			if (etaisyys <= 45){
+				/*if (this.kohde.annaVari() == aktiivinen.annaVari()){
+					/*aktiivinen.annaRyhma().add(this.kohde);
+					//TODO Lisataan ryhmaan myos naapurin ryhman jasenet
+					//Lisataan itsemme naapurin ryhmaan
+					this.kohde.annaRyhma().add(aktiivinen);
+					System.out.println("Listaan lisätty kupla " + this.kohde);
+				}*/
 				return true;
 			}
 		}
@@ -107,6 +110,11 @@ public class AktiivinenKupla extends Kupla {
 		} else {
 			this.pysahtynyt = true;
 			this.tasaaSijainti(this);
+			Kupla nykyinen = this.pelimaailma.annaMaailma().annaNykyinen();
+			nykyinen.annaNaapurit();
+			for(int i = 0; i < nykyinen.annaNaapurit().size(); i++){
+				System.out.println(nykyinen.annaNaapurit().get(i));
+			}
 			return;
 		}
 

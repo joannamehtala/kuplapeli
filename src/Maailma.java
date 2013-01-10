@@ -73,14 +73,14 @@ public class Maailma {
 				//parittomille riveille luodaan 10 kuplaa alkaen x=50
 				for (int a = 0; a < 9; a++){
 					Kupla kupla2 = new Kupla(this.alkupiste_x+(a*45), 
-							this.alkupiste_y+(i*45));
+							this.alkupiste_y+(i*45), this);
 					this.kuplat.push(kupla2);
 				}
 			} else {
 				//parillisille riveille luodaan 9 kuplaa alkaen x=72.5
 				for (int a = 0; a < 8; a++){
 						Kupla kupla = new Kupla(this.alkupiste_x+22.5+(a*45),
-								this.alkupiste_y+(i*45));
+								this.alkupiste_y+(i*45), this);
 						this.kuplat.push(kupla);
 				}
 			}

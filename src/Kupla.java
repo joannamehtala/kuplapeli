@@ -3,6 +3,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 
@@ -20,7 +21,9 @@ public class Kupla {
 	public static final Random rand = new Random();
 	private double x;
 	private double y;
-	private ArrayList<Kupla> ryhma; 
+	private ArrayList<Kupla> ryhma;
+	private ArrayList<Kupla> naapurit;
+	private Maailma maailma;
 	private static final Image punainen = 
 			Toolkit.getDefaultToolkit().createImage("media/punainenkupla.png");
 	private static final Image sininen =
@@ -39,16 +42,17 @@ public class Kupla {
 	 * seuraavaksi ammuttavana.
 	 * @param vari
 	 */
-	public Kupla(double x, double y){
+	public Kupla(double x, double y, Maailma maailma){
 		this.ehja = true;
 		this.ryhma = new ArrayList<Kupla>();
+		this.maailma = maailma;
 		this.x = x;
 		this.y = y;
 
 		Vari[] varit = Vari.values();
 		int i = rand.nextInt(varit.length);
 		this.vari = varit[i];
-		
+
 	}
 
 	/**
@@ -58,7 +62,7 @@ public class Kupla {
 	public Vari annaVari(){
 		return this.vari;
 	}
-	
+
 	/**
 	 * Palauttaa kuplan nykyisen x-koordinaatin.
 	 * @return x-koord
@@ -66,7 +70,7 @@ public class Kupla {
 	public double annaX(){
 		return this.x;
 	}
-	
+
 	/**
 	 * Palauttaa kuplan nykyisen y-koordinaatin.
 	 * @return y-koord
@@ -84,7 +88,7 @@ public class Kupla {
 			return true;
 		} return false;
 	}
-	
+
 	/**
 	 * Palauttaa kuplan säteen.
 	 * @return sade
@@ -93,37 +97,12 @@ public class Kupla {
 		return this.sade;
 	}
 
-	/**
-	 * Jos samanvärinen kupla osuu toiseen, se lisätään kyseisen kuplan naapuri-
-	 * listaan. Kun naapurilistan koko kasvaa kolmeen tai suuremmaksi, kaikki
-	 * naapurilistan kuplat poksahtavat.
-	 */
-	/*public void kosketa(int x, int y){
-		Kupla kohde = new Kupla(x, y);
-		kohde.asetaSijainti(x, y);
-		//Oikeasti kosketettava kupla täytyy antaa jotenkin koordinaateilla tms,
-		//on laskettava se x- ja y-koordinaatti mihin vektori päättyy. ei voi
-		//vaan luoda uutta
-		if (this.koskeeToista(kohde)){
-			if (this.annaVari() == kohde.annaVari()){
-				this.ryhma.add(kohde);
-				if (this.ryhma.size() >= 3){
-					for (int i = 0; i < this.ryhma.size(); i++){
-						this.ryhma.get(i).poksahda();
-					}
-					kohde.kosketa(x, y); //Kaydaan rekursiolla lapi myos
-					//kosketettavan kuplan naapurit ja poksautetaan ne.
-					//Nyt en tiedä toimiiko mutta.........
-				}
-			}
-		}
-	}*/
-
 	public void poksahda(){
 		this.ehja = false;
+		this.vari = null;
 		//Pitää myös asettaa sijainti nulliksi tms.
 	}
-	
+
 	public Image annaKuva(){
 		switch (this.vari){
 		case PUNAINEN:
@@ -139,14 +118,37 @@ public class Kupla {
 		}
 		return null;
 	}
-	
+
 	protected void asetaSijainti(double x, double y){
 		this.x = x;
 		this.y = y;
 	}
-	
-	public Rectangle annaMitat(){
-		return new Rectangle((int) this.annaX(), (int) this.annaY(), 45, 45);
+
+	public ArrayList<Kupla> annaRyhma(){
+		return this.ryhma;
 	}
-	
+
+	public ArrayList<Kupla> annaNaapurit(){
+		this.naapurit = new ArrayList<Kupla>();
+		
+		if (!(this.maailma == null)){
+			for(int i = 0; i < this.maailma.annaKuplat().size(); i++){
+				Kupla mahdollinenNaapuri = this.maailma.annaKuplat().get(i);
+
+				double etaisyys = Math.sqrt(Math.pow(((mahdollinenNaapuri.annaX() + 
+						mahdollinenNaapuri.annaSade()) - (this.annaX() + 
+								this.annaSade())), 2) + 
+								Math.pow(((mahdollinenNaapuri.annaY() + 
+										mahdollinenNaapuri.annaSade()) -
+										(this.annaY() + this.annaSade())), 2));
+
+				if (etaisyys == 45){
+					this.naapurit.add(mahdollinenNaapuri);
+				}
+			}
+
+		}
+		return this.naapurit;
+	}
+
 }
