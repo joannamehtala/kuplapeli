@@ -54,7 +54,8 @@ public class AktiivinenKupla extends Kupla {
 
 	public double annaEtaisyys(Kupla kupla, Piste piste){
 		double etaisyys = Math.sqrt(Math.pow((piste.annaX() - 
-				kupla.annaX()),2) + Math.pow((piste.annaY() - 
+				kupla.annaX()),2) + 
+				Math.pow((piste.annaY() - 
 						kupla.annaY()), 2));
 		return etaisyys;
 	}

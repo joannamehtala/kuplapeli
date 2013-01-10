@@ -66,7 +66,8 @@ public class Maailma {
 		this.alkupiste_y = 50;
 
 		/*
-		 * Luodaan pisteitä, joihin maailmaan ammuttavat kuplat asetetaan.
+		 * Luodaan pisteitä 10 riville, joihin maailmaan ammuttavat kuplat 
+		 * asetetaan.
 		 */
 		for (int i = 0; i < 10; i++){
 			/*
@@ -74,8 +75,8 @@ public class Maailma {
 			 */
 			if (i % 2 == 0){
 				for (int a = 0; a < 9; a++){
-					Piste piste = new Piste(this.alkupiste_x+(a*45),
-							this.alkupiste_y+(i*45));
+					Piste piste = new Piste(this.alkupiste_x+22.5+(a*45),
+							this.alkupiste_y+22.5+(i*45));
 					this.pisteet.add(piste);
 				}
 				/*
@@ -84,38 +85,44 @@ public class Maailma {
 				 */
 			} else {
 				for (int a = 0; a < 8; a++){
-					Piste piste2 = new Piste(this.alkupiste_x+22.5+(a*45),
-							this.alkupiste_y+(i*45));
+					Piste piste2 = new Piste(this.alkupiste_x+45+(a*45),
+							this.alkupiste_y+22.5+(i*45));
 					this.pisteet.add(piste2);
 
 				}
 			}
 		}
-
 		/*
 		 * Luodaan kuplia muutaman rivin verran pelin aluksi.
 		 */
+		for(int i = 0; i < this.pisteet.size() - 51; i++){
+			Kupla kupla = new Kupla(this.pisteet.get(i).annaX() - 22.5, 
+					this.pisteet.get(i).annaY() - 22.5, this);
+			this.kuplat.push(kupla);
+		}
+
+		/*
 		for (int i = 0; i < 4; i++){
 			if (i % 2 == 0){
 				/*
 				 * Parittomille riveille luodaan 10 kuplaa alkaen x = 50.
-				 */
+
 				for (int a = 0; a < 9; a++){
-					Kupla kupla2 = new Kupla(this.alkupiste_x+(a*45), 
+					Kupla kupla = new Kupla(this.alkupiste_x+(a*45), 
 							this.alkupiste_y+(i*45), this);
-					this.kuplat.push(kupla2);
+					this.kuplat.push(kupla);
 				}
 			} else {
 				/*
 				 * Parillisille riveille luodaan 9 kuplaa alkaen x = 72.5
-				 */
+				 
 				for (int a = 0; a < 8; a++){
-					Kupla kupla = new Kupla(this.alkupiste_x+22.5+(a*45),
+					Kupla kupla2 = new Kupla(this.alkupiste_x+22.5+(a*45),
 							this.alkupiste_y+(i*45), this);
-					this.kuplat.push(kupla);
+					this.kuplat.push(kupla2);
 				}
 			}
-		}
+		}*/
 
 		/*
 		 * Luodaan pelin aluksi yksi aktiivinen kupla peliruudun alareunaan

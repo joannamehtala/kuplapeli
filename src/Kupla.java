@@ -127,6 +127,10 @@ public class Kupla {
 	public ArrayList<Kupla> annaRyhma(){
 		return this.ryhma;
 	}
+	
+	public String toString(){
+		return "Kuplan väri on " + this.annaVari();
+	}
 
 	public ArrayList<Kupla> annaNaapurit(){
 		this.naapurit = new ArrayList<Kupla>();
@@ -142,7 +146,7 @@ public class Kupla {
 										mahdollinenNaapuri.annaSade()) -
 										(this.annaY() + this.annaSade())), 2));
 
-				if (etaisyys == 45){
+				if (etaisyys <= 48){
 					this.naapurit.add(mahdollinenNaapuri);
 				}
 			}
