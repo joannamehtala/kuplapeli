@@ -14,20 +14,28 @@ import java.util.Stack;
 
 public class Maailma {
 
-	/**
-	 * Attribuutteina leveys, korkeus, koordinaatit x ja y, pelimaailma,
-	 * maailman nykyinen ja seuraava aktiivinen kupla, boolean pelin loppumisen
-	 * tarkastelulle sek‰ kuplien lukum‰‰r‰‰ kuvaava int.
-	 */
+	/** Maailman leveys ja korkeus. */
 	private int leveys;
 	private int korkeus;
+
+	/** Random-olio arpomista varten. */
 	public static Random rand = new Random();
+
+	/** Boolean-tyyppinen attribuutti, joka kertoo, onko peli loppunut vai ei.*/
 	private boolean peliLoppunut;
+
+	/** Kaikki maailman kuplat ker‰t‰‰n pinoon. */
 	private Stack<Kupla> kuplat;
+
+	/** Maailman pelimaailma ja ohjaaja. */
 	private Pelimaailma pelimaailma;
 	private Ohjaaja ohjaaja;
+
+	/** Alkupisteet x ja y, joista kuplien piirt‰minen aloitetaan. */
 	private double alkupiste_x;
 	private double alkupiste_y;
+
+	/** Lista pisteille, joihin kuplat asetetaan. */
 	private ArrayList<Piste> pisteet;
 
 
@@ -45,51 +53,82 @@ public class Maailma {
 		this.korkeus = 500;
 		this.pelimaailma = pelimaailma;
 
+		/*
+		 * Alustetaan kuplien pino ja pisteiden lista.
+		 */
 		this.kuplat = new Stack<Kupla>();
 		this.pisteet = new ArrayList<Piste>();
 
+		/*
+		 * M‰‰ritet‰‰n kuplien piirt‰misen alkupisteiksi kohta (50,50).
+		 */
 		this.alkupiste_x = 50;
 		this.alkupiste_y = 50;
-		
+
+		/*
+		 * Luodaan pisteit‰, joihin maailmaan ammuttavat kuplat asetetaan.
+		 */
 		for (int i = 0; i < 10; i++){
+			/*
+			 * Parittomille riveille tulee 10 paikkaa kuplille.
+			 */
 			if (i % 2 == 0){
 				for (int a = 0; a < 9; a++){
 					Piste piste = new Piste(this.alkupiste_x+(a*45),
 							this.alkupiste_y+(i*45));
 					this.pisteet.add(piste);
 				}
+				/*
+				 * Parillisille riveille tulee 9 paikkaa kuplille, jotta ne
+				 * asetetaan kauniisti limitt‰in.
+				 */
 			} else {
 				for (int a = 0; a < 8; a++){
 					Piste piste2 = new Piste(this.alkupiste_x+22.5+(a*45),
 							this.alkupiste_y+(i*45));
 					this.pisteet.add(piste2);
-					
+
 				}
 			}
 		}
 
+		/*
+		 * Luodaan kuplia muutaman rivin verran pelin aluksi.
+		 */
 		for (int i = 0; i < 4; i++){
 			if (i % 2 == 0){
-				//parittomille riveille luodaan 10 kuplaa alkaen x=50
+				/*
+				 * Parittomille riveille luodaan 10 kuplaa alkaen x = 50.
+				 */
 				for (int a = 0; a < 9; a++){
 					Kupla kupla2 = new Kupla(this.alkupiste_x+(a*45), 
 							this.alkupiste_y+(i*45), this);
 					this.kuplat.push(kupla2);
 				}
 			} else {
-				//parillisille riveille luodaan 9 kuplaa alkaen x=72.5
+				/*
+				 * Parillisille riveille luodaan 9 kuplaa alkaen x = 72.5
+				 */
 				for (int a = 0; a < 8; a++){
-						Kupla kupla = new Kupla(this.alkupiste_x+22.5+(a*45),
-								this.alkupiste_y+(i*45), this);
-						this.kuplat.push(kupla);
+					Kupla kupla = new Kupla(this.alkupiste_x+22.5+(a*45),
+							this.alkupiste_y+(i*45), this);
+					this.kuplat.push(kupla);
 				}
 			}
 		}
 
+		/*
+		 * Luodaan pelin aluksi yksi aktiivinen kupla peliruudun alareunaan
+		 * seuraavaksi ammuttavaksi.
+		 */
 		AktiivinenKupla kupla_nykyinen = 
 				new AktiivinenKupla(Pelimaailma.LAHTO_X - 22.5,
 						Pelimaailma.LAHTO_Y - 22.5, this.pelimaailma);
 		this.kuplat.push(kupla_nykyinen);
+		
+		/*
+		 * Luodaan ohjaaja.
+		 */
 		this.ohjaaja = new Ohjaaja(this, this.pelimaailma);
 	}
 
@@ -124,7 +163,7 @@ public class Maailma {
 	public Iterator<Kupla> kuplaiteraattori(){
 		return this.kuplat.iterator();
 	}
-	
+
 	/**
 	 * Iteroidaan maailman pisteit‰.
 	 * @return pisteiteraattori
@@ -143,7 +182,7 @@ public class Maailma {
 
 	/**
 	 * Arvotaan uusi kupla seuraavaksi ammuttavaksi ja lis‰t‰‰n se maailman
-	 * kuplien pinoon.
+	 * kuplien pinoon p‰‰llimm‰iseksi.
 	 */
 	public void arvoUusi(){
 		AktiivinenKupla arvottu = new AktiivinenKupla(Pelimaailma.LAHTO_X - 22.5,
@@ -163,11 +202,10 @@ public class Maailma {
 			this.arvoUusi();
 		}
 	}
-	
-	//TODO ‰l‰ mielell‰‰n pid‰ t‰t‰ metodia t‰‰ll‰
+
 	/**
 	 * Palauttaa kuplien pinon.
-	 * @return
+	 * @return kuplat, maailman kuplien pino
 	 */
 	public Stack<Kupla> annaKuplat(){
 		return this.kuplat;
