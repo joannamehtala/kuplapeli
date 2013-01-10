@@ -21,22 +21,24 @@ import javax.swing.border.Border;
 @SuppressWarnings("serial")
 public class Aloitusnaytto extends JPanel {
 
-	/**
-	 * Attribuuteiksi asetetaan aloitusnäytön taustakuva sekä aloita- ja 
-	 * ohjenappulan kuvat. Lisäksi asetetaan attribuuteikse itse nappulat,
-	 * ikkuna, nappuloiden reunukset sekä insetsit.
-	 */
+	/** Attribuutteina aloitusnäytön taustakuva ja nappuloiden kuvat.*/
 	private static final Image kuplapeli =
 			Toolkit.getDefaultToolkit().createImage("media/kuplapeli.png");
 	private static final ImageIcon aloita_normal = 
 			new ImageIcon("media/aloita.png");
-	private static final ImageIcon ohjeet_normal = new ImageIcon("media/ohjeet.png");
-	private static final ImageIcon lopeta_normal = new ImageIcon("media/lopeta.png");
+	private static final ImageIcon ohjeet_normal = 
+			new ImageIcon("media/ohjeet.png");
+	private static final ImageIcon lopeta_normal = 
+			new ImageIcon("media/lopeta.png");
+	
+	/** Asetetaan attribuuteiksi aloitusnäytön nappulat ja niille reunukset.*/
 	private JButton aloitus;
 	private JButton ohjeet;
 	private JButton lopeta;
-	private Ikkuna ikkuna;
 	private Border reunus = BorderFactory.createEmptyBorder();
+	
+	/** Attribuutteina vielä ikkuna tiedonsaantia varten sekä ikkunan reunat.*/
+	private Ikkuna ikkuna;
 	private Insets insets;
 
 	/**
@@ -77,7 +79,7 @@ public class Aloitusnaytto extends JPanel {
 		this.add(this.ohjeet);
 		this.ohjeet.setBounds(205 + this.insets.left, 180 + this.insets.top, 
 				93, 37);
-		
+
 		/*
 		 * Lopetusnapin ominaisuudet.
 		 */
@@ -100,27 +102,33 @@ public class Aloitusnaytto extends JPanel {
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.drawImage(kuplapeli, 0, 0, this);
 	}
-	
+
 	/**
 	 * Metodilla voi asettaa aloitusnapille kuvan. Tätä tarvitaan, jotta
 	 * hiirikuntelijaluokassa voidaan asettaa napille uusi kuva, kun hiirtä
-	 * liikutetaan kuvan päälle.
-	 * @param i
+	 * liikutetaan napin päälle.
+	 * @param i, aloitusnapin kuva
 	 */
 	public void aloita_asetaKuva(ImageIcon i){
 		this.aloitus.setIcon(i);
 	}
-	
+
 	/**
 	 * Metodilla voi asettaa ohjenapille kuvan. Tätä tarvitaan, jotta
 	 * hiirikuntelijaluokassa voidaan asettaa napille uusi kuva, kun hiirtä
-	 * liikutetaan kuvan päälle.
-	 * @param i
+	 * liikutetaan napin päälle.
+	 * @param i, ohjenapin kuva
 	 */
 	public void ohjeet_asetaKuva(ImageIcon i){
 		this.ohjeet.setIcon(i);
 	}
-	
+
+	/**
+	 * Metodilla voi asettaa lopetusnapille kuvan. Tätä tarvitaan, jotta
+	 * hiirikuuntelijaluokassa voidaan asettaa napille uusi kuva, kun hiiri
+	 * siirretään napin päälle.
+	 * @param i, lopetusnapin kuva
+	 */
 	public void lopeta_asetaKuva(ImageIcon i){
 		this.lopeta.setIcon(i);
 	}

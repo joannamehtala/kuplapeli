@@ -90,7 +90,7 @@ public class Maailma {
 				new AktiivinenKupla(Pelimaailma.LAHTO_X - 22.5,
 						Pelimaailma.LAHTO_Y - 22.5, this.pelimaailma);
 		this.kuplat.push(kupla_nykyinen);
-		this.ohjaaja = new Ohjaaja(this, this.pelimaailma, this.annaNykyinen());
+		this.ohjaaja = new Ohjaaja(this, this.pelimaailma);
 	}
 
 	/**
