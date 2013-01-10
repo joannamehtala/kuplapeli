@@ -3,46 +3,79 @@ import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 
-
+/**
+ * Hiirikuuntelijaluokka takaisin-nappia varten.
+ * @author 345480
+ *
+ */
 public class Hiirikuuntelija_Takaisin implements MouseListener {
+	
+	/** Takaisin-napin kuvat. */
 	private static final ImageIcon takaisin_normal = 
 			new ImageIcon("media/takaisin.png");
 	private static final ImageIcon takaisin_hiiri = 
 			new ImageIcon("media/takaisin2.png");
+	
+	/** Ohjenäyttö ja ikkuna. */
 	private Ohjenaytto ohjenaytto;
 	private Ikkuna ikkuna;
 	
+	/**
+	 * Hiirikuuntelijan konstruktori, jossa alustetaan parametreina annetut
+	 * ohjenäyttö ja ikkuna.
+	 * @param ohjenaytto
+	 * @param ikkuna
+	 */
 	public Hiirikuuntelija_Takaisin(Ohjenaytto ohjenaytto, Ikkuna ikkuna){
 		this.ohjenaytto = ohjenaytto;
 		this.ikkuna = ikkuna;
 	}
 
+	/**
+	 * Kun takaisin-nappia klikataan, siirrytään takaisin aloitusnäyttöön.
+	 */
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		this.ikkuna.vaihdaAloitusnayttoon();
 		
 	}
 
+	/**
+	 * Kun liikutetaan hiiri napin päälle, sen kuvaksi vaihdetaan pinkillä
+	 * tekstillä varustettu kuva.
+	 */
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		this.ohjenaytto.takaisin_asetaKuva(takaisin_hiiri);
 	}
 
+	/**
+	 * Kun liikutetaan hiiri pois napin päältä, sen kuvaksi vaihdetaan taas
+	 * mustalla tekstillä varustettu kuva.
+	 */
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		this.ohjenaytto.takaisin_asetaKuva(takaisin_normal);
 		
 	}
 
+	/**
+	 * MouseListener-luokan implementointi vaatii tämän metodin, vaikka sitä ei
+	 * käytettäisi mihinkään.
+	 */
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		// tyhjä metodi
 		
 	}
 
+	/**
+	 * MouseListener-luokan implementointi vaatii tämän metodin, vaikka sitä ei
+	 * käytettäisi mihinkään.
+	 */
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		// tyhjä metodi
 		
 	}
 }

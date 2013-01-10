@@ -11,13 +11,13 @@ import javax.swing.ImageIcon;
  */
 public class Hiirikuuntelija_Ohjeet implements MouseListener{
 	
-	/**
-	 * Asetetaan attribuuteiksi ohjenapin kuvat sekä aloitusnäyttö ja ikkuna.
-	 */
+	/** Ohjenapin kuvat. */
 	private static final ImageIcon ohjeet_normal = 
 			new ImageIcon("media/ohjeet.png");
 	private static final ImageIcon ohjeet_hiiri = 
 			new ImageIcon("media/ohjeet2.png");
+	
+	/** Aloitusnäyttö ja ikkuna. */
 	private Aloitusnaytto aloitusnaytto;
 	private Ikkuna ikkuna;
 	
@@ -37,7 +37,6 @@ public class Hiirikuuntelija_Ohjeet implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		this.ikkuna.vaihdaOhjenayttoon();
-		
 	}
 
 	/**
@@ -65,8 +64,7 @@ public class Hiirikuuntelija_Ohjeet implements MouseListener{
 	 */
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		// tyhjä metodi
 	}
 
 	/**
@@ -75,7 +73,7 @@ public class Hiirikuuntelija_Ohjeet implements MouseListener{
 	 */
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		// tyhjä metodi
 		
 	}
 

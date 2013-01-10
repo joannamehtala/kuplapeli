@@ -11,16 +11,15 @@ import javax.swing.JFrame;
 @SuppressWarnings("serial")
 public class Ikkuna extends JFrame {
 
-	/**
-	 * Asetetaan attribuuteiksi asettelu, joka toteutetaan CardLayoutilla,
-	 * eri näkymät sekä CardLayoutia varten tarvittavat näkymiä kuvaavat 
-	 * merkkijonot.
-	 */
-	
+	/** CardLayout näyttöjen vaihtelua varten. */
 	private CardLayout naytot;
+	
+	/** Eri näytöt. */
 	private Aloitusnaytto aloitusnaytto;
 	private Pelimaailma pelimaailma;
 	private Ohjenaytto ohjenaytto;
+	
+	/** CardLayoutia varten vaaditut Stringit näyttöjä kuvaamaan.*/
 	private static final String ALOITUSNAYTTO = "aloitusnaytto";
 	private static final String PELIMAAILMA = "pelimaailma";
 	private static final String OHJENAYTTO = "ohjenaytto";

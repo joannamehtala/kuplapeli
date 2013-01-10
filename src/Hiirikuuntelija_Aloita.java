@@ -11,14 +11,13 @@ import javax.swing.ImageIcon;
  */
 public class Hiirikuuntelija_Aloita implements MouseListener{
 	
-	/**
-	 * Attribuuteiksi asetetaan aloita-nappiin liittyvät kuvat sekä aloitus-
-	 * näyttö ja ikkuna tiedonkulkua helpottamaan.
-	 */
+	/** Aloita-napin kuvat. */
 	private static final ImageIcon aloita_normal = 
 			new ImageIcon("media/aloita.png");
 	private static final ImageIcon aloita_hiiri = 
 			new ImageIcon("media/aloita2.png");
+	
+	/** Aloitusnäyttö ja ikkuna tiedonsaantia varten. */
 	private Aloitusnaytto aloitusnaytto;
 	private Ikkuna ikkuna;
 	
@@ -66,7 +65,7 @@ public class Hiirikuuntelija_Aloita implements MouseListener{
 	 */
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		// tyhjä metodi
 		
 	}
 
@@ -76,6 +75,6 @@ public class Hiirikuuntelija_Aloita implements MouseListener{
 	 */
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		// tyhjä metodi
 	}
 }
