@@ -5,15 +5,15 @@ import java.util.Random;
 
 public class AktiivinenKupla extends Kupla {
 	public static Random rand = new Random();
-	private Pelimaailma pelimaailma;
+	private Maailma maailma;
 	private double aste;
 	private boolean pysahtynyt;
 	private boolean ammuttu;
 	private Kupla kohde;
 
-	public AktiivinenKupla(double x, double y, Pelimaailma p){
-		super(x, y, p.annaMaailma());
-		this.pelimaailma = p;
+	public AktiivinenKupla(double x, double y, Maailma maailma){
+		super(x, y, maailma);
+		this.maailma = maailma;;
 	}
 
 	public void ammu(double aste){
@@ -25,12 +25,11 @@ public class AktiivinenKupla extends Kupla {
 	}
 
 	public boolean koskeeToista(){
-		Kupla aktiivinen = this.pelimaailma.annaMaailma().annaNykyinen();
+		Kupla aktiivinen = this.maailma.annaNykyinen();
 
-		for (int i = 0; i < 
-				this.pelimaailma.annaMaailma().annaKuplat().size() - 1; 
+		for (int i = 0; i < this.maailma.annaKuplat().size() - 1; 
 				i++){
-			this.kohde = this.pelimaailma.annaMaailma().annaKuplat().get(i);
+			this.kohde = this.maailma.annaKuplat().get(i);
 
 			double deltaX = this.kohde.annaKeskiX() - aktiivinen.annaKeskiX();
 			double deltaY = this.kohde.annaKeskiY() - aktiivinen.annaKeskiY();
@@ -59,7 +58,7 @@ public class AktiivinenKupla extends Kupla {
 		Piste tutkittava;
 		Piste lahin = null;
 		Iterator<Piste> iteraattori = 
-				this.pelimaailma.annaMaailma().pisteiteraattori();
+				this.maailma.pisteiteraattori();
 		while (iteraattori.hasNext()){
 			tutkittava = iteraattori.next();
 			if (lahin == null || this.annaEtaisyys(kupla, tutkittava) 
@@ -100,7 +99,7 @@ public class AktiivinenKupla extends Kupla {
 		 * Liikutetaan.
 		 */
 		if (y > 50 && y < 465 && 
-				!this.pelimaailma.annaMaailma().annaNykyinen().koskeeToista()){
+				!this.maailma.annaNykyinen().koskeeToista()){
 			x += Math.cos(Math.toRadians(aste))*muutos*0.1;
 			y += Math.sin(Math.toRadians(aste))*muutos*0.1;
 

@@ -130,7 +130,7 @@ public class Maailma {
 		 */
 		AktiivinenKupla kupla_nykyinen = 
 				new AktiivinenKupla(Pelimaailma.LAHTO_X - 22.5,
-						Pelimaailma.LAHTO_Y - 22.5, this.pelimaailma);
+						Pelimaailma.LAHTO_Y - 22.5, this);
 		this.kuplat.push(kupla_nykyinen);
 		
 		/*
@@ -193,8 +193,7 @@ public class Maailma {
 	 */
 	public void arvoUusi(){
 		AktiivinenKupla arvottu = new AktiivinenKupla(Pelimaailma.LAHTO_X - 22.5,
-				Pelimaailma.LAHTO_Y - 22.5, 
-				this.pelimaailma);
+				Pelimaailma.LAHTO_Y - 22.5, this);
 		this.kuplat.push(arvottu);
 	}
 

@@ -158,22 +158,11 @@ public class Kupla {
 			for(int i = 0; i < this.maailma.annaKuplat().size(); i++){
 				Kupla tutkittava = this.maailma.annaKuplat().get(i);
 
-				double deltaX = tutkittava.annaKeskiX() - this.annaKeskiX();
-				double deltaY = this.annaKeskiY() - tutkittava.annaKeskiY();
-				//System.out.println("Tutkittava keskiY:" + tutkittava.annaKeskiY());
-				//System.out.println("This keskiY: " + this.annaKeskiY());
-				
-				double etaisyysNelio = (deltaX * deltaX) + (deltaY * deltaY);
-
 				double sade = this.annaSade();
 
-				/*if (etaisyysNelio <= (sade * sade)){
-					this.naapurit.add(tutkittava);
-					System.out.println(tutkittava);
-				}
-				*/
-				System.out.println(Point2D.distance(this.annaKeskiX(), this.annaKeskiY(), tutkittava.annaKeskiX(), tutkittava.annaKeskiY()) + " vs " + 2*sade);
-				if (Point2D.distance(this.annaKeskiX(), this.annaKeskiY(), tutkittava.annaKeskiX(), tutkittava.annaKeskiY()) <= 2 * sade + 6) {
+				if (Point2D.distance(this.annaKeskiX(), this.annaKeskiY(), 
+						tutkittava.annaKeskiX(), tutkittava.annaKeskiY()) 
+						<= 2 * sade + 6) {
 					this.naapurit.add(tutkittava);
 					System.out.println(tutkittava);
 				}
