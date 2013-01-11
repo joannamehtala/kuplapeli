@@ -23,7 +23,7 @@ public class Kupla {
 	public static final Random rand = new Random();
 	private double x;
 	private double y;
-	private ArrayList<Kupla> ryhma;
+	private ArrayList<Kupla> samanvariset;
 	private ArrayList<Kupla> naapurit;
 	private Maailma maailma;
 	private static final Image punainen = 
@@ -46,7 +46,7 @@ public class Kupla {
 	 */
 	public Kupla(double x, double y, Maailma maailma){
 		this.ehja = true;
-		this.ryhma = new ArrayList<Kupla>();
+		this.samanvariset = new ArrayList<Kupla>();
 		this.maailma = maailma;
 		this.x = x;
 		this.y = y;
@@ -117,7 +117,7 @@ public class Kupla {
 
 	public void poksahda(){
 		this.ehja = false;
-		this.vari = null;
+		System.out.println("Seuraavan kupla poksahti: " + this);
 		//Pitää myös asettaa sijainti nulliksi tms.
 	}
 
@@ -142,10 +142,6 @@ public class Kupla {
 		this.y = y;
 	}
 
-	public ArrayList<Kupla> annaRyhma(){
-		return this.ryhma;
-	}
-
 	public String toString(){
 		return "Kuplan väri on " + this.annaVari() + ", kuplan sijainti on: "
 				+ this.annaX() + ", " + this.annaY();
@@ -155,7 +151,7 @@ public class Kupla {
 		this.naapurit = new ArrayList<Kupla>();
 		if (!(this.maailma == null)){
 			System.out.println("menee tänne");
-			for(int i = 0; i < this.maailma.annaKuplat().size(); i++){
+			for (int i = 0; i < this.maailma.annaKuplat().size(); i++){
 				Kupla tutkittava = this.maailma.annaKuplat().get(i);
 
 				double sade = this.annaSade();
@@ -170,5 +166,27 @@ public class Kupla {
 			}
 		}
 		return this.naapurit;
+	}
+	
+	public void tarkistaSamanvariset(){
+		Kupla tarkasteltava;
+		for (int i = 0; i < this.naapurit.size(); i++){
+			tarkasteltava = this.naapurit.get(i);
+			if (tarkasteltava.annaVari() == this.annaVari() 
+					&& tarkasteltava.onEhja()){
+				this.samanvariset.add(tarkasteltava);
+				System.out.println("Samanvärisiä: " + tarkasteltava);
+			}
+		}
+		
+		if (this.samanvariset.size() >= 3){
+			for (int i = 0; i < this.samanvariset.size(); i++){
+				this.samanvariset.get(i).poksahda();
+			}
+		}
+	}
+	
+	public ArrayList<Kupla> annaSamanvariset(){
+		return this.samanvariset;
 	}
 }

@@ -38,7 +38,7 @@ public class AktiivinenKupla extends Kupla {
 
 			double sade = 2 * this.kohde.annaSade();
 
-			if (etaisyysNelio <= sade * sade){
+			if (etaisyysNelio <= sade * sade && this.kohde.onEhja()){
 				return true;
 			}
 		}
@@ -107,9 +107,7 @@ public class AktiivinenKupla extends Kupla {
 			this.pysahtynyt = true;
 			this.tasaaSijainti(this);
 			this.annaNaapurit();
-			/*for (int i = 0; i < this.annaNaapurit().size(); i++){
-				System.out.println(this.annaNaapurit().get(i));
-			}*/
+			this.tarkistaSamanvariset();
 			return;
 		}
 
