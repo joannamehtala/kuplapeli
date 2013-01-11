@@ -78,7 +78,7 @@ public class Kupla {
 	public double annaY(){
 		return this.y;
 	}
-	
+
 	/**
 	 * Palauttaa kuplan keskipisteen x-koordinaatin.
 	 * @return double keskipisteen x-koordinaatti
@@ -86,7 +86,7 @@ public class Kupla {
 	public double annaKeskiX(){
 		return this.x + 22.5;
 	}
-	
+
 	/**
 	 * Palauttaa kuplan keskipisteen y-koordinaatin.
 	 * @return double keskipisteen y-koordinaatti
@@ -143,28 +143,32 @@ public class Kupla {
 	public ArrayList<Kupla> annaRyhma(){
 		return this.ryhma;
 	}
-	
+
 	public String toString(){
-		return "Kuplan väri on " + this.annaVari();
+		return "Kuplan väri on " + this.annaVari() + ", kuplan sijainti on: "
+				+ this.annaX() + ", " + this.annaY();
 	}
 
 	public ArrayList<Kupla> annaNaapurit(){
 		this.naapurit = new ArrayList<Kupla>();
-		
+
 		if (!(this.maailma == null)){
+			System.out.println("menee tänne");
 			for(int i = 0; i < this.maailma.annaKuplat().size(); i++){
-				Kupla mahdollinenNaapuri = this.maailma.annaKuplat().get(i);
+				Kupla tutkittava = this.maailma.annaKuplat().get(i);
 
-				double etaisyys = Math.sqrt(Math.pow(((mahdollinenNaapuri.annaX() + 
-						mahdollinenNaapuri.annaSade()) - (this.annaX() + 
-								this.annaSade())), 2) + 
-								Math.pow(((mahdollinenNaapuri.annaY() + 
-										mahdollinenNaapuri.annaSade()) -
-										(this.annaY() + this.annaSade())), 2));
+				double deltaX = tutkittava.annaKeskiX() - this.annaKeskiX();
+				double deltaY = tutkittava.annaKeskiY() - this.annaKeskiY();
 
-				if (etaisyys <= 48){
-					this.naapurit.add(mahdollinenNaapuri);
+				double etaisyysNelio = (deltaX * deltaX) + (deltaY * deltaY);
+
+				double sade = 2 * this.annaSade();
+
+				if (etaisyysNelio <= (sade * sade + 10)){
+					this.naapurit.add(tutkittava);
+					System.out.println(tutkittava);
 				}
+				System.out.println(this.naapurit.size());
 			}
 
 		}

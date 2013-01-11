@@ -31,15 +31,17 @@ public class AktiivinenKupla extends Kupla {
 				this.pelimaailma.annaMaailma().annaKuplat().size() - 1; 
 				i++){
 			this.kohde = this.pelimaailma.annaMaailma().annaKuplat().get(i);
-			
+
 			double deltaX = this.kohde.annaKeskiX() - aktiivinen.annaKeskiX();
 			double deltaY = this.kohde.annaKeskiY() - aktiivinen.annaKeskiY();
 
 			double etaisyysNelio = (deltaX * deltaX) + (deltaY * deltaY);
-			
+
 			double sade = 2 * this.kohde.annaSade();
-					
+
 			if (etaisyysNelio <= sade * sade){
+				this.pelimaailma.annaMaailma().annaNykyinen()
+				.annaNaapurit().add(kohde);
 				return true;
 			}
 		}
@@ -49,9 +51,9 @@ public class AktiivinenKupla extends Kupla {
 	public double annaEtaisyys(Kupla kupla, Piste piste){
 		double deltaX = piste.annaX() - kupla.annaKeskiX();
 		double deltaY = piste.annaY() - kupla.annaKeskiY();
-		
+
 		double etaisyysNelio = (deltaX * deltaX) + (deltaY * deltaY);
-		
+
 		return etaisyysNelio;
 	}
 
@@ -107,6 +109,9 @@ public class AktiivinenKupla extends Kupla {
 		} else {
 			this.pysahtynyt = true;
 			this.tasaaSijainti(this);
+			/*for (int i = 0; i < this.annaNaapurit().size(); i++){
+				System.out.println(this.annaNaapurit().get(i));
+			}*/
 			return;
 		}
 
