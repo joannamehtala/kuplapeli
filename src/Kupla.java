@@ -1,7 +1,9 @@
 
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
@@ -50,8 +52,8 @@ public class Kupla {
 		this.y = y;
 
 		Vari[] varit = Vari.values();
-		int i = rand.nextInt(varit.length);
-		this.vari = varit[i];
+		int a = rand.nextInt(varit.length);
+		this.vari = varit[a];
 
 	}
 
@@ -151,28 +153,33 @@ public class Kupla {
 
 	public ArrayList<Kupla> annaNaapurit(){
 		this.naapurit = new ArrayList<Kupla>();
-
 		if (!(this.maailma == null)){
 			System.out.println("menee tänne");
 			for(int i = 0; i < this.maailma.annaKuplat().size(); i++){
 				Kupla tutkittava = this.maailma.annaKuplat().get(i);
 
 				double deltaX = tutkittava.annaKeskiX() - this.annaKeskiX();
-				double deltaY = tutkittava.annaKeskiY() - this.annaKeskiY();
-
+				double deltaY = this.annaKeskiY() - tutkittava.annaKeskiY();
+				//System.out.println("Tutkittava keskiY:" + tutkittava.annaKeskiY());
+				//System.out.println("This keskiY: " + this.annaKeskiY());
+				
 				double etaisyysNelio = (deltaX * deltaX) + (deltaY * deltaY);
 
-				double sade = 2 * this.annaSade();
+				double sade = this.annaSade();
 
-				if (etaisyysNelio <= (sade * sade + 10)){
+				/*if (etaisyysNelio <= (sade * sade)){
+					this.naapurit.add(tutkittava);
+					System.out.println(tutkittava);
+				}
+				*/
+				System.out.println(Point2D.distance(this.annaKeskiX(), this.annaKeskiY(), tutkittava.annaKeskiX(), tutkittava.annaKeskiY()) + " vs " + 2*sade);
+				if (Point2D.distance(this.annaKeskiX(), this.annaKeskiY(), tutkittava.annaKeskiX(), tutkittava.annaKeskiY()) <= 2 * sade + 6) {
 					this.naapurit.add(tutkittava);
 					System.out.println(tutkittava);
 				}
 				System.out.println(this.naapurit.size());
 			}
-
 		}
 		return this.naapurit;
 	}
-
 }

@@ -40,8 +40,6 @@ public class AktiivinenKupla extends Kupla {
 			double sade = 2 * this.kohde.annaSade();
 
 			if (etaisyysNelio <= sade * sade){
-				this.pelimaailma.annaMaailma().annaNykyinen()
-				.annaNaapurit().add(kohde);
 				return true;
 			}
 		}
@@ -109,6 +107,7 @@ public class AktiivinenKupla extends Kupla {
 		} else {
 			this.pysahtynyt = true;
 			this.tasaaSijainti(this);
+			this.annaNaapurit();
 			/*for (int i = 0; i < this.annaNaapurit().size(); i++){
 				System.out.println(this.annaNaapurit().get(i));
 			}*/
