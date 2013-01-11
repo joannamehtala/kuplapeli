@@ -106,7 +106,6 @@ public class AktiivinenKupla extends Kupla {
 		} else {
 			this.pysahtynyt = true;
 			this.tasaaSijainti(this);
-			this.annaNaapurit();
 			this.tarkistaSamanvariset();
 			return;
 		}

@@ -5,8 +5,10 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Random;
+import java.util.Set;
 
 
 /**
@@ -23,8 +25,6 @@ public class Kupla {
 	public static final Random rand = new Random();
 	private double x;
 	private double y;
-	private ArrayList<Kupla> samanvariset;
-	private ArrayList<Kupla> naapurit;
 	private Maailma maailma;
 	private static final Image punainen = 
 			Toolkit.getDefaultToolkit().createImage("media/punainenkupla.png");
@@ -46,7 +46,6 @@ public class Kupla {
 	 */
 	public Kupla(double x, double y, Maailma maailma){
 		this.ehja = true;
-		this.samanvariset = new ArrayList<Kupla>();
 		this.maailma = maailma;
 		this.x = x;
 		this.y = y;
@@ -147,8 +146,8 @@ public class Kupla {
 				+ this.annaX() + ", " + this.annaY();
 	}
 
-	public ArrayList<Kupla> annaNaapurit(){
-		this.naapurit = new ArrayList<Kupla>();
+	private ArrayList<Kupla> annaNaapurit(){
+		ArrayList<Kupla> naapurit = new ArrayList<Kupla>();
 		if (!(this.maailma == null)){
 			System.out.println("menee t‰nne");
 			for (int i = 0; i < this.maailma.annaKuplat().size(); i++){
@@ -159,34 +158,61 @@ public class Kupla {
 				if (Point2D.distance(this.annaKeskiX(), this.annaKeskiY(), 
 						tutkittava.annaKeskiX(), tutkittava.annaKeskiY()) 
 						<= 2 * sade + 6) {
-					this.naapurit.add(tutkittava);
+					naapurit.add(tutkittava);
 					System.out.println(tutkittava);
 				}
-				System.out.println(this.naapurit.size());
+				System.out.println(naapurit.size());
 			}
 		}
-		return this.naapurit;
+		return naapurit;
 	}
 	
+	public boolean onSamanVarinen(Kupla toinen){
+		if (this.annaVari() == toinen.annaVari()){
+			return true;
+		}
+		return false;
+	}
+
 	public void tarkistaSamanvariset(){
-		Kupla tarkasteltava;
-		for (int i = 0; i < this.naapurit.size(); i++){
-			tarkasteltava = this.naapurit.get(i);
-			if (tarkasteltava.annaVari() == this.annaVari() 
-					&& tarkasteltava.onEhja()){
-				this.samanvariset.add(tarkasteltava);
-				System.out.println("Samanv‰risi‰: " + tarkasteltava);
-			}
-		}
+
+		//Alustetaan tarkisteltavien kuplien lista kuplan v‰littˆm‰ss‰
+		//l‰heisyydessa olevilla naapureilla.
+		ArrayList<Kupla> samanvariset = new ArrayList<Kupla>();
+		samanvariset.add(this);
+		HashSet<Kupla> tarkastetut = new HashSet<Kupla>();
+		tarkastetut.add(this);
 		
-		if (this.samanvariset.size() >= 3){
-			for (int i = 0; i < this.samanvariset.size(); i++){
-				this.samanvariset.get(i).poksahda();
+		//K‰yd‰‰n l‰pi samanv‰riset kuplat, joita tulee lis‰‰ kun silmukkaa
+		//k‰yd‰‰n l‰pi
+		for (int i = 0; i < samanvariset.size(); i++){
+			Kupla t = samanvariset.get(i);
+			ArrayList<Kupla> tempNaapurit = t.annaNaapurit();
+			//K‰yd‰‰n l‰pi ‰sken listatut kuplan t naapurit yksi kerrallaan,
+			//ja jokaisen kohdalla tarkistetaan, onko sit‰ tutkittu aiemmin
+			//ja jos ei, se lis‰t‰‰n tutkittujen listalle ja tarkistetaan,
+			//onko se samanv‰rinen kuin ammuttu kupla.
+			for (Kupla n : tempNaapurit){
+				if (!tarkastetut.contains(n)){
+					tarkastetut.add(n);
+					if (this.onSamanVarinen(n)){
+						//Lis‰t‰‰n samanv‰risiin n, jolle tehd‰‰n uudestaan
+						//koko tarkastelu silmukan alusta l‰htien.
+						samanvariset.add(n);
+					}
+				}
 			}
 		}
-	}
-	
-	public ArrayList<Kupla> annaSamanvariset(){
-		return this.samanvariset;
+
+		//Nyt samanv‰riset sis‰lt‰‰ kaikki ne samanv‰riset kuplat, joihin
+		//kupla ja sen naapurit ja naapurin naapurit jne. koskevat.
+		
+		//Poks!!!
+		
+		if (samanvariset.size() >= 3){
+			for (int i = 0; i < samanvariset.size(); i++){
+				samanvariset.get(i).poksahda();
+			}
+		}
 	}
 }
