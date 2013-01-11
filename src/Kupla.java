@@ -157,7 +157,7 @@ public class Kupla {
 
 				if (Point2D.distance(this.annaKeskiX(), this.annaKeskiY(), 
 						tutkittava.annaKeskiX(), tutkittava.annaKeskiY()) 
-						<= 2 * sade + 6) {
+						<= 2 * sade + 6 && tutkittava.onEhja()) {
 					naapurit.add(tutkittava);
 					System.out.println(tutkittava);
 				}
