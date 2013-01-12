@@ -100,8 +100,8 @@ public class AktiivinenKupla extends Kupla {
 		 */
 		if (y > 50 && y < 465 && 
 				!this.maailma.annaNykyinen().koskeeToista()){
-			x += Math.cos(Math.toRadians(aste))*muutos*0.1;
-			y += Math.sin(Math.toRadians(aste))*muutos*0.1;
+			x += Math.cos(Math.toRadians(aste))*muutos*0.2;
+			y += Math.sin(Math.toRadians(aste))*muutos*0.2;
 
 		} else {
 			this.pysahtynyt = true;

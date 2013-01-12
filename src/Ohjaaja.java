@@ -30,7 +30,7 @@ public class Ohjaaja implements ActionListener{
 	 * @param aktiivinenkupla
 	 */
 	public Ohjaaja(Maailma maailma, Pelimaailma pelimaailma){
-		this.timer = new Timer(10, this);
+		this.timer = new Timer(5, this);
 		this.maailma = maailma;
 		this.pelimaailma = pelimaailma;
 		this.timer.start();

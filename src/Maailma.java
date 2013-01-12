@@ -105,7 +105,7 @@ public class Maailma {
 		for (int i = 0; i < 4; i++){
 			if (i % 2 == 0){
 				/*
-				 * Parittomille riveille luodaan 10 kuplaa alkaen x = 50.
+		 * Parittomille riveille luodaan 10 kuplaa alkaen x = 50.
 
 				for (int a = 0; a < 9; a++){
 					Kupla kupla = new Kupla(this.alkupiste_x+(a*45), 
@@ -114,8 +114,8 @@ public class Maailma {
 				}
 			} else {
 				/*
-				 * Parillisille riveille luodaan 9 kuplaa alkaen x = 72.5
-				 
+		 * Parillisille riveille luodaan 9 kuplaa alkaen x = 72.5
+
 				for (int a = 0; a < 8; a++){
 					Kupla kupla2 = new Kupla(this.alkupiste_x+22.5+(a*45),
 							this.alkupiste_y+(i*45), this);
@@ -132,7 +132,7 @@ public class Maailma {
 				new AktiivinenKupla(Pelimaailma.LAHTO_X - 22.5,
 						Pelimaailma.LAHTO_Y - 22.5, this);
 		this.kuplat.push(kupla_nykyinen);
-		
+
 		/*
 		 * Luodaan ohjaaja.
 		 */
@@ -187,14 +187,64 @@ public class Maailma {
 		this.annaNykyinen().ammu(kulma);
 	}
 
+	public ArrayList<Vari> annaKuplienVarit(){
+		ArrayList<Vari> kuplienVarit = new ArrayList<Vari>();
+		Iterator<Kupla> iteraattori = this.kuplaiteraattori();
+		while (iteraattori.hasNext()){
+			Kupla tutkittava = iteraattori.next();
+			if (tutkittava.onEhja() && 
+					!kuplienVarit.contains(tutkittava.annaVari())){
+				kuplienVarit.add(tutkittava.annaVari());
+			}
+
+
+			//				switch (tutkittava.annaVari()){
+			//				case PUNAINEN:
+			//					if (!kuplienVarit.contains(Vari.PUNAINEN)){
+			//						kuplienVarit.add(Vari.PUNAINEN);
+			//					} 
+			//				case SININEN:
+			//					if (!kuplienVarit.contains(Vari.SININEN)){
+			//						kuplienVarit.add(Vari.SININEN);
+			//					} 
+			//
+			//				case VIHREA:
+			//					if (!kuplienVarit.contains(Vari.VIHREA)){
+			//						kuplienVarit.add(Vari.VIHREA);
+			//					} 
+			//
+			//				case KELTAINEN:
+			//					if (!kuplienVarit.contains(Vari.KELTAINEN)){
+			//						kuplienVarit.add(Vari.KELTAINEN);
+			//					} 
+			//
+			//				case LIILA:
+			//					if (!kuplienVarit.contains(Vari.LIILA)){
+			//						kuplienVarit.add(Vari.LIILA);
+			//					} 
+			//
+			//				}
+		}
+		System.out.println(kuplienVarit);
+		return kuplienVarit;
+	}
+
+
 	/**
 	 * Arvotaan uusi kupla seuraavaksi ammuttavaksi ja lis‰t‰‰n se maailman
 	 * kuplien pinoon p‰‰llimm‰iseksi.
 	 */
 	public void arvoUusi(){
+		
 		AktiivinenKupla arvottu = new AktiivinenKupla(Pelimaailma.LAHTO_X - 22.5,
 				Pelimaailma.LAHTO_Y - 22.5, this);
-		this.kuplat.push(arvottu);
+		if (this.annaKuplienVarit().contains(arvottu.annaVari())){
+			System.out.println("Samanv‰risi‰ on maailmassa wihii!");
+			this.kuplat.push(arvottu);
+		} else {
+			System.out.println("Samanv‰risi‰ ei ollut :(");
+			this.arvoUusi();
+		}
 	}
 
 	/**
