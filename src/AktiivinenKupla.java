@@ -68,6 +68,9 @@ public class AktiivinenKupla extends Kupla {
 		}
 		kupla.asetaSijainti(lahin.annaX() - kupla.annaSade(), lahin.annaY() - 
 				kupla.annaSade());
+		if (kupla.annaY() >= 450){
+			System.out.println("hävisit");
+		}
 	}
 
 
@@ -106,7 +109,7 @@ public class AktiivinenKupla extends Kupla {
 		} else {
 			this.pysahtynyt = true;
 			this.tasaaSijainti(this);
-			this.tarkistaSamanvariset();
+			this.tarkistaPoksautettavat();
 			return;
 		}
 

@@ -19,7 +19,7 @@ import java.util.Set;
  *
  */
 public class Kupla {
-	private final double sade = 22.5;
+	private double sade;
 	private Vari vari;
 	private boolean ehja;
 	public static final Random rand = new Random();
@@ -49,6 +49,7 @@ public class Kupla {
 		this.maailma = maailma;
 		this.x = x;
 		this.y = y;
+		this.sade = 22.5;
 
 		Vari[] varit = Vari.values();
 		int a = rand.nextInt(varit.length);
@@ -140,29 +141,30 @@ public class Kupla {
 	}
 
 	public String toString(){
-		return "Kuplan v‰ri on " + this.annaVari() + ", kuplan sijainti on: "
-				+ this.annaX() + ", " + this.annaY();
+		return "Kuplan v‰ri on " + this.annaVari();
 	}
 
 	private ArrayList<Kupla> annaNaapurit(){
 		ArrayList<Kupla> naapurit = new ArrayList<Kupla>();
 		if (!(this.maailma == null)){
 			
+			if (this instanceof Superkupla){
+				this.sade = 40;
+			}
+
 			for (int i = 0; i < this.maailma.annaKuplat().size(); i++){
 				Kupla tutkittava = this.maailma.annaKuplat().get(i);
 
-				double sade = this.annaSade();
-
 				if (Point2D.distance(this.annaKeskiX(), this.annaKeskiY(), 
 						tutkittava.annaKeskiX(), tutkittava.annaKeskiY()) 
-						<= 2 * sade + 6 && tutkittava.onEhja()) {
+						<= 2 * this.sade + 6 && tutkittava.onEhja()) {
 					naapurit.add(tutkittava);
 				}
 			}
 		}
 		return naapurit;
 	}
-	
+
 	public boolean onSamanVarinen(Kupla toinen){
 		if (this.annaVari() == toinen.annaVari()){
 			return true;
@@ -170,31 +172,37 @@ public class Kupla {
 		return false;
 	}
 
-	public void tarkistaSamanvariset(){
+	public void tarkistaPoksautettavat(){
 
 		//Alustetaan tarkisteltavien kuplien lista kuplan v‰littˆm‰ss‰
 		//l‰heisyydessa olevilla naapureilla.
-		ArrayList<Kupla> samanvariset = new ArrayList<Kupla>();
-		samanvariset.add(this);
+		ArrayList<Kupla> poksautettavat = new ArrayList<Kupla>();
+		poksautettavat.add(this);
 		HashSet<Kupla> tarkastetut = new HashSet<Kupla>();
 		tarkastetut.add(this);
-		
-		//K‰yd‰‰n l‰pi samanv‰riset kuplat, joita tulee lis‰‰ kun silmukkaa
-		//k‰yd‰‰n l‰pi
-		for (int i = 0; i < samanvariset.size(); i++){
-			Kupla t = samanvariset.get(i);
-			ArrayList<Kupla> tempNaapurit = t.annaNaapurit();
-			//K‰yd‰‰n l‰pi ‰sken listatut kuplan t naapurit yksi kerrallaan,
-			//ja jokaisen kohdalla tarkistetaan, onko sit‰ tutkittu aiemmin
-			//ja jos ei, se lis‰t‰‰n tutkittujen listalle ja tarkistetaan,
-			//onko se samanv‰rinen kuin ammuttu kupla.
-			for (Kupla n : tempNaapurit){
-				if (!tarkastetut.contains(n)){
-					tarkastetut.add(n);
-					if (this.onSamanVarinen(n)){
-						//Lis‰t‰‰n samanv‰risiin n, jolle tehd‰‰n uudestaan
-						//koko tarkastelu silmukan alusta l‰htien.
-						samanvariset.add(n);
+
+		if (this instanceof Superkupla){
+			poksautettavat = this.annaNaapurit();
+
+		} else {
+
+			//K‰yd‰‰n l‰pi samanv‰riset kuplat, joita tulee lis‰‰ kun silmukkaa
+			//k‰yd‰‰n l‰pi
+			for (int i = 0; i < poksautettavat.size(); i++){
+				Kupla t = poksautettavat.get(i);
+				ArrayList<Kupla> tempNaapurit = t.annaNaapurit();
+				//K‰yd‰‰n l‰pi ‰sken listatut kuplan t naapurit yksi kerrallaan,
+				//ja jokaisen kohdalla tarkistetaan, onko sit‰ tutkittu aiemmin
+				//ja jos ei, se lis‰t‰‰n tutkittujen listalle ja tarkistetaan,
+				//onko se samanv‰rinen kuin ammuttu kupla.
+				for (Kupla n : tempNaapurit){
+					if (!tarkastetut.contains(n)){
+						tarkastetut.add(n);
+						if (this.onSamanVarinen(n)){
+							//Lis‰t‰‰n samanv‰risiin n, jolle tehd‰‰n uudestaan
+							//koko tarkastelu silmukan alusta l‰htien.
+							poksautettavat.add(n);
+						}
 					}
 				}
 			}
@@ -202,13 +210,21 @@ public class Kupla {
 
 		//Nyt samanv‰riset sis‰lt‰‰ kaikki ne samanv‰riset kuplat, joihin
 		//kupla ja sen naapurit ja naapurin naapurit jne. koskevat.
-		
+
 		//Poks!!!
-		
-		if (samanvariset.size() >= 3){
-			for (int i = 0; i < samanvariset.size(); i++){
-				samanvariset.get(i).poksahda();
+
+		if (!(this instanceof Superkupla)){
+			if (poksautettavat.size() >= 3){
+				for (int i = 0; i < poksautettavat.size(); i++){
+					poksautettavat.get(i).poksahda();
+				}
+			}
+		} else {
+			for (int i = 0; i < poksautettavat.size(); i++){
+				poksautettavat.get(i).poksahda();
 			}
 		}
+
+
 	}
 }

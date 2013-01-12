@@ -190,14 +190,23 @@ public class Maailma {
 			}
 		}
 
+		double arpa = rand.nextDouble();
+
 		if (!ehjat.isEmpty()){
-			AktiivinenKupla arvottu = new AktiivinenKupla(Pelimaailma.LAHTO_X - 22.5,
-					Pelimaailma.LAHTO_Y - 22.5, this);
-			if (this.annaKuplienVarit().contains(arvottu.annaVari())){
-				this.kuplat.push(arvottu);
+			if (arpa < 0.04){
+				Superkupla superkupla = new Superkupla(Pelimaailma.LAHTO_X - 22.5,
+						Pelimaailma.LAHTO_Y - 22.5, this);
+				this.kuplat.push(superkupla);
 			} else {
-				this.arvoUusi();
+				AktiivinenKupla arvottu = new AktiivinenKupla(Pelimaailma.LAHTO_X - 22.5,
+						Pelimaailma.LAHTO_Y - 22.5, this);
+				if (this.annaKuplienVarit().contains(arvottu.annaVari())){
+					this.kuplat.push(arvottu);
+				} else {
+					this.arvoUusi();
+				}
 			}
+
 		} else {
 			this.peliLoppunut = true;
 			this.pelimaailma.lopetaPeli();
