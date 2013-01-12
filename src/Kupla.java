@@ -116,8 +116,6 @@ public class Kupla {
 
 	public void poksahda(){
 		this.ehja = false;
-		System.out.println("Seuraavan kupla poksahti: " + this);
-		//Pitää myös asettaa sijainti nulliksi tms.
 	}
 
 	public Image annaKuva(){
@@ -149,7 +147,7 @@ public class Kupla {
 	private ArrayList<Kupla> annaNaapurit(){
 		ArrayList<Kupla> naapurit = new ArrayList<Kupla>();
 		if (!(this.maailma == null)){
-			//System.out.println("menee tänne");
+			
 			for (int i = 0; i < this.maailma.annaKuplat().size(); i++){
 				Kupla tutkittava = this.maailma.annaKuplat().get(i);
 
@@ -159,9 +157,7 @@ public class Kupla {
 						tutkittava.annaKeskiX(), tutkittava.annaKeskiY()) 
 						<= 2 * sade + 6 && tutkittava.onEhja()) {
 					naapurit.add(tutkittava);
-					//System.out.println(tutkittava);
 				}
-				//System.out.println(naapurit.size());
 			}
 		}
 		return naapurit;

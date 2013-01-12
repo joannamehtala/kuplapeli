@@ -156,8 +156,10 @@ MouseMotionListener {
 		return this.kulma;
 	}
 
+	/**
+	 * Lopettaa pelin.
+	 */
 	public void lopetaPeli(){
-		System.out.println("siirryt‰‰n voitton‰kym‰‰n");
 		if (this.maailma.peliOhi()){
 			this.ikkuna.vaihdaVoittonakymaan();
 		}

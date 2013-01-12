@@ -102,33 +102,6 @@ public class Maailma {
 			this.kuplat.push(kupla);
 		}
 
-		/*
-		for (int i = 0; i < 4; i++){
-			if (i % 2 == 0){
-				/*
-		 * Parittomille riveille luodaan 10 kuplaa alkaen x = 50.
-
-				for (int a = 0; a < 9; a++){
-					Kupla kupla = new Kupla(this.alkupiste_x+(a*45), 
-							this.alkupiste_y+(i*45), this);
-					this.kuplat.push(kupla);
-				}
-			} else {
-				/*
-		 * Parillisille riveille luodaan 9 kuplaa alkaen x = 72.5
-
-				for (int a = 0; a < 8; a++){
-					Kupla kupla2 = new Kupla(this.alkupiste_x+22.5+(a*45),
-							this.alkupiste_y+(i*45), this);
-					this.kuplat.push(kupla2);
-				}
-			}
-		}*/
-
-		/*
-		 * Luodaan pelin aluksi yksi aktiivinen kupla peliruudun alareunaan
-		 * seuraavaksi ammuttavaksi.
-		 */
 		AktiivinenKupla kupla_nykyinen = 
 				new AktiivinenKupla(Pelimaailma.LAHTO_X - 22.5,
 						Pelimaailma.LAHTO_Y - 22.5, this);
@@ -198,7 +171,6 @@ public class Maailma {
 				kuplienVarit.add(tutkittava.annaVari());
 			}
 		}
-		System.out.println(kuplienVarit);
 		return kuplienVarit;
 	}
 

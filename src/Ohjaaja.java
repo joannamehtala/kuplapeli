@@ -73,11 +73,5 @@ public class Ohjaaja implements ActionListener{
 			this.maailma.liikutaNykyista(muutos);
 			this.pelimaailma.repaint();
 		}
-		
-		/*System.out.println("peli on ohi");
-		this.timer.stop();
-		this.pelimaailma.lopetaPeli();*/
-		
-
 	}
 }
