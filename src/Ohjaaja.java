@@ -55,23 +55,29 @@ public class Ohjaaja implements ActionListener{
 		long muutos = System.currentTimeMillis() - this.edellinenhetki;
 		this.edellinenhetki = System.currentTimeMillis();
 
-		//if (!this.maailma.peliOhi()){
-		/**
-		 * Jos nykyist‰ ammuttavaa kuplaa ei viel‰ ole ammuttu, piirret‰‰n
-		 * uudestaan eik‰ tehd‰ muuta.
-		 */
-		if (!this.maailma.annaNykyinen().onAmmuttu()){
+		if (!this.maailma.peliOhi()){
+			//System.out.println("peli ei ole ohi");
+			/**
+			 * Jos nykyist‰ ammuttavaa kuplaa ei viel‰ ole ammuttu, piirret‰‰n
+			 * uudestaan eik‰ tehd‰ muuta.
+			 */
+			if (!this.maailma.annaNykyinen().onAmmuttu()){
+				this.pelimaailma.repaint();
+				return;
+			}
+
+			/**
+			 * Jos kupla on ammuttu, sit‰ liikutetaan parametrina aiemmin laskettu
+			 * ajanhetkien erotus ja piirret‰‰n uudestaan.
+			 */
+			this.maailma.liikutaNykyista(muutos);
 			this.pelimaailma.repaint();
-			return;
 		}
+		
+		/*System.out.println("peli on ohi");
+		this.timer.stop();
+		this.pelimaailma.lopetaPeli();*/
+		
 
-		/**
-		 * Jos kupla on ammuttu, sit‰ liikutetaan parametrina aiemmin laskettu
-		 * ajanhetkien erotus ja piirret‰‰n uudestaan.
-		 */
-		this.maailma.liikutaNykyista(muutos);
-		this.pelimaailma.repaint();
 	}
-
-	//}
 }

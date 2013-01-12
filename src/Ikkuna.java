@@ -18,11 +18,13 @@ public class Ikkuna extends JFrame {
 	private Aloitusnaytto aloitusnaytto;
 	private Pelimaailma pelimaailma;
 	private Ohjenaytto ohjenaytto;
+	private Voittonakyma voittonakyma;
 	
 	/** CardLayoutia varten vaaditut Stringit n‰yttˆj‰ kuvaamaan.*/
 	private static final String ALOITUSNAYTTO = "aloitusnaytto";
 	private static final String PELIMAAILMA = "pelimaailma";
 	private static final String OHJENAYTTO = "ohjenaytto";
+	private static final String VOITTONAKYMA = "voittonakyma";
 
 	/**
 	 * Ikkunan konstruktorissa alustetaan attribuutit ja lis‰t‰‰n ikkunaan
@@ -40,6 +42,7 @@ public class Ikkuna extends JFrame {
 		this.aloitusnaytto = new Aloitusnaytto(this);
 		this.pelimaailma = new Pelimaailma(this);
 		this.ohjenaytto = new Ohjenaytto(this);
+		this.voittonakyma = new Voittonakyma(this);
 
 		/*
 		 * Asetetaan otsikko, layout, koko sek‰ aukeamiskohta. Lis‰t‰‰n
@@ -52,6 +55,7 @@ public class Ikkuna extends JFrame {
 		this.add(this.aloitusnaytto, ALOITUSNAYTTO);
 		this.add(this.pelimaailma, PELIMAAILMA);
 		this.add(this.ohjenaytto, OHJENAYTTO);
+		this.add(this.voittonakyma, VOITTONAKYMA);
 		this.setResizable(false);
 		this.pack();
 		this.setLocationRelativeTo(this);
@@ -85,6 +89,11 @@ public class Ikkuna extends JFrame {
 	public void vaihdaOhjenayttoon(){
 		this.naytot.show(this.getContentPane(), OHJENAYTTO);
 	}
+	
+	public void vaihdaVoittonakymaan(){
+		this.naytot.show(this.getContentPane(), VOITTONAKYMA);
+	}
+	
 	/**
 	 * P‰‰ohjelmametodi, jossa luodaan uusi ikkuna ja asetetaan se n‰kyv‰ksi.
 	 * @param args

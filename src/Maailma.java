@@ -52,6 +52,7 @@ public class Maailma {
 		this.leveys = 450;
 		this.korkeus = 500;
 		this.pelimaailma = pelimaailma;
+		this.peliLoppunut = false;
 
 		/*
 		 * Alustetaan kuplien pino ja pisteiden lista.
@@ -196,34 +197,6 @@ public class Maailma {
 					!kuplienVarit.contains(tutkittava.annaVari())){
 				kuplienVarit.add(tutkittava.annaVari());
 			}
-
-
-			//				switch (tutkittava.annaVari()){
-			//				case PUNAINEN:
-			//					if (!kuplienVarit.contains(Vari.PUNAINEN)){
-			//						kuplienVarit.add(Vari.PUNAINEN);
-			//					} 
-			//				case SININEN:
-			//					if (!kuplienVarit.contains(Vari.SININEN)){
-			//						kuplienVarit.add(Vari.SININEN);
-			//					} 
-			//
-			//				case VIHREA:
-			//					if (!kuplienVarit.contains(Vari.VIHREA)){
-			//						kuplienVarit.add(Vari.VIHREA);
-			//					} 
-			//
-			//				case KELTAINEN:
-			//					if (!kuplienVarit.contains(Vari.KELTAINEN)){
-			//						kuplienVarit.add(Vari.KELTAINEN);
-			//					} 
-			//
-			//				case LIILA:
-			//					if (!kuplienVarit.contains(Vari.LIILA)){
-			//						kuplienVarit.add(Vari.LIILA);
-			//					} 
-			//
-			//				}
 		}
 		System.out.println(kuplienVarit);
 		return kuplienVarit;
@@ -249,14 +222,13 @@ public class Maailma {
 			AktiivinenKupla arvottu = new AktiivinenKupla(Pelimaailma.LAHTO_X - 22.5,
 					Pelimaailma.LAHTO_Y - 22.5, this);
 			if (this.annaKuplienVarit().contains(arvottu.annaVari())){
-				System.out.println("Samanvärisiä on maailmassa wihii!");
 				this.kuplat.push(arvottu);
 			} else {
-				System.out.println("Samanvärisiä ei ollut :(");
 				this.arvoUusi();
 			}
 		} else {
 			this.peliLoppunut = true;
+			this.pelimaailma.lopetaPeli();
 		}
 	}
 

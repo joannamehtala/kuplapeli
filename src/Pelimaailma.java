@@ -155,10 +155,13 @@ MouseMotionListener {
 	public double annaKulma(){
 		return this.kulma;
 	}
-	
-//	public void lopetaPeli(){
-//		
-//	}
+
+	public void lopetaPeli(){
+		System.out.println("siirryt‰‰n voitton‰kym‰‰n");
+		if (this.maailma.peliOhi()){
+			this.ikkuna.vaihdaVoittonakymaan();
+		}
+	}
 
 	/**
 	 * MouseListenerin implementointi vaatii t‰m‰n metodin, vaikkei sit‰
