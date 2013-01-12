@@ -235,15 +235,28 @@ public class Maailma {
 	 * kuplien pinoon p‰‰llimm‰iseksi.
 	 */
 	public void arvoUusi(){
-		
-		AktiivinenKupla arvottu = new AktiivinenKupla(Pelimaailma.LAHTO_X - 22.5,
-				Pelimaailma.LAHTO_Y - 22.5, this);
-		if (this.annaKuplienVarit().contains(arvottu.annaVari())){
-			System.out.println("Samanv‰risi‰ on maailmassa wihii!");
-			this.kuplat.push(arvottu);
+
+		ArrayList<Kupla> ehjat = new ArrayList<Kupla>();
+		Iterator<Kupla> iteraattori = this.kuplaiteraattori();
+		while (iteraattori.hasNext()){
+			Kupla tutkittava = iteraattori.next();
+			if (tutkittava.onEhja()){
+				ehjat.add(tutkittava);
+			}
+		}
+
+		if (!ehjat.isEmpty()){
+			AktiivinenKupla arvottu = new AktiivinenKupla(Pelimaailma.LAHTO_X - 22.5,
+					Pelimaailma.LAHTO_Y - 22.5, this);
+			if (this.annaKuplienVarit().contains(arvottu.annaVari())){
+				System.out.println("Samanv‰risi‰ on maailmassa wihii!");
+				this.kuplat.push(arvottu);
+			} else {
+				System.out.println("Samanv‰risi‰ ei ollut :(");
+				this.arvoUusi();
+			}
 		} else {
-			System.out.println("Samanv‰risi‰ ei ollut :(");
-			this.arvoUusi();
+			this.peliLoppunut = true;
 		}
 	}
 

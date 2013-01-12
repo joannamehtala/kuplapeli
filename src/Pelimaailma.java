@@ -155,10 +155,10 @@ MouseMotionListener {
 	public double annaKulma(){
 		return this.kulma;
 	}
-
-	public Maailma annaMaailma(){
-		return this.maailma;
-	}
+	
+//	public void lopetaPeli(){
+//		
+//	}
 
 	/**
 	 * MouseListenerin implementointi vaatii tämän metodin, vaikkei sitä

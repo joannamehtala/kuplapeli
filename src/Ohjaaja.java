@@ -45,16 +45,17 @@ public class Ohjaaja implements ActionListener{
 			this.edellinenhetki = System.currentTimeMillis();
 			return;
 		}
-		
+
 		/** 
 		 * Lasketaan nykyisen hetken ja edellisen erotus.
 		 * Ajanhetkien erotusta tarvitaan kuplien sulavaan liikuttamiseen
 		 * (n‰in kuplan liikkuminen ei ole riippuvaista koneen suoritustehoista,
 		 * vaan se liikkuu tasaisesti huolimatta jumituksista). */
-		
+
 		long muutos = System.currentTimeMillis() - this.edellinenhetki;
 		this.edellinenhetki = System.currentTimeMillis();
 
+		//if (!this.maailma.peliOhi()){
 		/**
 		 * Jos nykyist‰ ammuttavaa kuplaa ei viel‰ ole ammuttu, piirret‰‰n
 		 * uudestaan eik‰ tehd‰ muuta.
@@ -70,6 +71,7 @@ public class Ohjaaja implements ActionListener{
 		 */
 		this.maailma.liikutaNykyista(muutos);
 		this.pelimaailma.repaint();
-
 	}
+
+	//}
 }

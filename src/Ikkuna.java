@@ -72,9 +72,10 @@ public class Ikkuna extends JFrame {
 	}
 
 	/**
-	 * Metodi n‰ytt‰‰ pelimaailman ottamalla sen esille CardLayoutissa.
+	 * Metodi luo uuden pelimaailman ja n‰ytt‰‰ sen CardLayoutissa.
 	 */
 	public void vaihdaPelimaailmaan(){
+		this.add(new Pelimaailma(this), PELIMAAILMA);
 		this.naytot.show(this.getContentPane(), PELIMAAILMA);
 	}
 	
