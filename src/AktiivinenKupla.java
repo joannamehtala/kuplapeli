@@ -70,6 +70,7 @@ public class AktiivinenKupla extends Kupla {
 				kupla.annaSade());
 		if (kupla.annaY() >= 450){
 			System.out.println("hävisit");
+			this.maailma.annaPelimaailma().lopetaPeli(false);
 		}
 	}
 

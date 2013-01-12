@@ -209,7 +209,7 @@ public class Maailma {
 
 		} else {
 			this.peliLoppunut = true;
-			this.pelimaailma.lopetaPeli();
+			this.pelimaailma.lopetaPeli(true);
 		}
 	}
 
@@ -241,5 +241,9 @@ public class Maailma {
 		if (this.peliLoppunut){
 			return true;
 		} return false;
+	}
+	
+	public Pelimaailma annaPelimaailma(){
+		return this.pelimaailma;
 	}
 }

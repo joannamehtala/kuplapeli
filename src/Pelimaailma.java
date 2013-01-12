@@ -159,10 +159,16 @@ MouseMotionListener {
 	/**
 	 * Lopettaa pelin.
 	 */
-	public void lopetaPeli(){
-		if (this.maailma.peliOhi()){
-			this.ikkuna.vaihdaVoittonakymaan();
-		}
+	public void lopetaPeli(boolean voitettu){
+		//if (this.maailma.peliOhi()){
+			if (voitettu){
+				this.ikkuna.vaihdaVoittonakymaan();
+
+			} else {
+				System.out.println("vaihdetaan häviönäkymään");
+				this.ikkuna.vaihdaHavionakymaan();
+			}
+		//}
 	}
 
 	/**

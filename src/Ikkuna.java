@@ -19,12 +19,14 @@ public class Ikkuna extends JFrame {
 	private Pelimaailma pelimaailma;
 	private Ohjenaytto ohjenaytto;
 	private Voittonakyma voittonakyma;
+	private Havionakyma havionakyma;
 	
 	/** CardLayoutia varten vaaditut Stringit näyttöjä kuvaamaan.*/
 	private static final String ALOITUSNAYTTO = "aloitusnaytto";
 	private static final String PELIMAAILMA = "pelimaailma";
 	private static final String OHJENAYTTO = "ohjenaytto";
 	private static final String VOITTONAKYMA = "voittonakyma";
+	private static final String HAVIONAKYMA = "havionakyma";
 
 	/**
 	 * Ikkunan konstruktorissa alustetaan attribuutit ja lisätään ikkunaan
@@ -43,6 +45,7 @@ public class Ikkuna extends JFrame {
 		this.pelimaailma = new Pelimaailma(this);
 		this.ohjenaytto = new Ohjenaytto(this);
 		this.voittonakyma = new Voittonakyma(this);
+		this.havionakyma = new Havionakyma(this, this.voittonakyma);
 
 		/*
 		 * Asetetaan otsikko, layout, koko sekä aukeamiskohta. Lisätään
@@ -56,6 +59,7 @@ public class Ikkuna extends JFrame {
 		this.add(this.pelimaailma, PELIMAAILMA);
 		this.add(this.ohjenaytto, OHJENAYTTO);
 		this.add(this.voittonakyma, VOITTONAKYMA);
+		this.add(this.havionakyma, HAVIONAKYMA);
 		this.setResizable(false);
 		this.pack();
 		this.setLocationRelativeTo(this);
@@ -92,6 +96,10 @@ public class Ikkuna extends JFrame {
 	
 	public void vaihdaVoittonakymaan(){
 		this.naytot.show(this.getContentPane(), VOITTONAKYMA);
+	}
+	
+	public void vaihdaHavionakymaan(){
+		this.naytot.show(this.getContentPane(), HAVIONAKYMA);
 	}
 	
 	/**
