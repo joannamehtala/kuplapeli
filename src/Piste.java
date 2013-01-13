@@ -37,4 +37,12 @@ public class Piste {
 	public double annaY(){
 		return this.y;
 	}
+	
+	/**
+	 * Asettaa pisteelle sijainnin.
+	 */
+	public void asetaSijainti(double x, double y){
+		this.x = x;
+		this.y = y;
+	}
 }

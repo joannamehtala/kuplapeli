@@ -37,6 +37,9 @@ public class Maailma {
 
 	/** Lista pisteille, joihin kuplat asetetaan. */
 	private ArrayList<Piste> pisteet;
+	
+	/** Tallennetaan attribuuttiin ampumiskerrat. */
+	private int ampumiskerrat;
 
 
 	/**
@@ -52,7 +55,16 @@ public class Maailma {
 		this.leveys = 450;
 		this.korkeus = 500;
 		this.pelimaailma = pelimaailma;
+		
+		/*
+		 * Peli ei ole vielä loppunut maailmaa luotaessa.
+		 */
 		this.peliLoppunut = false;
+		
+		/*
+		 * Alustetaan ampumiskerrat nollaksi.
+		 */
+		this.ampumiskerrat = 0;
 
 		/*
 		 * Alustetaan kuplien pino ja pisteiden lista.
@@ -159,6 +171,24 @@ public class Maailma {
 	 */
 	public void ammuNykyinen(double kulma){
 		this.annaNykyinen().ammu(kulma);
+		this.ampumiskerrat++;
+	}
+	
+	public void lisaaKuplia(){
+		if (this.ampumiskerrat % 10 == 0){
+			Iterator<Piste> iteraattori = this.pisteiteraattori();
+			while(iteraattori.hasNext()){
+				Piste pudotettava = iteraattori.next();
+				pudotettava.asetaSijainti(pudotettava.annaX(), 
+						pudotettava.annaY() + 45);
+			}
+			
+			for (int i = 0; i < this.kuplat.size() - 1; i++){
+				Kupla pudotettava = this.kuplat.get(i);
+				pudotettava.asetaSijainti(pudotettava.annaX(), 
+						pudotettava.annaY() + 45);
+			}
+		}
 	}
 
 	public ArrayList<Vari> annaKuplienVarit(){
@@ -221,6 +251,7 @@ public class Maailma {
 	public void liikutaNykyista(long muutos){
 		this.annaNykyinen().liiku(muutos);
 		if (this.annaNykyinen().onPysahtynyt()){
+			this.lisaaKuplia();
 			this.arvoUusi();
 		}
 	}
