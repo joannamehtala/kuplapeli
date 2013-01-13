@@ -318,7 +318,7 @@ public class Maailma {
 			//TODO t‰h‰n joku timer.wait koska muuten pelaaja ei ehdi n‰hd‰,
 			//miksi se h‰vi‰‰ kun sen kupla putoaa pelimaailman ulkopuolelle
 			//kun tulee lis‰‰ kuplia.
-			this.tarkistaSijainnit();
+			//this.tarkistaSijainnit();
 			this.arvoUusi();
 		}
 	}
