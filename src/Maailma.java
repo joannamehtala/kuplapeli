@@ -202,8 +202,9 @@ public class Maailma {
 				Kupla pudotettava = this.kuplat.get(i);
 				pudotettava.asetaSijainti(pudotettava.annaX(), 
 						pudotettava.annaY() + 45);
-				if (pudotettava.annaY() >= 450){
+				if (pudotettava.onEhja() && pudotettava.annaY() >= 450){
 					//tähän se timer wait!!
+					System.out.println("nyt y on suurempi kuin pitäisi olla");
 					this.pelimaailma.lopetaPeli(false);
 				}
 			}
