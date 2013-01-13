@@ -37,9 +37,14 @@ public class Maailma {
 
 	/** Lista pisteille, joihin kuplat asetetaan. */
 	private ArrayList<Piste> pisteet;
-	
+
 	/** Tallennetaan attribuuttiin ampumiskerrat. */
 	private int ampumiskerrat;
+
+	/** Tallennetaan attribuuttiin kuplien lis‰‰miskerrat. T‰h‰n ei lasketa
+	 * alkuper‰isten kuplien luomista.
+	 */
+	private int lisaamiskerrat;
 
 
 	/**
@@ -55,12 +60,12 @@ public class Maailma {
 		this.leveys = 450;
 		this.korkeus = 500;
 		this.pelimaailma = pelimaailma;
-		
+
 		/*
 		 * Peli ei ole viel‰ loppunut maailmaa luotaessa.
 		 */
 		this.peliLoppunut = false;
-		
+
 		/*
 		 * Alustetaan ampumiskerrat nollaksi.
 		 */
@@ -173,20 +178,78 @@ public class Maailma {
 		this.annaNykyinen().ammu(kulma);
 		this.ampumiskerrat++;
 	}
-	
+
+	/**
+	 * Metodi lis‰‰ kuplia maailmaan joka kymmenennen ampumiskerran j‰lkeen.
+	 * Aluksi pudotetaan kaikkia maailman kuplia ja pisteit‰ yhden rivin
+	 * verran alasp‰in. Sitten luodaan yl‰riviin uudet kuplat ja pisteet joka
+	 * toisella kerralla limitt‰in ja joka toisella suoraan. Uudet pisteet
+	 * t‰ytyy luoda, jotta kuplat asettuisivat oikein, kun niit‰ ammutaan
+	 * uuteen yl‰riviin.
+	 */
 	public void lisaaKuplia(){
+		System.out.println(this.lisaamiskerrat);
 		if (this.ampumiskerrat % 10 == 0){
+
 			Iterator<Piste> iteraattori = this.pisteiteraattori();
 			while(iteraattori.hasNext()){
 				Piste pudotettava = iteraattori.next();
 				pudotettava.asetaSijainti(pudotettava.annaX(), 
 						pudotettava.annaY() + 45);
 			}
-			
-			for (int i = 0; i < this.kuplat.size() - 1; i++){
+
+			for (int i = 0; i < this.kuplat.size(); i++){
 				Kupla pudotettava = this.kuplat.get(i);
 				pudotettava.asetaSijainti(pudotettava.annaX(), 
 						pudotettava.annaY() + 45);
+			}
+
+			//Joka toisella kerralla kuplat luodaan limitt‰in ja joka toisella
+			//"suoraan". Aloitetaan limitt‰in luomisesta, koska alempi rivi
+			//on tehty "suoraan".
+			System.out.println(this.lisaamiskerrat);
+			if (this.lisaamiskerrat % 2 == 0){
+
+				//Luodaan uudet pisteet yl‰reunaan.
+				for (int a = 0; a < 8; a++){
+					Piste uusi = new Piste(this.alkupiste_x+45+(a*45),
+							this.alkupiste_y+22.5);
+					this.pisteet.add(uusi);
+				}
+				
+				//Luodaan rivin verran kuplia yl‰reunaan.
+				for (int b = 0; b < 8; b++){
+					Kupla uusi = new Kupla(this.alkupiste_x+22.5+(b*45),
+							this.alkupiste_y, this);
+					this.kuplat.push(uusi);
+				}
+				this.lisaamiskerrat++;
+
+			//Nyt luodaan uudet pisteet ja kuplat "suoraan".
+			} else {
+				
+				//Luodaan uudet pisteet yl‰reunaan.
+				for (int a = 0; a < 9; a++){
+					Piste uusi = new Piste(this.alkupiste_x+22.5+(a*45),
+							this.alkupiste_y+22.5);
+					this.pisteet.add(uusi);
+				}
+				
+				//Luodaan rivin verran kuplia yl‰reunaan.
+				for (int b = 0; b < 9; b++){
+					Kupla uusi = new Kupla(this.alkupiste_x+(b*45),
+							this.alkupiste_y, this);
+					this.kuplat.push(uusi);
+				}
+				this.lisaamiskerrat++;
+			}
+		}
+	}
+	
+	public void tarkistaSijainnit(){
+		for (int i = 0; i < this.kuplat.size() - 1; i++){
+			if (this.kuplat.get(i).annaY() >= 450){
+				this.pelimaailma.lopetaPeli(false);
 			}
 		}
 	}
@@ -252,6 +315,10 @@ public class Maailma {
 		this.annaNykyinen().liiku(muutos);
 		if (this.annaNykyinen().onPysahtynyt()){
 			this.lisaaKuplia();
+			//TODO t‰h‰n joku timer.wait koska muuten pelaaja ei ehdi n‰hd‰,
+			//miksi se h‰vi‰‰ kun sen kupla putoaa pelimaailman ulkopuolelle
+			//kun tulee lis‰‰ kuplia.
+			this.tarkistaSijainnit();
 			this.arvoUusi();
 		}
 	}
@@ -273,7 +340,7 @@ public class Maailma {
 			return true;
 		} return false;
 	}
-	
+
 	public Pelimaailma annaPelimaailma(){
 		return this.pelimaailma;
 	}

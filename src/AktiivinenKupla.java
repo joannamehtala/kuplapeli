@@ -111,7 +111,6 @@ public class AktiivinenKupla extends Kupla {
 			this.pysahtynyt = true;
 			this.tasaaSijainti(this);
 			this.tarkistaPoksautettavat();
-			//this.maailma.lisaaKuplia();
 			return;
 		}
 
