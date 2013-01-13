@@ -202,6 +202,10 @@ public class Maailma {
 				Kupla pudotettava = this.kuplat.get(i);
 				pudotettava.asetaSijainti(pudotettava.annaX(), 
 						pudotettava.annaY() + 45);
+				if (pudotettava.annaY() >= 450){
+					//t‰h‰n se timer wait!
+					this.pelimaailma.lopetaPeli(false);
+				}
 			}
 
 			//Joka toisella kerralla kuplat luodaan limitt‰in ja joka toisella
@@ -246,13 +250,13 @@ public class Maailma {
 		}
 	}
 	
-	public void tarkistaSijainnit(){
-		for (int i = 0; i < this.kuplat.size() - 1; i++){
-			if (this.kuplat.get(i).annaY() >= 450){
-				this.pelimaailma.lopetaPeli(false);
-			}
-		}
-	}
+//	public void tarkistaSijainnit(){
+//		for (int i = 0; i < this.kuplat.size() - 1; i++){
+//			if (this.kuplat.get(i).annaY() >= 450){
+//				this.pelimaailma.lopetaPeli(false);
+//			}
+//		}
+//	}
 
 	public ArrayList<Vari> annaKuplienVarit(){
 		ArrayList<Vari> kuplienVarit = new ArrayList<Vari>();
@@ -315,10 +319,6 @@ public class Maailma {
 		this.annaNykyinen().liiku(muutos);
 		if (this.annaNykyinen().onPysahtynyt()){
 			this.lisaaKuplia();
-			//TODO t‰h‰n joku timer.wait koska muuten pelaaja ei ehdi n‰hd‰,
-			//miksi se h‰vi‰‰ kun sen kupla putoaa pelimaailman ulkopuolelle
-			//kun tulee lis‰‰ kuplia.
-			//this.tarkistaSijainnit();
 			this.arvoUusi();
 		}
 	}

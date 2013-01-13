@@ -160,15 +160,13 @@ MouseMotionListener {
 	 * Lopettaa pelin.
 	 */
 	public void lopetaPeli(boolean voitettu){
-		//if (this.maailma.peliOhi()){
-			if (voitettu){
-				this.ikkuna.vaihdaVoittonakymaan();
+		if (voitettu){
+			this.ikkuna.vaihdaVoittonakymaan();
 
-			} else {
-				System.out.println("vaihdetaan häviönäkymään");
-				this.ikkuna.vaihdaHavionakymaan();
-			}
-		//}
+		} else {
+			System.out.println("vaihdetaan häviönäkymään");
+			this.ikkuna.vaihdaHavionakymaan();
+		}
 	}
 
 	/**
