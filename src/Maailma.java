@@ -189,7 +189,7 @@ public class Maailma {
 	 */
 	public void lisaaKuplia(){
 		System.out.println(this.lisaamiskerrat);
-		if (this.ampumiskerrat % 10 == 0){
+		if (this.ampumiskerrat % 12 == 0){
 
 			Iterator<Piste> iteraattori = this.pisteiteraattori();
 			while(iteraattori.hasNext()){
@@ -291,7 +291,7 @@ public class Maailma {
 		double arpa = rand.nextDouble();
 
 		if (!ehjat.isEmpty()){
-			if (arpa < 0.04){
+			if (arpa < 0.05){
 				Superkupla superkupla = new Superkupla(Pelimaailma.LAHTO_X - 22.5,
 						Pelimaailma.LAHTO_Y - 22.5, this);
 				this.kuplat.push(superkupla);
