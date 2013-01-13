@@ -203,7 +203,7 @@ public class Maailma {
 				pudotettava.asetaSijainti(pudotettava.annaX(), 
 						pudotettava.annaY() + 45);
 				if (pudotettava.annaY() >= 450){
-					//tähän se timer wait!
+					//tähän se timer wait!!
 					this.pelimaailma.lopetaPeli(false);
 				}
 			}
