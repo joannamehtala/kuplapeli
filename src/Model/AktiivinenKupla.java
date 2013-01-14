@@ -1,6 +1,12 @@
+package Model;
+
 
 import java.util.Iterator;
 import java.util.Random;
+
+
+
+
 
 
 public class AktiivinenKupla extends Kupla {
@@ -24,8 +30,7 @@ public class AktiivinenKupla extends Kupla {
 		this.aste = aste;
 	}
 
-	public boolean koskeeToista(){
-		Kupla aktiivinen = this.maailma.annaNykyinen();
+	public boolean koskeeToista(Kupla aktiivinen){
 
 		for (int i = 0; i < this.maailma.annaKuplat().size() - 1; 
 				i++){
@@ -103,9 +108,11 @@ public class AktiivinenKupla extends Kupla {
 		 * Liikutetaan.
 		 */
 		if (y > 50 && y < 465 && 
-				!this.maailma.annaNykyinen().koskeeToista()){
+				!this.maailma.annaNykyinen().
+				koskeeToista(this.maailma.annaNykyinen())){
 			x += Math.cos(Math.toRadians(aste))*muutos*0.3;
 			y += Math.sin(Math.toRadians(aste))*muutos*0.3;
+			
 
 		} else {
 			this.pysahtynyt = true;

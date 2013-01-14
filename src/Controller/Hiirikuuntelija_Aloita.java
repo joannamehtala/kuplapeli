@@ -1,8 +1,12 @@
+package Controller;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
+
+import View.Aloitusnaytto;
+import View.Ikkuna;
 
 /**
  * Hiirikuuntelijaluokka aloitusnäkymän Aloita-JButtonin toimintaa varten.

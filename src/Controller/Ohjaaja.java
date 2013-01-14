@@ -1,7 +1,13 @@
+package Controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
+
+import Model.Maailma;
+import View.Pelimaailma;
+
+
 
 /**
  * Tämä luokka toimii MVC-mallin mukaisesti controllerina, eli tämän luokan

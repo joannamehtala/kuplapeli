@@ -1,9 +1,22 @@
+package Model;
+
+
+
+
+
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.Stack;
+
+import Controller.Ohjaaja;
+import View.Pelimaailma;
+
+
+
+
 
 /**
  * Maailma-luokka, joka sisältää pelilogiikkaa maailman osalta; pidetään
@@ -402,44 +415,29 @@ public class Maailma {
 	}
 
 	public void tarkistaYksinaiset(){
-		//Alustetaan tarkisteltavien kuplien lista kuplan välittömässä
-		//läheisyydessa olevilla naapureilla.
+		
 		ArrayList<Kupla> pudotettavat = new ArrayList<Kupla>();
 		HashSet<Kupla> tarkastetut = new HashSet<Kupla>();
 
-		//Käydään läpi poksautettavat kuplat, joita tulee lisää kun
-		//silmukkaa käydään läpi
 		for (int i = 0; i < this.kuplat.size(); i++){
-			Kupla t = this.kuplat.get(i);
-			ArrayList<Kupla> naapurit = t.annaNaapurit();
+			Kupla tutkittava = this.kuplat.get(i);
+			ArrayList<Kupla> naapurit = tutkittava.annaNaapurit();
 
-			//Käydään läpi äsken listatut kuplan t naapurit yksi kerrallaan,
-			//ja jokaisen kohdalla tarkistetaan, onko sitä tutkittu aiemmin
-			//ja jos ei, se lisätään tutkittujen listalle ja tarkistetaan,
-			//onko se samanvärinen kuin ammuttu kupla.
 			for (Kupla n : naapurit){
 
-				//Kupla tarkastetaan vain, jos sitä ei vielä ole tarkastettu
-				//(vältetään StackOverFlowError).
-				if (!tarkastetut.contains(n)){
-					tarkastetut.add(n);
+				if (!tarkastetut.contains(tutkittava)){
+					tarkastetut.add(tutkittava);
 
 					if (!(n.annaY() == 50) && n.annaNaapurit().size() < 2){
-						//Lisätään poksautettaviin n, jolle tehdään 
-						//uudestaan koko tarkastelu silmukan alusta lähtien.
 						pudotettavat.add(n);
+						
 					}
 				}
 			}
 		}
 
-		//Nyt poksautettavat sisältää kaikki ne samanväriset kuplat, joihin
-		//kupla ja sen naapurit ja naapurin naapurit jne. koskevat.
-
-		//Poksautetaan kuplat :)
-
 		for (int i = 0; i < pudotettavat.size(); i++){
-			pudotettavat.get(i).poksahda();
+			pudotettavat.get(i).putoa();
 		}
 	}
 }

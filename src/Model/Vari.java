@@ -1,3 +1,6 @@
+package Model;
+
+
 /**
  * Enumeraatioluokka kuplien värejä varten.
  * @author 345480

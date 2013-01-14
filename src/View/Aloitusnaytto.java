@@ -1,3 +1,5 @@
+package View;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -10,6 +12,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
+
+import Controller.Hiirikuuntelija_Aloita;
+import Controller.Hiirikuuntelija_Lopeta;
+import Controller.Hiirikuuntelija_Ohjeet;
+
 
 /**
  * Aloitusnäytön luokka. Aloitusnäytöllä on taustakuva ja nappulat, joita

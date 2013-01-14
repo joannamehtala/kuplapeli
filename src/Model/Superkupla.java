@@ -1,5 +1,11 @@
+package Model;
+
+
 import java.awt.Image;
 import java.awt.Toolkit;
+
+
+
 
 
 public class Superkupla extends AktiivinenKupla{
@@ -14,8 +20,6 @@ public class Superkupla extends AktiivinenKupla{
 	@Override
 	public Image annaKuva(){
 		return superkupla;
+		
 	}
-	
-	
-	
 }

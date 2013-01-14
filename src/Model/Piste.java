@@ -1,3 +1,5 @@
+package Model;
+
 
 /**
  * Java Point-luokka ottaa parametreina int-tyyppisen x:n ja y:n, mutta

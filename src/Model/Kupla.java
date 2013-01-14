@@ -1,14 +1,23 @@
+package Model;
 
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
+
+import javax.swing.Timer;
+
+
+
+
 
 
 /**
@@ -18,7 +27,7 @@ import java.util.Set;
  * @author 345480
  *
  */
-public class Kupla {
+public class Kupla implements ActionListener{
 
 	/** Kuplan s‰de. */
 	private double sade;
@@ -38,6 +47,8 @@ public class Kupla {
 
 	/** Maailma, jossa kupla sijaitsee. */
 	private Maailma maailma;
+	
+	private Timer timer;
 
 	/** Kuplien kuvat. */
 	private static final Image punainen = 
@@ -63,6 +74,7 @@ public class Kupla {
 		this.x = x;
 		this.y = y;
 		this.sade = 22.5;
+		this.timer = new Timer(20, this);
 
 		Vari[] varit = Vari.values();
 		int a = rand.nextInt(varit.length);
@@ -135,10 +147,11 @@ public class Kupla {
 		this.ehja = false;
 	}
 
-	public void putoa(){
+	public void putoa() {
 		System.out.println("pudotaan");
-		while (this.annaY() < 450){
-			this.y--;
+
+		while (this.y <= 450){
+			this.y++;
 		}
 		this.poksahda();
 	}
@@ -252,8 +265,8 @@ public class Kupla {
 			//K‰yd‰‰n l‰pi poksautettavat kuplat, joita tulee lis‰‰ kun
 			//silmukkaa k‰yd‰‰n l‰pi
 			for (int i = 0; i < poksautettavat.size(); i++){
-				Kupla t = poksautettavat.get(i);
-				ArrayList<Kupla> tempNaapurit = t.annaNaapurit();
+				Kupla tutkittava = poksautettavat.get(i);
+				ArrayList<Kupla> tempNaapurit = tutkittava.annaNaapurit();
 
 				//K‰yd‰‰n l‰pi ‰sken listatut kuplan t naapurit yksi kerrallaan,
 				//ja jokaisen kohdalla tarkistetaan, onko sit‰ tutkittu aiemmin
@@ -295,5 +308,10 @@ public class Kupla {
 				poksautettavat.get(i).poksahda();
 			}
 		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		this.maailma.annaPelimaailma().repaint();
 	}
 }

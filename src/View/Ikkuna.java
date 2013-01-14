@@ -1,3 +1,5 @@
+package View;
+
 
 import java.awt.CardLayout;
 import javax.swing.JFrame;
@@ -54,7 +56,7 @@ public class Ikkuna extends JFrame {
 		 */
 		
 		this.setTitle("Kuplapeli");
-		this.setLayout(naytot);
+		this.setLayout(this.naytot);
 		this.add(this.aloitusnaytto, ALOITUSNAYTTO);
 		this.add(this.pelimaailma, PELIMAAILMA);
 		this.add(this.ohjenaytto, OHJENAYTTO);
