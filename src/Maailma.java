@@ -206,10 +206,15 @@ public class Maailma {
 
 		this.tutkiEhjat();
 
+		//Kuplia lisätään vain, jos maailmassa on ehjiä kuplia.
 		if (!this.ehjat.isEmpty()){
-			System.out.println(this.lisaamiskerrat);
+			
+			//Kuplia lisätään tiettyjen ampumiskertojen välein.
 			if (this.ampumiskerrat % 12 == 0){
 
+				//Käydään läpi maailman pisteet ja pudotetaan niitä yhden rivin
+				//verran alaspäin.
+				
 				Iterator<Piste> iteraattori = this.pisteiteraattori();
 				while(iteraattori.hasNext()){
 					Piste pudotettava = iteraattori.next();
@@ -217,31 +222,38 @@ public class Maailma {
 							pudotettava.annaY() + 45);
 				}
 
+				//Pudotetaan myös kuplia yhden rivin verran alaspäin.
+				
 				for (int i = 0; i < this.kuplat.size(); i++){
 					Kupla pudotettava = this.kuplat.get(i);
 					pudotettava.asetaSijainti(pudotettava.annaX(), 
 							pudotettava.annaY() + 45);
+					
+					//Jos pudotettavat kuplat putoavat maailman alareunan
+					//yli (tai siis ali hehheh), niin peli hävitään.
+					
 					if (pudotettava.onEhja() && pudotettava.annaY() >= 450){
-						//tähän se timer wait!!
-						System.out.println("nyt y on suurempi kuin pitäisi olla");
+						
+						//TODO tähän se timer wait!!
 						this.pelimaailma.lopetaPeli(false);
 					}
 				}
 
-				//Joka toisella kerralla kuplat luodaan limittäin ja joka toisella
-				//"suoraan". Aloitetaan limittäin luomisesta, koska alempi rivi
-				//on tehty "suoraan".
+				//Joka toisella kerralla kuplat luodaan limittäin ja joka 
+				//toisella "suoraan". Aloitetaan limittäin luomisesta, koska 
+				//alempi rivi on tehty "suoraan".
+				
 				System.out.println(this.lisaamiskerrat);
 				if (this.lisaamiskerrat % 2 == 0){
 
-					//Luodaan uudet pisteet yläreunaan.
+					//Luodaan uudet pisteet (9) yläreunaan.
 					for (int a = 0; a < 8; a++){
 						Piste uusi = new Piste(this.alkupiste_x+45+(a*45),
 								this.alkupiste_y+22.5);
 						this.pisteet.add(uusi);
 					}
 
-					//Luodaan rivin verran kuplia yläreunaan.
+					//Luodaan rivin verran (9) kuplia yläreunaan.
 					for (int b = 0; b < 8; b++){
 						Kupla uusi = new Kupla(this.alkupiste_x+22.5+(b*45),
 								this.alkupiste_y, this);
@@ -252,14 +264,14 @@ public class Maailma {
 					//Nyt luodaan uudet pisteet ja kuplat "suoraan".
 				} else {
 
-					//Luodaan uudet pisteet yläreunaan.
+					//Luodaan uudet pisteet (10) yläreunaan.
 					for (int a = 0; a < 9; a++){
 						Piste uusi = new Piste(this.alkupiste_x+22.5+(a*45),
 								this.alkupiste_y+22.5);
 						this.pisteet.add(uusi);
 					}
 
-					//Luodaan rivin verran kuplia yläreunaan.
+					//Luodaan rivin verran (10) kuplia yläreunaan.
 					for (int b = 0; b < 9; b++){
 						Kupla uusi = new Kupla(this.alkupiste_x+(b*45),
 								this.alkupiste_y, this);
@@ -268,8 +280,11 @@ public class Maailma {
 					this.lisaamiskerrat++;
 				}
 			}
+			
+		//Jos maailmassa ei ole enää ehjiä kuplia, peli on voitettu.
 		} else {
 			this.peliLoppunut = true;
+			this.pelimaailma.lopetaPeli(true);
 		}
 	}
 
@@ -281,11 +296,19 @@ public class Maailma {
 	//		}
 	//	}
 
+	/**
+	 * Metodi palauttaa listan maailman kuplien väreistä.
+	 * @return lista kuplien väreistä
+	 */
 	public ArrayList<Vari> annaKuplienVarit(){
+		
 		ArrayList<Vari> kuplienVarit = new ArrayList<Vari>();
 		Iterator<Kupla> iteraattori = this.kuplaiteraattori();
+		
 		while (iteraattori.hasNext()){
 			Kupla tutkittava = iteraattori.next();
+			
+			//Kukin väri lisätään vain kerran listaan.
 			if (tutkittava.onEhja() && 
 					!kuplienVarit.contains(tutkittava.annaVari())){
 				kuplienVarit.add(tutkittava.annaVari());
@@ -305,14 +328,25 @@ public class Maailma {
 
 		double arpa = rand.nextDouble();
 
+		//Uusi kupla arvotaan alareunaan vain, jos maailmassa on ehjiä kuplia.
 		if (!ehjat.isEmpty()){
+			
+			//5 prosentin todennäköisyydellä maailmaan arvotaan superkupla.
 			if (arpa < 0.05){
-				Superkupla superkupla = new Superkupla(Pelimaailma.LAHTO_X - 22.5,
+				
+				Superkupla superkupla = 
+						new Superkupla(Pelimaailma.LAHTO_X - 22.5,
 						Pelimaailma.LAHTO_Y - 22.5, this);
 				this.kuplat.push(superkupla);
+				
+			//95 prosentin todennäköisyydellä maailmaan luodaan normaali kupla.	
 			} else {
-				AktiivinenKupla arvottu = new AktiivinenKupla(Pelimaailma.LAHTO_X - 22.5,
+				AktiivinenKupla arvottu =
+						new AktiivinenKupla(Pelimaailma.LAHTO_X - 22.5,
 						Pelimaailma.LAHTO_Y - 22.5, this);
+				
+				//Jos maailmasta on poksautettu kaikki tietynväriset kuplat,
+				//maailmaan ei enää arvota sen väristä kuplaa.
 				if (this.annaKuplienVarit().contains(arvottu.annaVari())){
 					this.kuplat.push(arvottu);
 				} else {
@@ -320,6 +354,7 @@ public class Maailma {
 				}
 			}
 
+		//Jos ehjiä kuplia ei ole enää maailmassa, niin peli on voitettu.
 		} else {
 			this.peliLoppunut = true;
 			this.pelimaailma.lopetaPeli(true);
@@ -328,7 +363,7 @@ public class Maailma {
 
 	/**
 	 * Liikutetaan nykyistä kuplaa. Jos kupla on pysähtynyt, arvotaan uusi
-	 * kupla.
+	 * kupla ja mahdollisesti myös lisätään rivi kuplia.
 	 * @param muutos
 	 */
 	public void liikutaNykyista(long muutos){
@@ -357,6 +392,10 @@ public class Maailma {
 		} return false;
 	}
 
+	/**
+	 * Palauttaa maailman pelimaailman.
+	 * @return pelimaailma
+	 */
 	public Pelimaailma annaPelimaailma(){
 		return this.pelimaailma;
 	}
