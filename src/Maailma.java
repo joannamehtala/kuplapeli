@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.Stack;
@@ -179,7 +180,7 @@ public class Maailma {
 		this.annaNykyinen().ammu(kulma);
 		this.ampumiskerrat++;
 	}
-	
+
 	/**
 	 * Tutkitaan maailman kuplat ja selvitet‰‰n, ovatko ne ehji‰.
 	 */
@@ -208,13 +209,13 @@ public class Maailma {
 
 		//Kuplia lis‰t‰‰n vain, jos maailmassa on ehji‰ kuplia.
 		if (!this.ehjat.isEmpty()){
-			
+
 			//Kuplia lis‰t‰‰n tiettyjen ampumiskertojen v‰lein.
 			if (this.ampumiskerrat % 12 == 0){
 
 				//K‰yd‰‰n l‰pi maailman pisteet ja pudotetaan niit‰ yhden rivin
 				//verran alasp‰in.
-				
+
 				Iterator<Piste> iteraattori = this.pisteiteraattori();
 				while(iteraattori.hasNext()){
 					Piste pudotettava = iteraattori.next();
@@ -223,17 +224,17 @@ public class Maailma {
 				}
 
 				//Pudotetaan myˆs kuplia yhden rivin verran alasp‰in.
-				
+
 				for (int i = 0; i < this.kuplat.size(); i++){
 					Kupla pudotettava = this.kuplat.get(i);
 					pudotettava.asetaSijainti(pudotettava.annaX(), 
 							pudotettava.annaY() + 45);
-					
+
 					//Jos pudotettavat kuplat putoavat maailman alareunan
 					//yli (tai siis ali hehheh), niin peli h‰vit‰‰n.
-					
+
 					if (pudotettava.onEhja() && pudotettava.annaY() >= 450){
-						
+
 						//TODO t‰h‰n se timer wait!!
 						this.pelimaailma.lopetaPeli(false);
 					}
@@ -242,7 +243,7 @@ public class Maailma {
 				//Joka toisella kerralla kuplat luodaan limitt‰in ja joka 
 				//toisella "suoraan". Aloitetaan limitt‰in luomisesta, koska 
 				//alempi rivi on tehty "suoraan".
-				
+
 				System.out.println(this.lisaamiskerrat);
 				if (this.lisaamiskerrat % 2 == 0){
 
@@ -280,8 +281,8 @@ public class Maailma {
 					this.lisaamiskerrat++;
 				}
 			}
-			
-		//Jos maailmassa ei ole en‰‰ ehji‰ kuplia, peli on voitettu.
+
+			//Jos maailmassa ei ole en‰‰ ehji‰ kuplia, peli on voitettu.
 		} else {
 			this.peliLoppunut = true;
 			this.pelimaailma.lopetaPeli(true);
@@ -301,13 +302,13 @@ public class Maailma {
 	 * @return lista kuplien v‰reist‰
 	 */
 	public ArrayList<Vari> annaKuplienVarit(){
-		
+
 		ArrayList<Vari> kuplienVarit = new ArrayList<Vari>();
 		Iterator<Kupla> iteraattori = this.kuplaiteraattori();
-		
+
 		while (iteraattori.hasNext()){
 			Kupla tutkittava = iteraattori.next();
-			
+
 			//Kukin v‰ri lis‰t‰‰n vain kerran listaan.
 			if (tutkittava.onEhja() && 
 					!kuplienVarit.contains(tutkittava.annaVari())){
@@ -330,21 +331,21 @@ public class Maailma {
 
 		//Uusi kupla arvotaan alareunaan vain, jos maailmassa on ehji‰ kuplia.
 		if (!ehjat.isEmpty()){
-			
+
 			//5 prosentin todenn‰kˆisyydell‰ maailmaan arvotaan superkupla.
 			if (arpa < 0.05){
-				
+
 				Superkupla superkupla = 
 						new Superkupla(Pelimaailma.LAHTO_X - 22.5,
-						Pelimaailma.LAHTO_Y - 22.5, this);
+								Pelimaailma.LAHTO_Y - 22.5, this);
 				this.kuplat.push(superkupla);
-				
-			//95 prosentin todenn‰kˆisyydell‰ maailmaan luodaan normaali kupla.	
+
+				//95 prosentin todenn‰kˆisyydell‰ maailmaan luodaan normaali kupla.	
 			} else {
 				AktiivinenKupla arvottu =
 						new AktiivinenKupla(Pelimaailma.LAHTO_X - 22.5,
-						Pelimaailma.LAHTO_Y - 22.5, this);
-				
+								Pelimaailma.LAHTO_Y - 22.5, this);
+
 				//Jos maailmasta on poksautettu kaikki tietynv‰riset kuplat,
 				//maailmaan ei en‰‰ arvota sen v‰rist‰ kuplaa.
 				if (this.annaKuplienVarit().contains(arvottu.annaVari())){
@@ -354,7 +355,7 @@ public class Maailma {
 				}
 			}
 
-		//Jos ehji‰ kuplia ei ole en‰‰ maailmassa, niin peli on voitettu.
+			//Jos ehji‰ kuplia ei ole en‰‰ maailmassa, niin peli on voitettu.
 		} else {
 			this.peliLoppunut = true;
 			this.pelimaailma.lopetaPeli(true);
@@ -398,5 +399,47 @@ public class Maailma {
 	 */
 	public Pelimaailma annaPelimaailma(){
 		return this.pelimaailma;
+	}
+
+	public void tarkistaYksinaiset(){
+		//Alustetaan tarkisteltavien kuplien lista kuplan v‰littˆm‰ss‰
+		//l‰heisyydessa olevilla naapureilla.
+		ArrayList<Kupla> pudotettavat = new ArrayList<Kupla>();
+		HashSet<Kupla> tarkastetut = new HashSet<Kupla>();
+
+		//K‰yd‰‰n l‰pi poksautettavat kuplat, joita tulee lis‰‰ kun
+		//silmukkaa k‰yd‰‰n l‰pi
+		for (int i = 0; i < this.kuplat.size(); i++){
+			Kupla t = this.kuplat.get(i);
+			ArrayList<Kupla> naapurit = t.annaNaapurit();
+
+			//K‰yd‰‰n l‰pi ‰sken listatut kuplan t naapurit yksi kerrallaan,
+			//ja jokaisen kohdalla tarkistetaan, onko sit‰ tutkittu aiemmin
+			//ja jos ei, se lis‰t‰‰n tutkittujen listalle ja tarkistetaan,
+			//onko se samanv‰rinen kuin ammuttu kupla.
+			for (Kupla n : naapurit){
+
+				//Kupla tarkastetaan vain, jos sit‰ ei viel‰ ole tarkastettu
+				//(v‰ltet‰‰n StackOverFlowError).
+				if (!tarkastetut.contains(n)){
+					tarkastetut.add(n);
+
+					if (!(n.annaY() == 50) && n.annaNaapurit().size() < 2){
+						//Lis‰t‰‰n poksautettaviin n, jolle tehd‰‰n 
+						//uudestaan koko tarkastelu silmukan alusta l‰htien.
+						pudotettavat.add(n);
+					}
+				}
+			}
+		}
+
+		//Nyt poksautettavat sis‰lt‰‰ kaikki ne samanv‰riset kuplat, joihin
+		//kupla ja sen naapurit ja naapurin naapurit jne. koskevat.
+
+		//Poksautetaan kuplat :)
+
+		for (int i = 0; i < pudotettavat.size(); i++){
+			pudotettavat.get(i).poksahda();
+		}
 	}
 }

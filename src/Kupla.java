@@ -19,26 +19,26 @@ import java.util.Set;
  *
  */
 public class Kupla {
-	
+
 	/** Kuplan s‰de. */
 	private double sade;
-	
+
 	/** Kuplan v‰ri. */
 	private Vari vari;
-	
+
 	/** Kertoo, onko kupla ehj‰. */
 	private boolean ehja;
-	
+
 	/** Random arpomista varten. */
 	public static final Random rand = new Random();
-	
+
 	/** Kuplan x- ja y-koordinaatit. */
 	private double x;
 	private double y;
-	
+
 	/** Maailma, jossa kupla sijaitsee. */
 	private Maailma maailma;
-	
+
 	/** Kuplien kuvat. */
 	private static final Image punainen = 
 			Toolkit.getDefaultToolkit().createImage("media/punainenkupla.png");
@@ -57,7 +57,7 @@ public class Kupla {
 	 * @param x-koordinaatti, y-koordinaatti, kuplan maailma
 	 */
 	public Kupla(double x, double y, Maailma maailma){
-		
+
 		this.ehja = true;
 		this.maailma = maailma;
 		this.x = x;
@@ -135,6 +135,15 @@ public class Kupla {
 		this.ehja = false;
 	}
 
+	public void putoa(){
+		System.out.println("pudotaan");
+		while (this.annaY() < 450){
+			this.y--;
+		}
+		this.poksahda();
+	}
+
+
 	/**
 	 * Palauttaa kuplan kuvan v‰rist‰ riippuen.
 	 * @return kuplan kuva
@@ -176,13 +185,13 @@ public class Kupla {
 	 * Palauttaa listan kuplan naapureista.
 	 * @return naapurit
 	 */
-	private ArrayList<Kupla> annaNaapurit(){
-		
+	public ArrayList<Kupla> annaNaapurit(){
+
 		ArrayList<Kupla> naapurit = new ArrayList<Kupla>();
-		
+
 		//Tarkastelu tehd‰‰n vain, jos maailma ei ole null.
 		if (!(this.maailma == null)){
-			
+
 			//Superkuplalle asetetaan isompi s‰de, jotta sen avulla saadaan
 			//helposti poksautettua enemm‰n kuplia.
 			if (this instanceof Superkupla){
@@ -245,18 +254,18 @@ public class Kupla {
 			for (int i = 0; i < poksautettavat.size(); i++){
 				Kupla t = poksautettavat.get(i);
 				ArrayList<Kupla> tempNaapurit = t.annaNaapurit();
-				
+
 				//K‰yd‰‰n l‰pi ‰sken listatut kuplan t naapurit yksi kerrallaan,
 				//ja jokaisen kohdalla tarkistetaan, onko sit‰ tutkittu aiemmin
 				//ja jos ei, se lis‰t‰‰n tutkittujen listalle ja tarkistetaan,
 				//onko se samanv‰rinen kuin ammuttu kupla.
 				for (Kupla n : tempNaapurit){
-					
+
 					//Kupla tarkastetaan vain, jos sit‰ ei viel‰ ole tarkastettu
 					//(v‰ltet‰‰n StackOverFlowError).
 					if (!tarkastetut.contains(n)){
 						tarkastetut.add(n);
-						
+
 						if (this.onSamanVarinen(n)){
 							//Lis‰t‰‰n poksautettaviin n, jolle tehd‰‰n 
 							//uudestaan koko tarkastelu silmukan alusta l‰htien.
@@ -272,15 +281,15 @@ public class Kupla {
 
 		//Poksautetaan kuplat :)
 		if (!(this instanceof Superkupla)){
-			
+
 			//Kuplat poksautetaan vain, jos poksautettavia on 3 tai enemm‰n.
 			if (poksautettavat.size() >= 3){
 				for (int i = 0; i < poksautettavat.size(); i++){
 					poksautettavat.get(i).poksahda();
 				}
 			}
-			
-		//Superkuplan tapauksessa poksautetaan kuplia aina.
+
+			//Superkuplan tapauksessa poksautetaan kuplia aina.
 		} else {
 			for (int i = 0; i < poksautettavat.size(); i++){
 				poksautettavat.get(i).poksahda();
