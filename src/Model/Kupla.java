@@ -220,7 +220,8 @@ public class Kupla implements ActionListener{
 				//naapureihin.
 				if (Point2D.distance(this.annaKeskiX(), this.annaKeskiY(), 
 						tutkittava.annaKeskiX(), tutkittava.annaKeskiY()) 
-						<= 2 * this.sade + 6 && tutkittava.onEhja()) {
+						<= 2 * this.sade + 6 && tutkittava.onEhja() &&
+						tutkittava.onEhja()) {
 					naapurit.add(tutkittava);
 				}
 			}
