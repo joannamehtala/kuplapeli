@@ -24,8 +24,9 @@ public class Maailma {
 	/** Boolean-tyyppinen attribuutti, joka kertoo, onko peli loppunut vai ei.*/
 	private boolean peliLoppunut;
 
-	/** Kaikki maailman kuplat ker‰t‰‰n pinoon. */
+	/** Kaikki maailman kuplat ker‰t‰‰n pinoon ja ehj‰t kuplat arraylistiin. */
 	private Stack<Kupla> kuplat;
+	private ArrayList<Kupla> ehjat;
 
 	/** Maailman pelimaailma ja ohjaaja. */
 	private Pelimaailma pelimaailma;
@@ -178,6 +179,20 @@ public class Maailma {
 		this.annaNykyinen().ammu(kulma);
 		this.ampumiskerrat++;
 	}
+	
+	/**
+	 * Tutkitaan maailman kuplat ja selvitet‰‰n, ovatko ne ehji‰.
+	 */
+	public void tutkiEhjat(){
+		this.ehjat = new ArrayList<Kupla>();
+		Iterator<Kupla> iteraattori = this.kuplaiteraattori();
+		while (iteraattori.hasNext()){
+			Kupla tutkittava = iteraattori.next();
+			if (tutkittava.onEhja()){
+				ehjat.add(tutkittava);
+			}
+		}
+	}
 
 	/**
 	 * Metodi lis‰‰ kuplia maailmaan joka kymmenennen ampumiskerran j‰lkeen.
@@ -188,76 +203,83 @@ public class Maailma {
 	 * uuteen yl‰riviin.
 	 */
 	public void lisaaKuplia(){
-		System.out.println(this.lisaamiskerrat);
-		if (this.ampumiskerrat % 12 == 0){
 
-			Iterator<Piste> iteraattori = this.pisteiteraattori();
-			while(iteraattori.hasNext()){
-				Piste pudotettava = iteraattori.next();
-				pudotettava.asetaSijainti(pudotettava.annaX(), 
-						pudotettava.annaY() + 45);
-			}
+		this.tutkiEhjat();
 
-			for (int i = 0; i < this.kuplat.size(); i++){
-				Kupla pudotettava = this.kuplat.get(i);
-				pudotettava.asetaSijainti(pudotettava.annaX(), 
-						pudotettava.annaY() + 45);
-				if (pudotettava.onEhja() && pudotettava.annaY() >= 450){
-					//t‰h‰n se timer wait!!
-					System.out.println("nyt y on suurempi kuin pit‰isi olla");
-					this.pelimaailma.lopetaPeli(false);
-				}
-			}
-
-			//Joka toisella kerralla kuplat luodaan limitt‰in ja joka toisella
-			//"suoraan". Aloitetaan limitt‰in luomisesta, koska alempi rivi
-			//on tehty "suoraan".
+		if (!this.ehjat.isEmpty()){
 			System.out.println(this.lisaamiskerrat);
-			if (this.lisaamiskerrat % 2 == 0){
+			if (this.ampumiskerrat % 12 == 0){
 
-				//Luodaan uudet pisteet yl‰reunaan.
-				for (int a = 0; a < 8; a++){
-					Piste uusi = new Piste(this.alkupiste_x+45+(a*45),
-							this.alkupiste_y+22.5);
-					this.pisteet.add(uusi);
+				Iterator<Piste> iteraattori = this.pisteiteraattori();
+				while(iteraattori.hasNext()){
+					Piste pudotettava = iteraattori.next();
+					pudotettava.asetaSijainti(pudotettava.annaX(), 
+							pudotettava.annaY() + 45);
 				}
-				
-				//Luodaan rivin verran kuplia yl‰reunaan.
-				for (int b = 0; b < 8; b++){
-					Kupla uusi = new Kupla(this.alkupiste_x+22.5+(b*45),
-							this.alkupiste_y, this);
-					this.kuplat.push(uusi);
-				}
-				this.lisaamiskerrat++;
 
-			//Nyt luodaan uudet pisteet ja kuplat "suoraan".
-			} else {
-				
-				//Luodaan uudet pisteet yl‰reunaan.
-				for (int a = 0; a < 9; a++){
-					Piste uusi = new Piste(this.alkupiste_x+22.5+(a*45),
-							this.alkupiste_y+22.5);
-					this.pisteet.add(uusi);
+				for (int i = 0; i < this.kuplat.size(); i++){
+					Kupla pudotettava = this.kuplat.get(i);
+					pudotettava.asetaSijainti(pudotettava.annaX(), 
+							pudotettava.annaY() + 45);
+					if (pudotettava.onEhja() && pudotettava.annaY() >= 450){
+						//t‰h‰n se timer wait!!
+						System.out.println("nyt y on suurempi kuin pit‰isi olla");
+						this.pelimaailma.lopetaPeli(false);
+					}
 				}
-				
-				//Luodaan rivin verran kuplia yl‰reunaan.
-				for (int b = 0; b < 9; b++){
-					Kupla uusi = new Kupla(this.alkupiste_x+(b*45),
-							this.alkupiste_y, this);
-					this.kuplat.push(uusi);
+
+				//Joka toisella kerralla kuplat luodaan limitt‰in ja joka toisella
+				//"suoraan". Aloitetaan limitt‰in luomisesta, koska alempi rivi
+				//on tehty "suoraan".
+				System.out.println(this.lisaamiskerrat);
+				if (this.lisaamiskerrat % 2 == 0){
+
+					//Luodaan uudet pisteet yl‰reunaan.
+					for (int a = 0; a < 8; a++){
+						Piste uusi = new Piste(this.alkupiste_x+45+(a*45),
+								this.alkupiste_y+22.5);
+						this.pisteet.add(uusi);
+					}
+
+					//Luodaan rivin verran kuplia yl‰reunaan.
+					for (int b = 0; b < 8; b++){
+						Kupla uusi = new Kupla(this.alkupiste_x+22.5+(b*45),
+								this.alkupiste_y, this);
+						this.kuplat.push(uusi);
+					}
+					this.lisaamiskerrat++;
+
+					//Nyt luodaan uudet pisteet ja kuplat "suoraan".
+				} else {
+
+					//Luodaan uudet pisteet yl‰reunaan.
+					for (int a = 0; a < 9; a++){
+						Piste uusi = new Piste(this.alkupiste_x+22.5+(a*45),
+								this.alkupiste_y+22.5);
+						this.pisteet.add(uusi);
+					}
+
+					//Luodaan rivin verran kuplia yl‰reunaan.
+					for (int b = 0; b < 9; b++){
+						Kupla uusi = new Kupla(this.alkupiste_x+(b*45),
+								this.alkupiste_y, this);
+						this.kuplat.push(uusi);
+					}
+					this.lisaamiskerrat++;
 				}
-				this.lisaamiskerrat++;
 			}
+		} else {
+			this.peliLoppunut = true;
 		}
 	}
-	
-//	public void tarkistaSijainnit(){
-//		for (int i = 0; i < this.kuplat.size() - 1; i++){
-//			if (this.kuplat.get(i).annaY() >= 450){
-//				this.pelimaailma.lopetaPeli(false);
-//			}
-//		}
-//	}
+
+	//	public void tarkistaSijainnit(){
+	//		for (int i = 0; i < this.kuplat.size() - 1; i++){
+	//			if (this.kuplat.get(i).annaY() >= 450){
+	//				this.pelimaailma.lopetaPeli(false);
+	//			}
+	//		}
+	//	}
 
 	public ArrayList<Vari> annaKuplienVarit(){
 		ArrayList<Vari> kuplienVarit = new ArrayList<Vari>();
@@ -279,14 +301,7 @@ public class Maailma {
 	 */
 	public void arvoUusi(){
 
-		ArrayList<Kupla> ehjat = new ArrayList<Kupla>();
-		Iterator<Kupla> iteraattori = this.kuplaiteraattori();
-		while (iteraattori.hasNext()){
-			Kupla tutkittava = iteraattori.next();
-			if (tutkittava.onEhja()){
-				ehjat.add(tutkittava);
-			}
-		}
+		this.tutkiEhjat();
 
 		double arpa = rand.nextDouble();
 
