@@ -1,33 +1,19 @@
 package Model;
 
 import java.awt.Image;
-import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Random;
-import java.util.Set;
-
-import javax.swing.Timer;
-
-
-
-
 
 
 /**
- * Luokka pelin t‰rkeimmille elementeille, kuplille. Luokassa m‰‰ritell‰‰n
- * kuplille ominaisuuksia, kuten koko, v‰ri, sijainti, tieto siit‰ onko kupla 
- * ehj‰ ja onko se aktiivinen. Lis‰ksi m‰‰ritell‰‰n metodeja.
+ * Kupla-luokka, jossa m‰‰ritell‰‰n kuplille ominaisuuksia ja metodeja.
  * @author 345480
  *
  */
-public class Kupla implements ActionListener{
+public class Kupla {
 
 	/** Kuplan s‰de. */
 	private double sade;
@@ -47,8 +33,6 @@ public class Kupla implements ActionListener{
 
 	/** Maailma, jossa kupla sijaitsee. */
 	private Maailma maailma;
-	
-	private Timer timer;
 
 	/** Kuplien kuvat. */
 	private static final Image punainen = 
@@ -74,7 +58,6 @@ public class Kupla implements ActionListener{
 		this.x = x;
 		this.y = y;
 		this.sade = 22.5;
-		this.timer = new Timer(20, this);
 
 		Vari[] varit = Vari.values();
 		int a = rand.nextInt(varit.length);
@@ -147,6 +130,10 @@ public class Kupla implements ActionListener{
 		this.ehja = false;
 	}
 
+	/**
+	 * Pudotetaan kuplaa alasp‰in ja poksautetaan, kun se osuu ruudun
+	 * alareunaan.
+	 */
 	public void putoa() {
 		System.out.println("pudotaan");
 
@@ -188,13 +175,6 @@ public class Kupla implements ActionListener{
 	}
 
 	/**
-	 * Testaamista helpottamaan toStringin ylikirjoitus.
-	 */
-	public String toString(){
-		return "Kuplan v‰ri on " + this.annaVari();
-	}
-
-	/**
 	 * Palauttaa listan kuplan naapureista.
 	 * @return naapurit
 	 */
@@ -202,22 +182,28 @@ public class Kupla implements ActionListener{
 
 		ArrayList<Kupla> naapurit = new ArrayList<Kupla>();
 
-		//Tarkastelu tehd‰‰n vain, jos maailma ei ole null.
+		/* Tarkastelu tehd‰‰n vain, jos maailma ei ole null. */
+		
 		if (!(this.maailma == null)){
 
-			//Superkuplalle asetetaan isompi s‰de, jotta sen avulla saadaan
-			//helposti poksautettua enemm‰n kuplia.
+			/*
+			 * Superkuplalle asetetaan isompi s‰de, jotta sen avulla saadaan
+			 * helposti poksautettua enemm‰n kuplia. 
+			 */
 			if (this instanceof Superkupla){
 				this.sade = 48;
 			}
 
-			//K‰yd‰‰n l‰pi kaikki maailman kuplat.
+			/* K‰yd‰‰n l‰pi kaikki maailman kuplat. */
+			
 			for (int i = 0; i < this.maailma.annaKuplat().size(); i++){
 				Kupla tutkittava = this.maailma.annaKuplat().get(i);
 
-				//Jos kuplien keskipisteiden v‰linen et‰isyys on yht‰ kuin
-				//halkaisija (plus 6 jotta aina toimii), niin lis‰t‰‰n kupla
-				//naapureihin.
+				/* 
+				 * Jos kuplien keskipisteiden v‰linen et‰isyys on yht‰ kuin
+				 * halkaisija (plus 6 jotta aina toimii), niin lis‰t‰‰n kupla
+				 * naapureihin. 
+				 */
 				if (Point2D.distance(this.annaKeskiX(), this.annaKeskiY(), 
 						tutkittava.annaKeskiX(), tutkittava.annaKeskiY()) 
 						<= 2 * this.sade + 6 && tutkittava.onEhja() &&
@@ -244,45 +230,67 @@ public class Kupla implements ActionListener{
 
 	/**
 	 * Metodi tarkistaa, mitk‰ kaikki kuplat on poksautettava tˆrm‰yksen
-	 * tapahtuessa. Kaikki samanv‰riset kuplat on poksautettava, ja superkuplan
-	 * tapauksessa poksautetaan naapureita suuremmalla alueella kuin muiden
-	 * kuplien tapauksessa.
+	 * tapahtuessa. Kaikki samanv‰riset kuplat on poksautettava jos niit‰ on
+	 * v‰hint‰‰n 3 ja superkuplanctapauksessa poksautetaan naapureita 
+	 * suuremmalla alueella kuin muiden kuplien tapauksessa, riippumatta
+	 * kuplien v‰reist‰.
 	 */
 	public void tarkistaPoksautettavat(){
 
-		//Alustetaan tarkisteltavien kuplien lista kuplan v‰littˆm‰ss‰
-		//l‰heisyydessa olevilla naapureilla.
+		/* 
+		 * Luodaan poksautettavien kuplien lista ja lis‰t‰‰n siihen t‰m‰ kupla.
+		 */
 		ArrayList<Kupla> poksautettavat = new ArrayList<Kupla>();
 		poksautettavat.add(this);
+		
+		/*
+		 * Luodaan jo tarkastettujen kuplien lista (ilman t‰t‰ saadaan aikaan
+		 * StackOverFlowError) ja lis‰t‰‰n tarkastettuihin t‰m‰ kupla.
+		 */
 		HashSet<Kupla> tarkastetut = new HashSet<Kupla>();
 		tarkastetut.add(this);
 
-		//Superkupla poksauttaa kaikki naapurinsa.
+		/*
+		 * Jos kyseess‰ on superkupla, poksautetaan kaikki naapurit.
+		 */
 		if (this instanceof Superkupla){
 			poksautettavat = this.annaNaapurit();
 
+		/*
+		 * Muulloin...
+		 */
 		} else {
 
-			//K‰yd‰‰n l‰pi poksautettavat kuplat, joita tulee lis‰‰ kun
-			//silmukkaa k‰yd‰‰n l‰pi
+			/*
+			 * K‰yd‰‰n l‰pi poksautettavat kuplat, joita tulee lis‰‰ kun
+			 * silmukkaa k‰yd‰‰n l‰pi
+			 */
+			
 			for (int i = 0; i < poksautettavat.size(); i++){
 				Kupla tutkittava = poksautettavat.get(i);
 				ArrayList<Kupla> tempNaapurit = tutkittava.annaNaapurit();
 
-				//K‰yd‰‰n l‰pi ‰sken listatut kuplan t naapurit yksi kerrallaan,
-				//ja jokaisen kohdalla tarkistetaan, onko sit‰ tutkittu aiemmin
-				//ja jos ei, se lis‰t‰‰n tutkittujen listalle ja tarkistetaan,
-				//onko se samanv‰rinen kuin ammuttu kupla.
+				/*
+				 * K‰yd‰‰n l‰pi ‰sken listatut tutkittavan kuplan naapurit yksi 
+				 * kerrallaan, ja jokaisen kohdalla tarkistetaan, onko sit‰ 
+				 * tutkittu aiemmin ja jos ei, se lis‰t‰‰n tutkittujen listalle
+				 * ja tarkistetaan, onko se samanv‰rinen kuin ammuttu kupla.
+				 */
 				for (Kupla n : tempNaapurit){
 
-					//Kupla tarkastetaan vain, jos sit‰ ei viel‰ ole tarkastettu
-					//(v‰ltet‰‰n StackOverFlowError).
+					/*
+					 * Kupla tarkastetaan vain, jos sit‰ ei ole viel‰
+					 * tarkistettu.
+					 */
 					if (!tarkastetut.contains(n)){
 						tarkastetut.add(n);
 
 						if (this.onSamanVarinen(n)){
-							//Lis‰t‰‰n poksautettaviin n, jolle tehd‰‰n 
-							//uudestaan koko tarkastelu silmukan alusta l‰htien.
+							/*
+							 * Lis‰t‰‰n poksautettaviin n, jolle tehd‰‰n 
+							 * uudestaan koko tarkastelu silmukan alusta
+							 * l‰htien.
+							 */
 							poksautettavat.add(n);
 						}
 					}
@@ -290,29 +298,30 @@ public class Kupla implements ActionListener{
 			}
 		}
 
-		//Nyt poksautettavat sis‰lt‰‰ kaikki ne samanv‰riset kuplat, joihin
-		//kupla ja sen naapurit ja naapurin naapurit jne. koskevat.
-
-		//Poksautetaan kuplat :)
+		/*
+		 * Silmukan j‰lkeen poksautettavat-lista sis‰lt‰‰ kaikki ne samanv‰riset
+		 * kuplat, joihin kupla ja sen naapurit ja naapurin naapurin jne.
+		 * koskevat. Sitten vain poksautetaan ne!
+		 */
+		
 		if (!(this instanceof Superkupla)){
 
-			//Kuplat poksautetaan vain, jos poksautettavia on 3 tai enemm‰n.
+			/*
+			 * Kuplat poksautetaan vain, jos poksautettavia on 3 tai enemm‰n.
+			 */
 			if (poksautettavat.size() >= 3){
 				for (int i = 0; i < poksautettavat.size(); i++){
 					poksautettavat.get(i).poksahda();
 				}
 			}
 
-			//Superkuplan tapauksessa poksautetaan kuplia aina.
+			/*
+			 * Superkuplan tapauksessa poksautetaan kuplia aina.
+			 */
 		} else {
 			for (int i = 0; i < poksautettavat.size(); i++){
 				poksautettavat.get(i).poksahda();
 			}
 		}
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		this.maailma.annaPelimaailma().repaint();
 	}
 }
