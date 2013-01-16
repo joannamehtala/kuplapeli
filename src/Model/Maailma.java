@@ -444,6 +444,7 @@ public class Maailma {
 		}
 	}
 
+	//
 	public void pudota(long muutos){
 		for (int i = 0; i < this.kuplat.size(); i++){
 			Kupla tutkittava = this.kuplat.get(i);
