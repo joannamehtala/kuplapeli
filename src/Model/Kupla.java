@@ -23,6 +23,9 @@ public class Kupla {
 
 	/** Kertoo, onko kupla ehjä. */
 	private boolean ehja;
+	
+	/** Kertoo, onko kupla tällä hetkellä putoava. */
+	private boolean putoava;
 
 	/** Random arpomista varten. */
 	public static final Random rand = new Random();
@@ -54,6 +57,7 @@ public class Kupla {
 	public Kupla(double x, double y, Maailma maailma){
 
 		this.ehja = true;
+		this.putoava = false;
 		this.maailma = maailma;
 		this.x = x;
 		this.y = y;
@@ -114,6 +118,21 @@ public class Kupla {
 			return true;
 		} return false;
 	}
+	
+	/**
+	 * Kertoo, onko kupla putoava.
+	 * @return true, jos kupla on putoava, false, jos ei ole.
+	 */
+	public boolean onPutoava(){
+		return this.putoava;
+	}
+	
+	/**
+	 * Asettaa kuplan putoavaksi.
+	 */
+	public void asetaPutoavaksi(){
+		this.putoava = true;
+	}
 
 	/**
 	 * Palauttaa kuplan säteen.
@@ -134,13 +153,14 @@ public class Kupla {
 	 * Pudotetaan kuplaa alaspäin ja poksautetaan, kun se osuu ruudun
 	 * alareunaan.
 	 */
-	public void putoa() {
+	public void putoa(long muutos) {
 		System.out.println("pudotaan");
-
-		while (this.y <= 450){
-			this.y++;
+		this.y += muutos*0.4;
+		
+		if (this.y >= 450){
+			this.poksahda();
 		}
-		this.poksahda();
+		
 	}
 
 

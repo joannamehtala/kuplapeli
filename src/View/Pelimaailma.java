@@ -11,11 +11,8 @@ import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.io.File;
 import java.util.Iterator;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -26,7 +23,6 @@ import javax.swing.border.Border;
 import Controller.Hiirikuuntelija_Valikkoon;
 import Model.Kupla;
 import Model.Maailma;
-
 
 
 /**

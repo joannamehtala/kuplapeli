@@ -38,6 +38,7 @@ public class Maailma {
 	/** Kaikki maailman kuplat ker‰t‰‰n pinoon ja ehj‰t kuplat arraylistiin. */
 	private Stack<Kupla> kuplat;
 	private ArrayList<Kupla> ehjat;
+	private ArrayList<Kupla> pysyvat;
 
 	/** Maailman pelimaailma ja ohjaaja. */
 	private Pelimaailma pelimaailma;
@@ -140,7 +141,7 @@ public class Maailma {
 		 * Luodaan ohjaaja.
 		 */
 		this.ohjaaja = new Ohjaaja(this, this.pelimaailma);
-		
+
 		/*
 		 * Laitetaan musiikki soimaan.
 		 */
@@ -415,29 +416,40 @@ public class Maailma {
 	}
 
 	public void tarkistaYksinaiset(){
-		
-		ArrayList<Kupla> pudotettavat = new ArrayList<Kupla>();
-		HashSet<Kupla> tarkastetut = new HashSet<Kupla>();
+		ArrayList<Kupla> pysyvat = new ArrayList<Kupla>();
 
 		for (int i = 0; i < this.kuplat.size(); i++){
-			Kupla tutkittava = this.kuplat.get(i);
-			ArrayList<Kupla> naapurit = tutkittava.annaNaapurit();
-
-			for (Kupla n : naapurit){
-
-				if (!tarkastetut.contains(tutkittava)){
-					tarkastetut.add(tutkittava);
-
-					if (!(n.annaY() == 50) && n.annaNaapurit().size() < 2){
-						pudotettavat.add(n);
-						
-					}
-				}
+			if (this.kuplat.get(i).annaY() == 50 && this.kuplat.get(i).onEhja()){
+				this.lisaaPysyva(this.kuplat.get(i), pysyvat);
 			}
 		}
 
-		for (int i = 0; i < pudotettavat.size(); i++){
-			pudotettavat.get(i).putoa();
+		for (int i = 0; i < this.kuplat.size(); i++){
+			if (!pysyvat.contains(this.kuplat.get(i)) && 
+					this.kuplat.get(i).onEhja()){
+				System.out.println("asetetaan putoamaan");
+				this.kuplat.get(i).asetaPutoavaksi();
+			}
+		}
+	}
+
+	public void lisaaPysyva(Kupla kupla, ArrayList<Kupla> pysyvat){
+
+		if (!pysyvat.contains(kupla)){
+			pysyvat.add(kupla);
+			ArrayList<Kupla> naapurit = kupla.annaNaapurit();
+			for (int i = 0; i < naapurit.size(); i++){
+				this.lisaaPysyva(naapurit.get(i), pysyvat);
+			}
+		}
+	}
+
+	public void pudota(long muutos){
+		for (int i = 0; i < this.kuplat.size(); i++){
+			Kupla tutkittava = this.kuplat.get(i);
+			if (tutkittava.onPutoava() && tutkittava.onEhja()){
+				tutkittava.putoa(muutos);
+			}
 		}
 	}
 }

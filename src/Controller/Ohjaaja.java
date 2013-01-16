@@ -64,6 +64,7 @@ public class Ohjaaja implements ActionListener{
 			 * Jos nykyist‰ ammuttavaa kuplaa ei viel‰ ole ammuttu, piirret‰‰n
 			 * uudestaan eik‰ tehd‰ muuta.
 			 */
+			this.maailma.pudota(muutos);
 			
 			if (!this.maailma.annaNykyinen().onAmmuttu()){
 				this.pelimaailma.repaint();
@@ -76,6 +77,7 @@ public class Ohjaaja implements ActionListener{
 			 */
 			
 			this.maailma.liikutaNykyista(muutos);
+			
 			this.pelimaailma.repaint();
 		}
 	}
