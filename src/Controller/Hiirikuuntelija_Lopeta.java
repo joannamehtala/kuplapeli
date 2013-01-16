@@ -23,7 +23,7 @@ public class Hiirikuuntelija_Lopeta implements MouseListener{
 	private Aloitusnaytto aloitusnaytto;
 	
 	/**
-	 * Hiirikuuntelijan konstruktori, joka ottaa parametrikseen aloitusnäytön.
+	 * Hiirikuuntelijan konstruktori, joka ottaa parametrinaan aloitusnäytön.
 	 * Aloitusnäyttö alustetaan konstruktorissa.
 	 * @param aloitusnaytto
 	 */

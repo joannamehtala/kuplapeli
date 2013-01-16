@@ -21,12 +21,12 @@ public class Hiirikuuntelija_Aloita implements MouseListener{
 	private static final ImageIcon aloita_hiiri = 
 			new ImageIcon("media/aloita2.png");
 	
-	/** Aloitusnäyttö ja ikkuna tiedonsaantia varten. */
+	/** Aloitusnäyttö ja ikkuna. */
 	private Aloitusnaytto aloitusnaytto;
 	private Ikkuna ikkuna;
 	
 	/**
-	 * Hiirikuuntelijan konstruktori, jossa alustetaan parametrit.
+	 * Hiirikuuntelijan konstruktori, jossa alustetaan attribuutit.
 	 * @param aloitusnaytto
 	 * @param ikkuna
 	 */
@@ -64,8 +64,8 @@ public class Hiirikuuntelija_Aloita implements MouseListener{
 	}
 
 	/**
-	 * MouseListenerin implementointi vaatii tämän metodin, vaikkei sitä
-	 * ylikirjoiteta tässä.
+	 * MouseListenerin implementointi vaatii tämän metodin, vaikkei sillä
+	 * tehdäkään mitään.
 	 */
 	@Override
 	public void mousePressed(MouseEvent arg0) {
@@ -74,8 +74,8 @@ public class Hiirikuuntelija_Aloita implements MouseListener{
 	}
 
 	/**
-	 * MouseListenerin implementointi vaatii tämän metodin, vaikkei sitä
-	 * ylikirjoiteta tässä.
+	 * MouseListenerin implementointi vaatii tämän metodin, vaikkei sillä
+	 * tehdäkään mitään.
 	 */
 	@Override
 	public void mouseReleased(MouseEvent arg0) {

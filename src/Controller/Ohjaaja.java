@@ -7,33 +7,30 @@ import javax.swing.Timer;
 import Model.Maailma;
 import View.Pelimaailma;
 
-
-
 /**
- * T‰m‰ luokka toimii MVC-mallin mukaisesti controllerina, eli t‰m‰n luokan
- * avulla ohjataan pelin toimintaa.
+ * T‰m‰ luokka ohjaa pelin toimintaa.
  * @author 345480
  *
  */
 public class Ohjaaja implements ActionListener{
 
 	/**
-	 * Asetetaan attribuuteiksi edellinenhetki, joka kertoo aikaisemman
-	 * ajanhetken (t‰t‰ tarvitaan timeria ja kuplien sulavaa liikkumista
-	 * varten), ajastin sek‰ attribuutit pelimaailmalle ja aktiiviselle
-	 * kuplalle tiedonkulkua helpottamaan.
-	 */
+	 * Edellinenhetki, joka kertoo aikaisemman ajanhetken 
+	 * (t‰t‰ tarvitaan timeria ja kuplien sulavaa liikkumista varten). */
 	private long edellinenhetki;
+	
+	/** Timer, jonka avulla maailmaa piirret‰‰n uudestaan. */
 	private Timer timer;
+	
+	/** Maailma ja pelimaailma. */
 	private Maailma maailma;
 	private Pelimaailma pelimaailma;
 
 	/**
-	 * Ohjaajan konstruktori. Parametreina annetaan maailma, pelimaailma ja 
-	 * aktiivinenkupla. Konstruktorissa k‰ynnistet‰‰n ajastin.
+	 * Ohjaajan konstruktori. Parametreina annetaan maailma ja pelimaailma.
+	 * Konstruktorissa k‰ynnistet‰‰n ajastin.
 	 * @param maailma
 	 * @param pelimaailma
-	 * @param aktiivinenkupla
 	 */
 	public Ohjaaja(Maailma maailma, Pelimaailma pelimaailma){
 		this.timer = new Timer(5, this);
@@ -52,7 +49,7 @@ public class Ohjaaja implements ActionListener{
 			return;
 		}
 
-		/** 
+		/*
 		 * Lasketaan nykyisen hetken ja edellisen erotus.
 		 * Ajanhetkien erotusta tarvitaan kuplien sulavaan liikuttamiseen
 		 * (n‰in kuplan liikkuminen ei ole riippuvaista koneen suoritustehoista,
@@ -62,20 +59,22 @@ public class Ohjaaja implements ActionListener{
 		this.edellinenhetki = System.currentTimeMillis();
 
 		if (!this.maailma.peliOhi()){
-			//System.out.println("peli ei ole ohi");
-			/**
+			
+			/*
 			 * Jos nykyist‰ ammuttavaa kuplaa ei viel‰ ole ammuttu, piirret‰‰n
 			 * uudestaan eik‰ tehd‰ muuta.
 			 */
+			
 			if (!this.maailma.annaNykyinen().onAmmuttu()){
 				this.pelimaailma.repaint();
 				return;
 			}
 
-			/**
-			 * Jos kupla on ammuttu, sit‰ liikutetaan parametrina aiemmin laskettu
-			 * ajanhetkien erotus ja piirret‰‰n uudestaan.
+			/*
+			 * Jos kupla on ammuttu, sit‰ liikutetaan parametrina aiemmin 
+			 * laskettu ajanhetkien erotus ja piirret‰‰n uudestaan.
 			 */
+			
 			this.maailma.liikutaNykyista(muutos);
 			this.pelimaailma.repaint();
 		}
