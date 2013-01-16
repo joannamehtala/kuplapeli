@@ -1,10 +1,5 @@
 package Model;
 
-
-
-
-
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -13,9 +8,6 @@ import java.util.Stack;
 
 import Controller.Ohjaaja;
 import View.Pelimaailma;
-
-
-
 
 
 /**
@@ -248,7 +240,6 @@ public class Maailma {
 
 					if (pudotettava.onEhja() && pudotettava.annaY() >= 450){
 
-						//TODO tähän se timer wait!!
 						this.pelimaailma.lopetaPeli(false);
 					}
 				}

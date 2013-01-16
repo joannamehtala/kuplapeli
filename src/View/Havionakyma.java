@@ -15,20 +15,36 @@ import javax.swing.border.Border;
 
 import Controller.Hiirikuuntelija_Aloitusvalikkoon;
 
-
-
+/**
+ * Häviönäkymä-luokka. Häviönäkymä näytetään, kun peli on hävitty.
+ * @author 345480
+ */
 @SuppressWarnings("serial")
 public class Havionakyma extends JPanel{
+	
+	/** Häviönäkymän taustakuva ja aloitusvalikkoon-napin kuva. */
 	private static Image havionakyma = 
 			Toolkit.getDefaultToolkit().createImage("media/havionakyma.png");
-	private Ikkuna ikkuna;
-	private Voittonakyma voittonakyma;
-	private JButton aloitusvalikkoon;
 	private static ImageIcon aloitusvalikkoon_normal = 
 			new ImageIcon("media/aloitusvalikkoon.png");
+	
+	/** Ikkuna ja voittonäkymä. */
+	private Ikkuna ikkuna;
+	private Voittonakyma voittonakyma;
+	
+	/** Aloitusvalikkoon-nappi ja sen reunus. */
+	private JButton aloitusvalikkoon;
 	private Border reunus = BorderFactory.createEmptyBorder();
+	
+	/** Ikkunan reunusten koot. */
 	private Insets insets;
 
+	/**
+	 * Häviönäkymän konstruktori, jossa luodaan näkymä ja sijoitetaan siihen
+	 * taustakuva ja aloitusvalikkoon-nappi.
+	 * @param ikkuna
+	 * @param voittonakyma
+	 */
 	public Havionakyma(Ikkuna ikkuna, Voittonakyma voittonakyma){
 		/*
 		 * Asetetaan paneelille koko ja tyhjä asettelija.
@@ -45,9 +61,10 @@ public class Havionakyma extends JPanel{
 		this.aloitusvalikkoon.setPreferredSize(new Dimension(200, 50));
 		this.aloitusvalikkoon.setIcon(aloitusvalikkoon_normal);
 		this.aloitusvalikkoon.setBorder(this.reunus);
-		this.aloitusvalikkoon.addMouseListener(new 
-				Hiirikuuntelija_Aloitusvalikkoon(this.voittonakyma, this.ikkuna));
 		this.add(this.aloitusvalikkoon);
+		this.aloitusvalikkoon.addMouseListener(new 
+				Hiirikuuntelija_Aloitusvalikkoon(this.voittonakyma, 
+						this.ikkuna));
 		this.aloitusvalikkoon.setBounds(150 + this.insets.left, 330 + 
 				this.insets.top, 200, 50);
 	}

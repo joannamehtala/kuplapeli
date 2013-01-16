@@ -24,27 +24,32 @@ import Controller.Hiirikuuntelija_Takaisin;
  */
 @SuppressWarnings("serial")
 public class Ohjenaytto extends JPanel {
-	
-	/**
-	 * Attribuuteiksi annetaan ohjen‰kym‰n taustakuva ja takaisin-nappulan kuva.
-	 * Lis‰ksi annetaan itse nappula, ikkuna, tyhj‰ reunus ja insetsit.
-	 */
+
+	/** Ohjen‰kym‰n taustakuva ja takaisin-napin kuva. */
 	private static Image ohjenakyma = 
 			Toolkit.getDefaultToolkit().createImage("media/ohjenakyma.png");
+	private static ImageIcon takaisin_normal = 
+			new ImageIcon("media/takaisin.png");
+	
+	/** Ikkuna. */
 	private Ikkuna ikkuna;
-	private JButton takaisin;
-	private static ImageIcon takaisin_normal = new ImageIcon("media/takaisin.png");
-	private Border reunus = BorderFactory.createEmptyBorder();
+	
+	/** N‰kym‰n reunusten koot. */
 	private Insets insets;
 	
+	/** Takaisin-nappula ja sen reunukset. */
+	private JButton takaisin;
+	private Border reunus = BorderFactory.createEmptyBorder();
+	
+
 	/**
-	 * Konstruktorissa alustetaan attribuutit, asetetaan haluttu koko,
-	 * asetetaan tyhj‰ LayoutManager jotta voidaan m‰‰ritell‰ pikseleiden
-	 * avulla nappulan paikka ja lis‰t‰‰n nappula ominaisuuksineen.
+	 * Ohjen‰ytˆn konstruktori. Luodaan takaisin-nappi ja asetetaan taustakuva.
+	 * Lis‰ksi asetetaan haluttu koko ja k‰ytet‰‰n tyhj‰‰ layoutmanageria jotta
+	 * saadaan nappula asetettua haluttuun paikkaan koordinaattien mukaan.
 	 * @param ikkuna
 	 */
 	public Ohjenaytto(Ikkuna ikkuna){
-		
+
 		/*
 		 * Asetetaan paneelille koko ja tyhj‰ asettelija.
 		 */
@@ -64,9 +69,9 @@ public class Ohjenaytto extends JPanel {
 		this.add(this.takaisin);
 		this.takaisin.setBounds(200 + this.insets.left, 420 + this.insets.top, 
 				100, 50);
-		
+
 	}
-	
+
 	/**
 	 * Piirret‰‰n ruudulle taustakuva.
 	 */
@@ -75,7 +80,7 @@ public class Ohjenaytto extends JPanel {
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.drawImage(ohjenakyma, 0, 0, this);
 	}
-	
+
 	/**
 	 * Metodi, jolla voidaan asettaa takaisin-nappulalle kuva. T‰t‰ tarvitaan,
 	 * jotta hiirikuuntelijaluokassa voidaan asettaa uusi kuva kun hiiri

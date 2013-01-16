@@ -1,6 +1,5 @@
 package Model;
 
-
 /**
  * Enumeraatioluokka kuplien v‰rej‰ varten.
  * @author 345480
@@ -9,6 +8,5 @@ package Model;
 public enum Vari {
 	
 	KELTAINEN, LIILA, PUNAINEN, VIHREA, SININEN;
-	//TODO tee konstruktori johon saadaan ne kuvat messiin suoraan t‰‰ll‰!
 
 }

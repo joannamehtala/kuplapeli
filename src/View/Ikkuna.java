@@ -3,20 +3,11 @@ package View;
 
 import java.awt.CardLayout;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.Line;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 
 
 /**
@@ -110,27 +101,36 @@ public class Ikkuna extends JFrame {
 		this.naytot.show(this.getContentPane(), OHJENAYTTO);
 	}
 
+	/**
+	 * Metodi n‰ytt‰‰ voitton‰kym‰n CardLayoutissa.
+	 */
 	public void vaihdaVoittonakymaan(){
 		this.naytot.show(this.getContentPane(), VOITTONAKYMA);
 	}
 
+	/**
+	 * Metodi n‰ytt‰‰ h‰viˆn‰kym‰n CardLayoutissa.
+	 */
 	public void vaihdaHavionakymaan(){
 		this.naytot.show(this.getContentPane(), HAVIONAKYMA);
 	}
-
-	/**
-	 * P‰‰ohjelmametodi, jossa luodaan uusi ikkuna ja asetetaan se n‰kyv‰ksi.
-	 * @param args
-	 */
-	public static void main(String[] args) throws Exception{
-		Ikkuna ikkuna = new Ikkuna();
-		ikkuna.setVisible(true);
-		
+	
+	public void soitaMusiikki() throws Exception {
 		File taustamusa = new File("media/musiikki.wav");
 		Clip clip = AudioSystem.getClip();
 		AudioInputStream input = AudioSystem.getAudioInputStream(taustamusa);
 		clip.open(input);
 		clip.loop(-1);
-		
+	}
+
+	/**
+	 * P‰‰ohjelmametodi, jossa luodaan uusi ikkuna ja asetetaan se n‰kyv‰ksi.
+	 * @param args
+	 * @throws Exception 
+	 */
+	public static void main(String[] args) throws Exception {
+		Ikkuna ikkuna = new Ikkuna();
+		ikkuna.setVisible(true);
+		ikkuna.soitaMusiikki();
 	}
 }
