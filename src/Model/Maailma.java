@@ -1,10 +1,15 @@
 package Model;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.Stack;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 import Controller.Ohjaaja;
 import View.Pelimaailma;
@@ -135,6 +140,10 @@ public class Maailma {
 		 * Luodaan ohjaaja.
 		 */
 		this.ohjaaja = new Ohjaaja(this, this.pelimaailma);
+		
+		/*
+		 * Laitetaan musiikki soimaan.
+		 */
 	}
 
 	/**

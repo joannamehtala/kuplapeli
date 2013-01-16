@@ -15,28 +15,43 @@ import javax.swing.border.Border;
 
 import Controller.Hiirikuuntelija_Aloitusvalikkoon;
 
-
+/**
+ * Voitton‰kym‰ tulee n‰kyviin, kun peli voitetaan.
+ * @author Joanna
+ */
 
 @SuppressWarnings("serial")
 public class Voittonakyma extends JPanel {
+
+	/** Taustakuva ja aloitusvalikkoon-napin kuva. */
 	private static Image voittonakyma = 
 			Toolkit.getDefaultToolkit().createImage("media/voittonakyma.png");
-	private Ikkuna ikkuna;
-	private JButton aloitusvalikkoon;
 	private static ImageIcon aloitusvalikkoon_normal = 
 			new ImageIcon("media/aloitusvalikkoon.png");
-	private Border reunus = BorderFactory.createEmptyBorder();
+	
+	/** Ikkuna ja sen reunusten mitat. */
+	private Ikkuna ikkuna;
 	private Insets insets;
-
+	
+	/** Aloitusvalikkoon-nappi ja sen reunus. */
+	private JButton aloitusvalikkoon;
+	private Border reunus = BorderFactory.createEmptyBorder();
+	
+	/**
+	 * Voitton‰kym‰n konstruktori.
+	 * @param ikkuna
+	 */
 	public Voittonakyma(Ikkuna ikkuna){
+		
 		/*
 		 * Asetetaan paneelille koko ja tyhj‰ asettelija.
 		 */
 		this.ikkuna = ikkuna;
 		this.setPreferredSize(new Dimension(500, 600));
 		this.setLayout(null);
+		
 		/*
-		 * M‰‰ritell‰‰n ominaisuuksia napille.
+		 * Aloitusvalikkoon-nappi ja sen ominaisuudet.
 		 */
 		this.insets = this.getInsets();
 		this.aloitusvalikkoon = new JButton();
@@ -49,7 +64,7 @@ public class Voittonakyma extends JPanel {
 		this.aloitusvalikkoon.setBounds(150 + this.insets.left, 330 + 
 				this.insets.top, 200, 50);
 	}
-	
+
 	/**
 	 * Piirret‰‰n ruudulle taustakuva.
 	 */
@@ -58,7 +73,7 @@ public class Voittonakyma extends JPanel {
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.drawImage(voittonakyma, 0, 0, this);
 	}
-	
+
 	/**
 	 * Metodi, jolla voidaan asettaa takaisin-nappulalle kuva. T‰t‰ tarvitaan,
 	 * jotta hiirikuuntelijaluokassa voidaan asettaa uusi kuva kun hiiri

@@ -115,6 +115,10 @@ public class Ikkuna extends JFrame {
 		this.naytot.show(this.getContentPane(), HAVIONAKYMA);
 	}
 	
+	/**
+	 * Soittaa taustamusiikin.
+	 * @throws Exception
+	 */
 	public void soitaMusiikki() throws Exception {
 		File taustamusa = new File("media/musiikki.wav");
 		Clip clip = AudioSystem.getClip();
@@ -128,9 +132,9 @@ public class Ikkuna extends JFrame {
 	 * @param args
 	 * @throws Exception 
 	 */
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) /*throws Exception*/ {
 		Ikkuna ikkuna = new Ikkuna();
 		ikkuna.setVisible(true);
-		ikkuna.soitaMusiikki();
+		//ikkuna.soitaMusiikki();
 	}
 }
