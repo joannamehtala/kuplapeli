@@ -163,15 +163,17 @@ MouseMotionListener {
 
 		double radkulma = Math.atan2(hiiriy - LAHTO_Y, hiirix - LAHTO_X );
 		this.kulma = Math.toDegrees(radkulma);
+		
+//		if (this.kulma > 0 && this.kulma < 90){
+//			this.kulma = -5;
+//		}
+//		
+//		if (this.kulma > 90 && this.kulma < 180){
+//			this.kulma = -175;
+//		}
+		
+		System.out.println(this.kulma);
 		this.repaint();
-	}
-
-	/**
-	 * Palauttaa kulman, jossa kupla lähtee liikkeelle.
-	 * @return
-	 */
-	public double annaKulma(){
-		return this.kulma;
 	}
 
 	/**

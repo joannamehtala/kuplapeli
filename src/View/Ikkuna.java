@@ -132,9 +132,9 @@ public class Ikkuna extends JFrame {
 	 * @param args
 	 * @throws Exception 
 	 */
-	public static void main(String[] args) /*throws Exception*/ {
+	public static void main(String[] args) throws Exception {
 		Ikkuna ikkuna = new Ikkuna();
 		ikkuna.setVisible(true);
-		//ikkuna.soitaMusiikki();
+		ikkuna.soitaMusiikki();
 	}
 }

@@ -226,7 +226,7 @@ public class Maailma {
 		if (!this.ehjat.isEmpty()){
 
 			//Kuplia lis‰t‰‰n tiettyjen ampumiskertojen v‰lein.
-			if (this.ampumiskerrat % 12 == 0){
+			if (this.ampumiskerrat % 10 == 0){
 
 				//K‰yd‰‰n l‰pi maailman pisteet ja pudotetaan niit‰ yhden rivin
 				//verran alasp‰in.
@@ -444,7 +444,6 @@ public class Maailma {
 		}
 	}
 
-	//
 	public void pudota(long muutos){
 		for (int i = 0; i < this.kuplat.size(); i++){
 			Kupla tutkittava = this.kuplat.get(i);

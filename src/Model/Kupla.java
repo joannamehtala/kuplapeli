@@ -154,7 +154,7 @@ public class Kupla {
 	 * alareunaan.
 	 */
 	public void putoa(long muutos) {
-		System.out.println("pudotaan");
+		
 		this.y += muutos*0.4;
 		
 		if (this.y >= 450){
