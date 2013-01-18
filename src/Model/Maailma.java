@@ -332,33 +332,40 @@ public class Maailma {
 
 		this.tutkiEhjat();
 
-		double arpa = rand.nextDouble();
+		/*
+		 * Uusi kupla arvotaan, jos maailmassa on ehjiä kuplia, jotka eivät
+		 * ole (kaikki) putoavia kuplia.
+		 */
+		if (!this.onVainPutoavia()){
 
-		/* Uusi kupla arvotaan alareunaan, jos maailmassa on ehjiä kuplia.*/
-		if (!ehjat.isEmpty()){
+			double arpa = rand.nextDouble();
 
-			/* 5 prosentin todennäköisyydellä maailmaan arvotaan superkupla. */
-			if (arpa < 0.05){
+			/* Uusi kupla arvotaan alareunaan, jos maailmassa on ehjiä kuplia.*/
+			if (!ehjat.isEmpty()){
 
-				Superkupla superkupla = 
-						new Superkupla(Pelimaailma.LAHTO_X - 22.5,
-								Pelimaailma.LAHTO_Y - 22.5, this);
-				this.kuplat.push(superkupla);
+				/* 5 % todennäköisyydellä maailmaan arvotaan superkupla. */
+				if (arpa < 0.05){
 
-				/* 95 % todennäköisyydellä maailmaan luodaan normaali kupla. */	
-			} else {
-				AktiivinenKupla arvottu =
-						new AktiivinenKupla(Pelimaailma.LAHTO_X - 22.5,
-								Pelimaailma.LAHTO_Y - 22.5, this);
+					Superkupla superkupla = 
+							new Superkupla(Pelimaailma.LAHTO_X - 22.5,
+									Pelimaailma.LAHTO_Y - 22.5, this);
+					this.kuplat.push(superkupla);
 
-				/* 
-				 * Jos maailmasta on poksautettu kaikki tietynväriset kuplat,
-				 * maailmaan ei enää arvota sen väristä kuplaa.
-				 */
-				if (this.annaKuplienVarit().contains(arvottu.annaVari())){
-					this.kuplat.push(arvottu);
+					/* 95 % todenn. maailmaan luodaan normaali kupla. */	
 				} else {
-					this.arvoUusi();
+					AktiivinenKupla arvottu =
+							new AktiivinenKupla(Pelimaailma.LAHTO_X - 22.5,
+									Pelimaailma.LAHTO_Y - 22.5, this);
+
+					/* 
+					 * Jos maailmasta on poksautettu kaikki tietynväriset 
+					 * kuplat, maailmaan ei enää arvota sen väristä kuplaa.
+					 */
+					if (this.annaKuplienVarit().contains(arvottu.annaVari())){
+						this.kuplat.push(arvottu);
+					} else {
+						this.arvoUusi();
+					}
 				}
 			}
 
@@ -466,6 +473,11 @@ public class Maailma {
 		}
 	}
 
+	public ArrayList<Kupla> annaEhjat(){
+		this.tutkiEhjat();
+		return this.ehjat;
+	}
+
 	/**
 	 * Metodi pudottaa kaikki maailman putoaviksi asetetut kuplat eli käynnistää 
 	 * niiden putoamisen käyttäen apunaan nykyisen hetken ja edellisen hetken 
@@ -479,5 +491,23 @@ public class Maailma {
 				tutkittava.putoa(muutos);
 			}
 		}
+
+		this.tutkiEhjat();
+	}
+
+	public boolean onVainPutoavia(){
+		ArrayList<Kupla> putoavat = new ArrayList<Kupla>();
+
+		for (int i = 0; i < this.ehjat.size(); i++){
+			Kupla putoava = this.ehjat.get(i);
+			if (putoava.onPutoava()){
+				putoavat.add(putoava);
+			}
+		}
+
+		if (putoavat.size() == this.ehjat.size()){
+			return true;
+		}
+		return false;
 	}
 }

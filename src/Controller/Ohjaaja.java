@@ -65,6 +65,10 @@ public class Ohjaaja implements ActionListener{
 			 * uudestaan eikä tehdä muuta.
 			 */
 			this.maailma.pudota(muutos);
+			this.maailma.tutkiEhjat();
+			if (this.maailma.annaEhjat().isEmpty()){
+				this.pelimaailma.lopetaPeli(true);
+			}
 			
 			if (!this.maailma.annaNykyinen().onAmmuttu()){
 				this.pelimaailma.repaint();
