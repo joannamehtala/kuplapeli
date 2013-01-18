@@ -15,8 +15,10 @@ import View.Pelimaailma;
  */
 public class Hiirikuuntelija_Pelimaailma extends MouseAdapter {
 
-	/** Pelimaailma ja maailma. */
+	/** Pelimaailma, johon hiirikuuntelija asetetaan. */
 	private Pelimaailma pelimaailma;
+	
+	/** Maailma, pelimaailman looginen vastine. */
 	private Maailma maailma;
 
 	/** Kulma, jossa kupla ammutaan ja jonka mukaan suuntaviiva liikkuu. */

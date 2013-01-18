@@ -9,8 +9,10 @@ package Model;
  */
 public class Piste {
 	
-	/** x- ja y-koordinaatit. */
+	/** Pisteen x-koordinaatti. */
 	private double x;
+	
+	/** Pisteen y-koordinaatti. */
 	private double y;
 	
 	/**

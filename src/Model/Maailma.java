@@ -19,8 +19,10 @@ import View.Pelimaailma;
 
 public class Maailma {
 
-	/** Maailman leveys ja korkeus. */
+	/** Maailman leveys. */
 	private int leveys;
+
+	/** Maailman korkeus. */
 	private int korkeus;
 
 	/** Random-olio arpomista varten. */
@@ -29,16 +31,22 @@ public class Maailma {
 	/** Boolean-tyyppinen attribuutti, joka kertoo, onko peli loppunut vai ei.*/
 	private boolean peliLoppunut;
 
-	/** Kaikki maailman kuplat ker‰t‰‰n pinoon ja ehj‰t kuplat arraylistiin. */
+	/** Kaikki maailman kuplat ker‰t‰‰n pinoon. */
 	private Stack<Kupla> kuplat;
+
+	/** Ehj‰t kuplat ker‰t‰‰n arraylistiin. */
 	private ArrayList<Kupla> ehjat;
 
-	/** Maailman pelimaailma ja ohjaaja. */
+	/** Maailmaa vastaava graafinen pelimaailma. */
 	private Pelimaailma pelimaailma;
+
+	/** Pelin ohjaaja. */
 	private Ohjaaja ohjaaja;
 
-	/** Alkupisteet x ja y, joista kuplien piirt‰minen aloitetaan. */
+	/** Alkupiste x, josta piirt‰minen aloitetaan. */
 	private double alkupiste_x;
+
+	/** Alkupiste y, josta piirt‰minen aloitetaan. */
 	private double alkupiste_y;
 
 	/** Lista pisteille, joihin kuplat asetetaan. */
@@ -336,36 +344,32 @@ public class Maailma {
 		 * Uusi kupla arvotaan, jos maailmassa on ehji‰ kuplia, jotka eiv‰t
 		 * ole (kaikki) putoavia kuplia.
 		 */
-		if (!this.onVainPutoavia()){
+		double arpa = rand.nextDouble();
 
-			double arpa = rand.nextDouble();
+		if (!ehjat.isEmpty() && !this.onVainPutoavia()){
 
-			/* Uusi kupla arvotaan alareunaan, jos maailmassa on ehji‰ kuplia.*/
-			if (!ehjat.isEmpty()){
+			/* 5 % todenn‰kˆisyydell‰ maailmaan arvotaan superkupla. */
+			if (arpa < 0.05){
 
-				/* 5 % todenn‰kˆisyydell‰ maailmaan arvotaan superkupla. */
-				if (arpa < 0.05){
+				Superkupla superkupla = 
+						new Superkupla(Pelimaailma.LAHTO_X - 22.5,
+								Pelimaailma.LAHTO_Y - 22.5, this);
+				this.kuplat.push(superkupla);
 
-					Superkupla superkupla = 
-							new Superkupla(Pelimaailma.LAHTO_X - 22.5,
-									Pelimaailma.LAHTO_Y - 22.5, this);
-					this.kuplat.push(superkupla);
+				/* 95 % todenn. maailmaan luodaan normaali kupla. */	
+			} else {
+				AktiivinenKupla arvottu =
+						new AktiivinenKupla(Pelimaailma.LAHTO_X - 22.5,
+								Pelimaailma.LAHTO_Y - 22.5, this);
 
-					/* 95 % todenn. maailmaan luodaan normaali kupla. */	
+				/* 
+				 * Jos maailmasta on poksautettu kaikki tietynv‰riset 
+				 * kuplat, maailmaan ei en‰‰ arvota sen v‰rist‰ kuplaa.
+				 */
+				if (this.annaKuplienVarit().contains(arvottu.annaVari())){
+					this.kuplat.push(arvottu);
 				} else {
-					AktiivinenKupla arvottu =
-							new AktiivinenKupla(Pelimaailma.LAHTO_X - 22.5,
-									Pelimaailma.LAHTO_Y - 22.5, this);
-
-					/* 
-					 * Jos maailmasta on poksautettu kaikki tietynv‰riset 
-					 * kuplat, maailmaan ei en‰‰ arvota sen v‰rist‰ kuplaa.
-					 */
-					if (this.annaKuplienVarit().contains(arvottu.annaVari())){
-						this.kuplat.push(arvottu);
-					} else {
-						this.arvoUusi();
-					}
+					this.arvoUusi();
 				}
 			}
 
@@ -471,11 +475,6 @@ public class Maailma {
 				this.lisaaPysyva(naapurit.get(i), pysyvat);
 			}
 		}
-	}
-
-	public ArrayList<Kupla> annaEhjat(){
-		this.tutkiEhjat();
-		return this.ehjat;
 	}
 
 	/**

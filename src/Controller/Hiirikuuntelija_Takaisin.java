@@ -14,14 +14,18 @@ import View.Ohjenaytto;
  */
 public class Hiirikuuntelija_Takaisin implements MouseListener {
 	
-	/** Takaisin-napin kuvat. */
+	/** Takaisin-napin tavallinen kuva. */
 	private static final ImageIcon takaisin_normal = 
 			new ImageIcon("media/takaisin.png");
+	
+	/** Takaisin-napin kuva, kun hiiri liikutetaan sen päälle. */
 	private static final ImageIcon takaisin_hiiri = 
 			new ImageIcon("media/takaisin2.png");
 	
-	/** Ohjenäyttö ja ikkuna. */
+	/** Ohjenäyttö. */
 	private Ohjenaytto ohjenaytto;
+	
+	/** Ikkuna. */
 	private Ikkuna ikkuna;
 	
 	/**

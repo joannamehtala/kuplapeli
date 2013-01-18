@@ -14,14 +14,18 @@ import View.Pelimaailma;
  */
 public class Hiirikuuntelija_Valikkoon implements MouseListener {
 
-	/** Valikkoon-napin kuvat. */
+	/** Valikkoon-napin tavallinen kuva. */
 	private static final ImageIcon valikkoon_normal = 
 			new ImageIcon("media/valikkoon.png");
+	
+	/** Valikkoon-napin kuva, kun hiiri liikutetaan sen p‰‰lle. */
 	private static final ImageIcon valikkoon_hiiri = 
 			new ImageIcon("media/valikkoon2.png");
 	
-	/** Pelimaailma ja ikkuna. */
+	/** Pelimaailma. */
 	private Pelimaailma pelimaailma;
+	
+	/** Ikkuna. */
 	private Ikkuna ikkuna;
 
 	/**

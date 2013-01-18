@@ -30,22 +30,32 @@ public class Kupla {
 	/** Random arpomista varten. */
 	public static final Random rand = new Random();
 
-	/** Kuplan x- ja y-koordinaatit. */
+	/** Kuplan x-koordinaatti. */
 	private double x;
+	
+	/** Kuplan y-koordinaatti. */
 	private double y;
 
 	/** Maailma, jossa kupla sijaitsee. */
 	private Maailma maailma;
 
-	/** Kuplien kuvat. */
+	/** Punaisen kuplan kuva. */
 	private static final Image punainen = 
 			Toolkit.getDefaultToolkit().createImage("media/punainenkupla.png");
+	
+	/** Sinisen kuplan kuva. */
 	private static final Image sininen =
 			Toolkit.getDefaultToolkit().createImage("media/sininenkupla.png");
+	
+	/** Vihreän kuplan kuva. */
 	private static final Image vihrea =
 			Toolkit.getDefaultToolkit().createImage("media/vihreakupla.png");
+	
+	/** Liilan kuplan kuva. */
 	private static final Image liila =
 			Toolkit.getDefaultToolkit().createImage("media/liilakupla.png");
+	
+	/** Keltaisen kuplan kuva. */
 	private static final Image keltainen =
 			Toolkit.getDefaultToolkit().createImage("media/keltainenkupla.png");
 

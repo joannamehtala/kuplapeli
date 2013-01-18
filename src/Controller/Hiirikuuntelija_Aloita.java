@@ -15,14 +15,18 @@ import View.Ikkuna;
  */
 public class Hiirikuuntelija_Aloita implements MouseListener{
 	
-	/** Aloita-napin kuvat. */
+	/** Aloita-napin normaali kuva. */
 	private static final ImageIcon aloita_normal = 
 			new ImageIcon("media/aloita.png");
+	
+	/** Aloita-napin kuva, kun hiiri liikutetaan sen päälle. */
 	private static final ImageIcon aloita_hiiri = 
 			new ImageIcon("media/aloita2.png");
 	
-	/** Aloitusnäyttö ja ikkuna. */
+	/** Aloitusnäyttö. */
 	private Aloitusnaytto aloitusnaytto;
+	
+	/** Ikkuna. */
 	private Ikkuna ikkuna;
 	
 	/**

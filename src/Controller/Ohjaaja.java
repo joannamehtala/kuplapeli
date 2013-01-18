@@ -22,8 +22,10 @@ public class Ohjaaja implements ActionListener{
 	/** Timer, jonka avulla maailmaa piirret‰‰n uudestaan. */
 	private Timer timer;
 
-	/** Maailma ja pelimaailma. */
+	/** Maailma */
 	private Maailma maailma;
+	
+	/** Pelimaailma */
 	private Pelimaailma pelimaailma;
 
 	/**

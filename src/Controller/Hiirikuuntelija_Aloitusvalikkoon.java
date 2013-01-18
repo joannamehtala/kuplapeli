@@ -16,14 +16,18 @@ import View.Voittonakyma;
 
 public class Hiirikuuntelija_Aloitusvalikkoon implements MouseListener {
 	
-	/** Aloitsvalikkoon-napin kuvat. */
+	/** Aloitusvalikkoon-napin normaali kuva. */
 	private static final ImageIcon aloitusvalikkoon_normal = 
 			new ImageIcon("media/aloitusvalikkoon.png");
+	
+	/** Aloitusvalikkoon-napin kuva, kun hiiri liikutetaan sen p‰‰lle. */
 	private static final ImageIcon aloitusvalikkoon_hiiri = 
 			new ImageIcon("media/aloitusvalikkoon2.png");
 	
-	/** Voitton‰kym‰ ja ikkuna. */
+	/** Voitton‰kym‰. */
 	private Voittonakyma voittonakyma;
+	
+	/** Ikkuna. */
 	private Ikkuna ikkuna;
 	
 	/**

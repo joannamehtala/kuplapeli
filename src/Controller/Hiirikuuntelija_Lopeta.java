@@ -13,9 +13,11 @@ import View.Aloitusnaytto;
  */
 public class Hiirikuuntelija_Lopeta implements MouseListener{
 	
-	/** Lopeta-napin kuvat. */
+	/** Lopeta-napin normaali kuva. */
 	private static final ImageIcon lopeta_normal = 
 			new ImageIcon("media/lopeta.png");
+	
+	/** Lopeta-napin kuva, kun hiiri liikutetaan sen p‰‰lle. */
 	private static final ImageIcon lopeta_hiiri = 
 			new ImageIcon("media/lopeta2.png");
 	

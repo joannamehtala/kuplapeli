@@ -33,8 +33,10 @@ public class Pelimaailma extends JPanel {
 	/** Swingin takia, muuten alkaa valittamaan. */
 	private static final long serialVersionUID = -2718553638694558080L;
 
-	/** Maailma ja ikkuna. */
+	/** Maailma - pelimaailman looginen vastine. */
 	private Maailma maailma;
+	
+	/** Ikkuna, joka sisältää pelimaailman. */
 	private Ikkuna ikkuna;
 
 	/** Pelimaailman taustakuva. */
@@ -44,15 +46,19 @@ public class Pelimaailma extends JPanel {
 	/** Valikkoon-napin kuva. */
 	private ImageIcon valikkoon_normal = new ImageIcon("media/valikkoon.png");
 
-	/** Valikkoon-nappi ja sen reunukset. */
+	/** Valikkoon-nappi. */
 	private JButton valikkoon;
+	
+	/** Napin reunukset. */
 	private Border reunus = BorderFactory.createEmptyBorder();
 
 	/** Ikkunan reunusten koot. */
 	private Insets insets;
 
-	/** Kuplan lähtöpaikka. */
+	/** Kuplan lähtöpaikan x-koordinaatti. */
 	public static final int LAHTO_X = 250;
+	
+	/** Kuplan lähtöpaikan y-koordinaatti. */
 	public static final int LAHTO_Y = 479;
 
 	/** Pelimaailman hiirikuuntelija. */

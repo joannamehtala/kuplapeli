@@ -15,14 +15,18 @@ import View.Ikkuna;
  */
 public class Hiirikuuntelija_Ohjeet implements MouseListener{
 	
-	/** Ohjenapin kuvat. */
+	/** Ohjenapin tavallinen kuva. */
 	private static final ImageIcon ohjeet_normal = 
 			new ImageIcon("media/ohjeet.png");
+	
+	/** Ohjenapin kuva, kun hiiri liikutetaan sen päälle. */
 	private static final ImageIcon ohjeet_hiiri = 
 			new ImageIcon("media/ohjeet2.png");
 	
-	/** Aloitusnäyttö ja ikkuna. */
+	/** Aloitusnäyttö. */
 	private Aloitusnaytto aloitusnaytto;
+	
+	/** Ikkuna. */
 	private Ikkuna ikkuna;
 	
 	/**

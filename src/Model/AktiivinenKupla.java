@@ -13,8 +13,10 @@ public class AktiivinenKupla extends Kupla {
 	/** Random arpomista varten. */
 	public static Random rand = new Random();
 
-	/** Maailma ja kupla */
+	/** Maailma */
 	private Maailma maailma;
+	
+	/** Kupla, jota kohti aktiivinen kupla ammutaan */
 	private Kupla kohde;
 
 	/** Kulma, jossa kupla liikkuu */
