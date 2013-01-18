@@ -216,10 +216,10 @@ public class Maailma {
 		this.tutkiEhjat();
 
 		/* Kuplia lis‰t‰‰n vain, jos maailmassa on ehji‰ kuplia.*/
-		if (!this.ehjat.isEmpty()){
+		if (!this.ehjat.isEmpty() && !this.onVainPutoavia()){
 
 			/* Kuplia lis‰t‰‰n tiettyjen ampumiskertojen v‰lein. */
-			if (this.ampumiskerrat % 50 == 0){
+			if (this.ampumiskerrat % 10 == 0){
 
 				/*
 				 * K‰yd‰‰n l‰pi maailman pisteet ja pudotetaan niit‰ yhden 

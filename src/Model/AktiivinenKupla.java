@@ -170,7 +170,7 @@ public class AktiivinenKupla extends Kupla {
 		/*
 		 * Oikeaan seinään törmäys kääntää kuplan suuntaa.
 		 */
-		if (x > 405){
+		if (x > 410){
 			aste = 180 - aste;
 		}
 

@@ -45,7 +45,7 @@ MouseMotionListener {
 	
 	/** Pelimaailman taustakuva. */
 	private static final Image taustakuva =
-			Toolkit.getDefaultToolkit().createImage("media/taustakuva1.png");
+			Toolkit.getDefaultToolkit().createImage("media/taustakuva.png");
 	
 	/** Valikkoon-napin kuva. */
 	private ImageIcon valikkoon_normal = new ImageIcon("media/valikkoon.png");
