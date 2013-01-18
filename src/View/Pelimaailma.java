@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+import Controller.Hiirikuuntelija_Pelimaailma;
 import Controller.Hiirikuuntelija_Valikkoon;
 import Model.Kupla;
 import Model.Maailma;
@@ -30,36 +31,39 @@ import Model.Maailma;
  * @author 345480
  *
  */
-public class Pelimaailma extends JPanel implements MouseListener,
-MouseMotionListener {
+public class Pelimaailma extends JPanel /*implements MouseListener,
+MouseMotionListener*/ {
 
 	/** Swingin takia, muuten alkaa valittamaan. */
 	private static final long serialVersionUID = -2718553638694558080L;
-	
+
 	/** Maailma ja ikkuna. */
 	private Maailma maailma;
 	private Ikkuna ikkuna;
-	
+
 	/** Kulma, jossa suuntaviiva liikkuu ja johon kupla ammutaan. */
-	private double kulma;
-	
+	//private double kulma;
+
 	/** Pelimaailman taustakuva. */
 	private static final Image taustakuva =
 			Toolkit.getDefaultToolkit().createImage("media/taustakuva.png");
-	
+
 	/** Valikkoon-napin kuva. */
 	private ImageIcon valikkoon_normal = new ImageIcon("media/valikkoon.png");
-	
+
 	/** Valikkoon-nappi ja sen reunukset. */
 	private JButton valikkoon;
 	private Border reunus = BorderFactory.createEmptyBorder();
-	
+
 	/** Ikkunan reunusten koot. */
 	private Insets insets;
-	
+
 	/** Kuplan lähtöpaikka. */
 	public static final int LAHTO_X = 250;
 	public static final int LAHTO_Y = 479;
+
+	/** Pelimaailman hiirikuuntelija. */
+	private Hiirikuuntelija_Pelimaailma hiirikuuntelija;
 
 
 	/**
@@ -75,8 +79,10 @@ MouseMotionListener {
 		this.maailma = new Maailma(this);
 		this.setPreferredSize(new Dimension(maailma.annaLeveys() + 50,
 				maailma.annaKorkeus() + 100));
-		this.addMouseMotionListener(this);
-		this.addMouseListener(this);
+		this.hiirikuuntelija = new Hiirikuuntelija_Pelimaailma(this, 
+				this.maailma);
+		this.addMouseMotionListener(this.hiirikuuntelija);
+		this.addMouseListener(this.hiirikuuntelija);
 		this.setLayout(null);
 
 		/*
@@ -132,7 +138,7 @@ MouseMotionListener {
 		/*
 		 * Piirretään suuntaviiva.
 		 */
-		double radkulma = Math.toRadians(this.kulma);
+		double radkulma = Math.toRadians(this.hiirikuuntelija.annaKulma());
 		double loppuX = LAHTO_X + Math.cos(radkulma)*35;
 		double loppuY = LAHTO_Y + Math.sin(radkulma)*35;
 
@@ -141,38 +147,38 @@ MouseMotionListener {
 	}
 
 
-	/**
-	 * Kun klikataan pelimaailmaa, ammutaan kupla.
-	 */
-	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		this.maailma.ammuNykyinen(this.kulma);
-	}
-
-	/**
-	 * Metodi määrittää, mitä tapahtuu, kun hiirtä liikutetaan ruudulla.
-	 * Seurataan hiiren koordinaatteja ja tallennetaan ne muuttujiin. Niiden
-	 * avulla lasketaan kulma, jonka mukaisesti hiirtä seuraava suuntaviiva 
-	 * liikkuu (ja jossa kupla lähtee liikkeelle).
-	 */
-	@Override
-	public void mouseMoved(MouseEvent arg0) {
-		int hiirix = arg0.getX();
-		int hiiriy = arg0.getY();
-
-		double radkulma = Math.atan2(hiiriy - LAHTO_Y, hiirix - LAHTO_X );
-		this.kulma = Math.toDegrees(radkulma);
-		
-		if (this.kulma > 0 && this.kulma < 90){
-			this.kulma = -5;
-		}
-		
-		if (this.kulma > 90 && this.kulma < 180){
-			this.kulma = -175;
-		}
-		
-		this.repaint();
-	}
+//	/**
+//	 * Kun klikataan pelimaailmaa, ammutaan kupla.
+//	 */
+//	@Override
+//	public void mouseClicked(MouseEvent arg0) {
+//		this.maailma.ammuNykyinen(this.kulma);
+//	}
+//
+//	/**
+//	 * Metodi määrittää, mitä tapahtuu, kun hiirtä liikutetaan ruudulla.
+//	 * Seurataan hiiren koordinaatteja ja tallennetaan ne muuttujiin. Niiden
+//	 * avulla lasketaan kulma, jonka mukaisesti hiirtä seuraava suuntaviiva 
+//	 * liikkuu (ja jossa kupla lähtee liikkeelle).
+//	 */
+//	@Override
+//	public void mouseMoved(MouseEvent arg0) {
+//		int hiirix = arg0.getX();
+//		int hiiriy = arg0.getY();
+//
+//		double radkulma = Math.atan2(hiiriy - LAHTO_Y, hiirix - LAHTO_X );
+//		this.kulma = Math.toDegrees(radkulma);
+//
+//		if (this.kulma > 0 && this.kulma < 90){
+//			this.kulma = -5;
+//		}
+//
+//		if (this.kulma > 90 && this.kulma < 180){
+//			this.kulma = -175;
+//		}
+//
+//		this.repaint();
+//	}
 
 	/**
 	 * Lopettaa pelin. Jos peli on voitettu, siirrytään voittonäkymään, ja jos
@@ -187,53 +193,53 @@ MouseMotionListener {
 		}
 	}
 
-	/**
-	 * MouseListenerin implementointi vaatii tämän metodin, vaikkei se teekään
-	 * mitään.
-	 */
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// tyhjä metodi
-
-	}
-
-	/**
-	 * MouseListenerin implementointi vaatii tämän metodin, vaikkei se teekään
-	 * mitään.
-	 */
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// tyhjä metodi
-
-	}
-
-	/**
-	 * MouseListenerin implementointi vaatii tämän metodin, vaikkei se teekään
-	 * mitään.
-	 */
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// tyhjä metodi
-
-	}
-
-	/**
-	 * MouseListenerin implementointi vaatii tämän metodin, vaikkei se teekään
-	 * mitään.
-	 */
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// tyhjä metodi
-
-	}
-
-	/**
-	 * MouseMotionListenerin implementointi vaatii tämän metodin, vaikkei se
-	 * teekään mitään.
-	 */
-	@Override
-	public void mouseDragged(MouseEvent arg0) {
-		// tyhjä metodi
-
-	}
+//	/**
+//	 * MouseListenerin implementointi vaatii tämän metodin, vaikkei se teekään
+//	 * mitään.
+//	 */
+//	@Override
+//	public void mouseEntered(MouseEvent arg0) {
+//		// tyhjä metodi
+//
+//	}
+//
+//	/**
+//	 * MouseListenerin implementointi vaatii tämän metodin, vaikkei se teekään
+//	 * mitään.
+//	 */
+//	@Override
+//	public void mouseExited(MouseEvent arg0) {
+//		// tyhjä metodi
+//
+//	}
+//
+//	/**
+//	 * MouseListenerin implementointi vaatii tämän metodin, vaikkei se teekään
+//	 * mitään.
+//	 */
+//	@Override
+//	public void mousePressed(MouseEvent arg0) {
+//		// tyhjä metodi
+//
+//	}
+//
+//	/**
+//	 * MouseListenerin implementointi vaatii tämän metodin, vaikkei se teekään
+//	 * mitään.
+//	 */
+//	@Override
+//	public void mouseReleased(MouseEvent arg0) {
+//		// tyhjä metodi
+//
+//	}
+//
+//	/**
+//	 * MouseMotionListenerin implementointi vaatii tämän metodin, vaikkei se
+//	 * teekään mitään.
+//	 */
+//	@Override
+//	public void mouseDragged(MouseEvent arg0) {
+//		// tyhjä metodi
+//
+//	}
 }

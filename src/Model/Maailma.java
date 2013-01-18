@@ -493,6 +493,13 @@ public class Maailma {
 		}
 	}
 
+	/**
+	 * Kertoo, onko maailmassa j‰ljell‰ en‰‰ vain putoavia kuplia. T‰t‰
+	 * tarvitaan, kun lis‰t‰‰n kuplia maailmaan tai arvotaan uusi - ei haluta
+	 * enemp‰‰ kuplia, jos maailman viimeiset kuplat ovat juuri putoamassa.
+	 * @return true, jos maailmassa on j‰ljell‰ vain putoavia kuplia, ja false,
+	 * jos on j‰ljell‰ muitakin.
+	 */
 	public boolean onVainPutoavia(){
 		ArrayList<Kupla> putoavat = new ArrayList<Kupla>();
 
