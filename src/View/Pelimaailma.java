@@ -59,7 +59,7 @@ MouseMotionListener {
 	
 	/** Kuplan lähtöpaikka. */
 	public static final int LAHTO_X = 250;
-	public static final int LAHTO_Y = 475;
+	public static final int LAHTO_Y = 479;
 
 
 	/**
@@ -171,7 +171,6 @@ MouseMotionListener {
 			this.kulma = -175;
 		}
 		
-		System.out.println(this.kulma);
 		this.repaint();
 	}
 

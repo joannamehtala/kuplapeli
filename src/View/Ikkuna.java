@@ -124,7 +124,8 @@ public class Ikkuna extends JFrame {
 		Clip clip = AudioSystem.getClip();
 		AudioInputStream input = AudioSystem.getAudioInputStream(taustamusa);
 		clip.open(input);
-		clip.loop(-1);
+		clip.loop(Clip.LOOP_CONTINUOUSLY);
+		clip.start();
 	}
 
 	/**
