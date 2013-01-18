@@ -219,7 +219,7 @@ public class Maailma {
 		if (!this.ehjat.isEmpty()){
 
 			/* Kuplia lis‰t‰‰n tiettyjen ampumiskertojen v‰lein. */
-			if (this.ampumiskerrat % 10 == 0){
+			if (this.ampumiskerrat % 50 == 0){
 
 				/*
 				 * K‰yd‰‰n l‰pi maailman pisteet ja pudotetaan niit‰ yhden 
@@ -491,8 +491,6 @@ public class Maailma {
 				tutkittava.putoa(muutos);
 			}
 		}
-
-		this.tutkiEhjat();
 	}
 
 	public boolean onVainPutoavia(){

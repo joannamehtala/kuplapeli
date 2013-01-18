@@ -18,10 +18,10 @@ public class Ohjaaja implements ActionListener{
 	 * Edellinenhetki, joka kertoo aikaisemman ajanhetken 
 	 * (t‰t‰ tarvitaan timeria ja kuplien sulavaa liikkumista varten). */
 	private long edellinenhetki;
-	
+
 	/** Timer, jonka avulla maailmaa piirret‰‰n uudestaan. */
 	private Timer timer;
-	
+
 	/** Maailma ja pelimaailma. */
 	private Maailma maailma;
 	private Pelimaailma pelimaailma;
@@ -59,17 +59,13 @@ public class Ohjaaja implements ActionListener{
 		this.edellinenhetki = System.currentTimeMillis();
 
 		if (!this.maailma.peliOhi()){
-			
+
 			/*
 			 * Jos nykyist‰ ammuttavaa kuplaa ei viel‰ ole ammuttu, piirret‰‰n
 			 * uudestaan eik‰ tehd‰ muuta.
 			 */
 			this.maailma.pudota(muutos);
-			this.maailma.tutkiEhjat();
-			if (this.maailma.annaEhjat().isEmpty()){
-				this.pelimaailma.lopetaPeli(true);
-			}
-			
+
 			if (!this.maailma.annaNykyinen().onAmmuttu()){
 				this.pelimaailma.repaint();
 				return;
@@ -79,9 +75,9 @@ public class Ohjaaja implements ActionListener{
 			 * Jos kupla on ammuttu, sit‰ liikutetaan parametrina aiemmin 
 			 * laskettu ajanhetkien erotus ja piirret‰‰n uudestaan.
 			 */
-			
+
 			this.maailma.liikutaNykyista(muutos);
-			
+
 			this.pelimaailma.repaint();
 		}
 	}
