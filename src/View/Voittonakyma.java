@@ -17,7 +17,7 @@ import Controller.Hiirikuuntelija_Aloitusvalikkoon;
 
 /**
  * Voittonäkymä tulee näkyviin, kun peli voitetaan.
- * @author Joanna
+ * @author 345480
  */
 
 @SuppressWarnings("serial")

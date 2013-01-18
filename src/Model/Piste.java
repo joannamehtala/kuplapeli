@@ -2,7 +2,7 @@ package Model;
 
 
 /**
- * Java Point-luokka ottaa parametreina int-tyyppisen x:n ja y:n, mutta
+ * Javan Point-luokka ottaa parametreina int-tyyppisen x:n ja y:n, mutta
  * tarvitsin käyttööni double-tyyppiset, joten tein oman luokan pisteitä varten.
  * @author 345480
  *

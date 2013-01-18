@@ -13,7 +13,6 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.Iterator;
 
-import javax.sound.sampled.Clip;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -164,13 +163,13 @@ MouseMotionListener {
 		double radkulma = Math.atan2(hiiriy - LAHTO_Y, hiirix - LAHTO_X );
 		this.kulma = Math.toDegrees(radkulma);
 		
-//		if (this.kulma > 0 && this.kulma < 90){
-//			this.kulma = -5;
-//		}
-//		
-//		if (this.kulma > 90 && this.kulma < 180){
-//			this.kulma = -175;
-//		}
+		if (this.kulma > 0 && this.kulma < 90){
+			this.kulma = -5;
+		}
+		
+		if (this.kulma > 90 && this.kulma < 180){
+			this.kulma = -175;
+		}
 		
 		System.out.println(this.kulma);
 		this.repaint();

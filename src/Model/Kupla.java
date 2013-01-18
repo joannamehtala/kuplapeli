@@ -221,8 +221,8 @@ public class Kupla {
 
 				/* 
 				 * Jos kuplien keskipisteiden välinen etäisyys on yhtä kuin
-				 * halkaisija (plus 6 jotta aina toimii), niin lisätään kupla
-				 * naapureihin. 
+				 * halkaisija (plus 6 jotta aina varmasti toimii), niin 
+				 * lisätään kupla naapureihin. 
 				 */
 				if (Point2D.distance(this.annaKeskiX(), this.annaKeskiY(), 
 						tutkittava.annaKeskiX(), tutkittava.annaKeskiY()) 

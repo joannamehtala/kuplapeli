@@ -181,8 +181,8 @@ public class AktiivinenKupla extends Kupla {
 		if (y > 50 && y < 465 && 
 				!this.maailma.annaNykyinen().
 				koskeeToista(this.maailma.annaNykyinen())){
-			x += Math.cos(Math.toRadians(aste))*muutos*0.4;
-			y += Math.sin(Math.toRadians(aste))*muutos*0.4;
+			x += Math.cos(Math.toRadians(aste))*muutos*0.5;
+			y += Math.sin(Math.toRadians(aste))*muutos*0.5;
 
 		/*
 		 * Jos kupla on osunut yläreunaan tai törmännyt toiseen, asetetaan
