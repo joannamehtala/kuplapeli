@@ -8,9 +8,6 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.util.Iterator;
 
 import javax.swing.BorderFactory;
@@ -31,8 +28,7 @@ import Model.Maailma;
  * @author 345480
  *
  */
-public class Pelimaailma extends JPanel /*implements MouseListener,
-MouseMotionListener*/ {
+public class Pelimaailma extends JPanel {
 
 	/** Swingin takia, muuten alkaa valittamaan. */
 	private static final long serialVersionUID = -2718553638694558080L;
@@ -40,9 +36,6 @@ MouseMotionListener*/ {
 	/** Maailma ja ikkuna. */
 	private Maailma maailma;
 	private Ikkuna ikkuna;
-
-	/** Kulma, jossa suuntaviiva liikkuu ja johon kupla ammutaan. */
-	//private double kulma;
 
 	/** Pelimaailman taustakuva. */
 	private static final Image taustakuva =
@@ -146,40 +139,6 @@ MouseMotionListener*/ {
 		g2d.drawLine(LAHTO_X, LAHTO_Y, (int) loppuX, (int) loppuY);
 	}
 
-
-//	/**
-//	 * Kun klikataan pelimaailmaa, ammutaan kupla.
-//	 */
-//	@Override
-//	public void mouseClicked(MouseEvent arg0) {
-//		this.maailma.ammuNykyinen(this.kulma);
-//	}
-//
-//	/**
-//	 * Metodi määrittää, mitä tapahtuu, kun hiirtä liikutetaan ruudulla.
-//	 * Seurataan hiiren koordinaatteja ja tallennetaan ne muuttujiin. Niiden
-//	 * avulla lasketaan kulma, jonka mukaisesti hiirtä seuraava suuntaviiva 
-//	 * liikkuu (ja jossa kupla lähtee liikkeelle).
-//	 */
-//	@Override
-//	public void mouseMoved(MouseEvent arg0) {
-//		int hiirix = arg0.getX();
-//		int hiiriy = arg0.getY();
-//
-//		double radkulma = Math.atan2(hiiriy - LAHTO_Y, hiirix - LAHTO_X );
-//		this.kulma = Math.toDegrees(radkulma);
-//
-//		if (this.kulma > 0 && this.kulma < 90){
-//			this.kulma = -5;
-//		}
-//
-//		if (this.kulma > 90 && this.kulma < 180){
-//			this.kulma = -175;
-//		}
-//
-//		this.repaint();
-//	}
-
 	/**
 	 * Lopettaa pelin. Jos peli on voitettu, siirrytään voittonäkymään, ja jos
 	 * se on hävitty, siirrytään häviönäkymään.
@@ -192,54 +151,4 @@ MouseMotionListener*/ {
 			this.ikkuna.vaihdaHavionakymaan();
 		}
 	}
-
-//	/**
-//	 * MouseListenerin implementointi vaatii tämän metodin, vaikkei se teekään
-//	 * mitään.
-//	 */
-//	@Override
-//	public void mouseEntered(MouseEvent arg0) {
-//		// tyhjä metodi
-//
-//	}
-//
-//	/**
-//	 * MouseListenerin implementointi vaatii tämän metodin, vaikkei se teekään
-//	 * mitään.
-//	 */
-//	@Override
-//	public void mouseExited(MouseEvent arg0) {
-//		// tyhjä metodi
-//
-//	}
-//
-//	/**
-//	 * MouseListenerin implementointi vaatii tämän metodin, vaikkei se teekään
-//	 * mitään.
-//	 */
-//	@Override
-//	public void mousePressed(MouseEvent arg0) {
-//		// tyhjä metodi
-//
-//	}
-//
-//	/**
-//	 * MouseListenerin implementointi vaatii tämän metodin, vaikkei se teekään
-//	 * mitään.
-//	 */
-//	@Override
-//	public void mouseReleased(MouseEvent arg0) {
-//		// tyhjä metodi
-//
-//	}
-//
-//	/**
-//	 * MouseMotionListenerin implementointi vaatii tämän metodin, vaikkei se
-//	 * teekään mitään.
-//	 */
-//	@Override
-//	public void mouseDragged(MouseEvent arg0) {
-//		// tyhjä metodi
-//
-//	}
 }

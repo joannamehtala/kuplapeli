@@ -1,24 +1,37 @@
 package Controller;
 
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 
 import Model.Maailma;
 import View.Pelimaailma;
 
-public class Hiirikuuntelija_Pelimaailma implements MouseListener,
-MouseMotionListener {
-	
+/**
+ * Hiirikuuntelija pelimaailmaa varten. Tämä hiirikuuntelija on pelin
+ * hiirikuuntelijoista tärkein, sillä se tunnistaa käyttäjän hiiren sijainnit
+ * ja antaa kulman, jossa kupla ammutaan käyttäjän klikkaamaan suuntaan.
+ * @author 345480
+ *
+ */
+public class Hiirikuuntelija_Pelimaailma extends MouseAdapter {
+
+	/** Pelimaailma ja maailma. */
 	private Pelimaailma pelimaailma;
 	private Maailma maailma;
+
+	/** Kulma, jossa kupla ammutaan ja jonka mukaan suuntaviiva liikkuu. */
 	private double kulma;
-	
+
+	/**
+	 * Hiirikuuntelijan konstruktori, jossa alustetaan attribuutit.
+	 * @param pelimaailma
+	 * @param maailma
+	 */
 	public Hiirikuuntelija_Pelimaailma(Pelimaailma pelimaailma, Maailma maailma){
 		this.pelimaailma = pelimaailma;
 		this.maailma = maailma;
 	}
-	
+
 	/**
 	 * Kun klikataan pelimaailmaa, ammutaan kupla.
 	 */
@@ -41,69 +54,23 @@ MouseMotionListener {
 		double radkulma = Math.atan2(hiiriy - Pelimaailma.LAHTO_Y, hiirix - 
 				Pelimaailma.LAHTO_X );
 		this.kulma = Math.toDegrees(radkulma);
-		
+
 		if (this.kulma > 0 && this.kulma < 90){
 			this.kulma = -5;
 		}
-		
+
 		if (this.kulma > 90 && this.kulma < 180){
 			this.kulma = -175;
 		}
-		
+
 		this.pelimaailma.repaint();
 	}
-	
+
+	/**
+	 * Palauttaa mouseMoved-metodissa lasketun kulman.
+	 * @return
+	 */
 	public double annaKulma(){
 		return this.kulma;
-	}
-
-	/**
-	 * MouseListenerin implementointi vaatii tämän metodin, vaikkei se teekään
-	 * mitään.
-	 */
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// tyhjä metodi
-
-	}
-
-	/**
-	 * MouseListenerin implementointi vaatii tämän metodin, vaikkei se teekään
-	 * mitään.
-	 */
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// tyhjä metodi
-
-	}
-
-	/**
-	 * MouseListenerin implementointi vaatii tämän metodin, vaikkei se teekään
-	 * mitään.
-	 */
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// tyhjä metodi
-
-	}
-
-	/**
-	 * MouseListenerin implementointi vaatii tämän metodin, vaikkei se teekään
-	 * mitään.
-	 */
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// tyhjä metodi
-
-	}
-
-	/**
-	 * MouseMotionListenerin implementointi vaatii tämän metodin, vaikkei se
-	 * teekään mitään.
-	 */
-	@Override
-	public void mouseDragged(MouseEvent arg0) {
-		// tyhjä metodi
-
 	}
 }
