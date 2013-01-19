@@ -1,6 +1,6 @@
 package Controller;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 
@@ -14,7 +14,7 @@ import View.Voittonakyma;
  *
  */
 
-public class Hiirikuuntelija_Aloitusvalikkoon implements MouseListener {
+public class Hiirikuuntelija_Aloitusvalikkoon extends MouseAdapter {
 	
 	/** Aloitusvalikkoon-napin normaali kuva. */
 	private static final ImageIcon aloitusvalikkoon_normal = 
@@ -65,21 +65,5 @@ public class Hiirikuuntelija_Aloitusvalikkoon implements MouseListener {
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		this.voittonakyma.aloitusvalikkoon_asetaKuva(aloitusvalikkoon_normal);
-	}
-	
-	/**
-	 * Tyhjä metodi, jonka MouseListenerin implementointi vaatii.
-	 */
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// tyhjä
-	}
-	
-	/**
-	 * Tyhjä metodi, jonka MouseListenerin implementointi vaatii.
-	 */
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// tyhjä
 	}
 }

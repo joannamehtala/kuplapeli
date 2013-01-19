@@ -1,7 +1,7 @@
 package Controller;
 
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 
@@ -13,22 +13,22 @@ import View.Ikkuna;
  * @author 345480
  *
  */
-public class Hiirikuuntelija_Ohjeet implements MouseListener{
-	
+public class Hiirikuuntelija_Ohjeet extends MouseAdapter{
+
 	/** Ohjenapin tavallinen kuva. */
 	private static final ImageIcon ohjeet_normal = 
 			new ImageIcon("media/ohjeet.png");
-	
+
 	/** Ohjenapin kuva, kun hiiri liikutetaan sen päälle. */
 	private static final ImageIcon ohjeet_hiiri = 
 			new ImageIcon("media/ohjeet2.png");
-	
+
 	/** Aloitusnäyttö. */
 	private Aloitusnaytto aloitusnaytto;
-	
+
 	/** Ikkuna. */
 	private Ikkuna ikkuna;
-	
+
 	/**
 	 * Hiirikuuntelijan konstruktori, jossa alustetaan attribuutit.
 	 * @param aloitusnaytto
@@ -63,26 +63,6 @@ public class Hiirikuuntelija_Ohjeet implements MouseListener{
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		this.aloitusnaytto.ohjeet_asetaKuva(ohjeet_normal);
-		
-	}
 
-	/**
-	 * MouseListenerin implementointi vaatii tämän metodin, vaikkei sitä
-	 * ylikirjoiteta tässä.
-	 */
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// tyhjä metodi
 	}
-
-	/**
-	 * MouseListenerin implementointi vaatii tämän metodin, vaikkei sitä
-	 * ylikirjoiteta tässä.
-	 */
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// tyhjä metodi
-		
-	}
-
 }

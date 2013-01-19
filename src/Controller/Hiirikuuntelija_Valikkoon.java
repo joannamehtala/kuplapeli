@@ -1,6 +1,6 @@
 package Controller;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 
@@ -12,7 +12,7 @@ import View.Pelimaailma;
  * @author Joanna
  *
  */
-public class Hiirikuuntelija_Valikkoon implements MouseListener {
+public class Hiirikuuntelija_Valikkoon extends MouseAdapter {
 
 	/** Valikkoon-napin tavallinen kuva. */
 	private static final ImageIcon valikkoon_normal = 
@@ -62,22 +62,6 @@ public class Hiirikuuntelija_Valikkoon implements MouseListener {
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		this.pelimaailma.valikkoon_asetaKuva(valikkoon_normal);
-	}
-
-	/**
-	 * Tyhjä metodi, jonka MouseListenerin implementointi kuitenkin vaatii.
-	 */
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// tyhjä
-	}
-
-	/**
-	 * Tyhjä metodi, jonka MouseListenerin implementointi kuitenkin vaatii.
-	 */
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// tyhjä
 	}
 }
 

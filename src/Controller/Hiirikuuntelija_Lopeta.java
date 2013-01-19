@@ -1,6 +1,6 @@
 package Controller;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 
@@ -11,7 +11,7 @@ import View.Aloitusnaytto;
  * @author 345480
  *
  */
-public class Hiirikuuntelija_Lopeta implements MouseListener{
+public class Hiirikuuntelija_Lopeta extends MouseAdapter{
 	
 	/** Lopeta-napin normaali kuva. */
 	private static final ImageIcon lopeta_normal = 
@@ -60,23 +60,5 @@ public class Hiirikuuntelija_Lopeta implements MouseListener{
 	public void mouseExited(MouseEvent e) {
 		this.aloitusnaytto.lopeta_asetaKuva(lopeta_normal);
 		
-	}
-
-	/**
-	 * Kun implementoidaan MouseListeneri‰, t‰m‰ metodi tarvitaan, vaikkei sit‰
-	 * k‰ytett‰isik‰‰n mihink‰‰n.
-	 */
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// tyhj‰ metodi
-	}
-
-	/**
-	 * Kun implementoidaan MouseListeneri‰, t‰m‰ metodi tarvitaan, vaikkei sit‰
-	 * k‰ytett‰isik‰‰n mihink‰‰n.
-	 */
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// tyhj‰ metodi
 	}
 }

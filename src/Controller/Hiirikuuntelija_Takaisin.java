@@ -1,6 +1,6 @@
 package Controller;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 
@@ -12,22 +12,22 @@ import View.Ohjenaytto;
  * @author 345480
  *
  */
-public class Hiirikuuntelija_Takaisin implements MouseListener {
-	
+public class Hiirikuuntelija_Takaisin extends MouseAdapter {
+
 	/** Takaisin-napin tavallinen kuva. */
 	private static final ImageIcon takaisin_normal = 
 			new ImageIcon("media/takaisin.png");
-	
+
 	/** Takaisin-napin kuva, kun hiiri liikutetaan sen päälle. */
 	private static final ImageIcon takaisin_hiiri = 
 			new ImageIcon("media/takaisin2.png");
-	
+
 	/** Ohjenäyttö. */
 	private Ohjenaytto ohjenaytto;
-	
+
 	/** Ikkuna. */
 	private Ikkuna ikkuna;
-	
+
 	/**
 	 * Hiirikuuntelijan konstruktori, jossa alustetaan parametreina annetut
 	 * ohjenäyttö ja ikkuna.
@@ -45,7 +45,7 @@ public class Hiirikuuntelija_Takaisin implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		this.ikkuna.vaihdaAloitusnayttoon();
-		
+
 	}
 
 	/**
@@ -64,26 +64,6 @@ public class Hiirikuuntelija_Takaisin implements MouseListener {
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		this.ohjenaytto.takaisin_asetaKuva(takaisin_normal);
-		
-	}
 
-	/**
-	 * MouseListener-luokan implementointi vaatii tämän metodin, vaikka sitä ei
-	 * käytettäisi mihinkään.
-	 */
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// tyhjä metodi
-		
-	}
-
-	/**
-	 * MouseListener-luokan implementointi vaatii tämän metodin, vaikka sitä ei
-	 * käytettäisi mihinkään.
-	 */
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// tyhjä metodi
-		
 	}
 }

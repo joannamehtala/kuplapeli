@@ -53,10 +53,17 @@ public class Hiirikuuntelija_Pelimaailma extends MouseAdapter {
 		int hiirix = arg0.getX();
 		int hiiriy = arg0.getY();
 
+		/*
+		 * Lasketaan hiiren koordinaattien avulla kuplan ampumiskulmaa.
+		 */
 		double radkulma = Math.atan2(hiiriy - Pelimaailma.LAHTO_Y, hiirix - 
 				Pelimaailma.LAHTO_X );
 		this.kulma = Math.toDegrees(radkulma);
 
+		/* 
+		 * Ei haluta, että käyttäjä ampuu kuplan alaspäin, joten asetetaan
+		 * kulmalle tietyt rajat.
+		 */
 		if (this.kulma > 0 && this.kulma < 90){
 			this.kulma = -5;
 		}

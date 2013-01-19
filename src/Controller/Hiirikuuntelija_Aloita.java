@@ -1,7 +1,7 @@
 package Controller;
 
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 
@@ -13,7 +13,7 @@ import View.Ikkuna;
  * @author 345480
  *
  */
-public class Hiirikuuntelija_Aloita implements MouseListener{
+public class Hiirikuuntelija_Aloita extends MouseAdapter {
 	
 	/** Aloita-napin normaali kuva. */
 	private static final ImageIcon aloita_normal = 
@@ -65,24 +65,5 @@ public class Hiirikuuntelija_Aloita implements MouseListener{
 	public void mouseExited(MouseEvent arg0) {
 		this.aloitusnaytto.aloita_asetaKuva(aloita_normal);
 		
-	}
-
-	/**
-	 * MouseListenerin implementointi vaatii t‰m‰n metodin, vaikkei sill‰
-	 * tehd‰k‰‰n mit‰‰n.
-	 */
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// tyhj‰ metodi
-		
-	}
-
-	/**
-	 * MouseListenerin implementointi vaatii t‰m‰n metodin, vaikkei sill‰
-	 * tehd‰k‰‰n mit‰‰n.
-	 */
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// tyhj‰ metodi
 	}
 }
