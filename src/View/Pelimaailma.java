@@ -41,7 +41,7 @@ public class Pelimaailma extends JPanel {
 
 	/** Pelimaailman taustakuva. */
 	private static final Image taustakuva =
-			Toolkit.getDefaultToolkit().createImage("media/taustakuva.png");
+			Toolkit.getDefaultToolkit().createImage("media/taustakuva2.png");
 
 	/** Valikkoon-napin kuva. */
 	private ImageIcon valikkoon_normal = new ImageIcon("media/valikkoon.png");
