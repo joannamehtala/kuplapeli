@@ -17,9 +17,9 @@ public class Superkupla extends AktiivinenKupla{
 
 	/**
 	 * Superkuplan konstruktori.
-	 * @param x, x-koordinaatti
-	 * @param y, y-koordinaatti
-	 * @param maailma, jossa superkupla sijaitsee
+	 * @param x kuplan x-koordinaatti
+	 * @param y kuplan y-koordinaatti
+	 * @param maailma jossa superkupla sijaitsee
 	 */
 	public Superkupla(double x, double y, Maailma maailma) {
 		super(x, y, maailma);

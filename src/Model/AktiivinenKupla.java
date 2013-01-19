@@ -30,9 +30,9 @@ public class AktiivinenKupla extends Kupla {
 
 	/**
 	 * Aktiivisen kuplan konstruktori.
-	 * @param x, x-koordinaatti
-	 * @param y, y-koordinaatti
-	 * @param maailma, jossa kupla sijaitsee
+	 * @param x x-koordinaatti
+	 * @param y y-koordinaatti
+	 * @param maailma jossa kupla sijaitsee
 	 */
 	public AktiivinenKupla(double x, double y, Maailma maailma){
 		super(x, y, maailma);
@@ -208,7 +208,7 @@ public class AktiivinenKupla extends Kupla {
 
 	/**
 	 * Palauttaa tiedon siitä, onko kupla pysähtynyt.
-	 * @return
+	 * @return true, jos on pysähtynyt, false, jos ei
 	 */
 	public boolean onPysahtynyt(){
 		return this.pysahtynyt;
@@ -216,7 +216,7 @@ public class AktiivinenKupla extends Kupla {
 
 	/**
 	 * Palauttaa tiedon siitä, onko kupla ammuttu.
-	 * @return
+	 * @return true, jos on ammuttu, false, jos ei
 	 */
 	public boolean onAmmuttu(){
 		return this.ammuttu;

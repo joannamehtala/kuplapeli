@@ -18,8 +18,8 @@ public class Piste {
 	/**
 	 * Pisteen konstruktori, joka ottaa parametreinaan x:n ja y:n.
 	 * Nämä alustetaan.
-	 * @param x, pisteen x-koordinaatti.
-	 * @param y, pisteen y-koordinaatti.
+	 * @param x pisteen x-koordinaatti.
+	 * @param y pisteen y-koordinaatti.
 	 */
 	public Piste(double x, double y) {
 		this.x = x;

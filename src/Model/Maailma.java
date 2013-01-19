@@ -191,7 +191,7 @@ public class Maailma {
 
 	/**
 	 * Ampuu nykyisen kuplan halutussa kulmassa ja kasvatetaan ampumiskertoja.
-	 * @param kulma, jossa kupla ammutaan liikkeelle
+	 * @param kulma jossa kupla ammutaan liikkeelle
 	 */
 	public void ammuNykyinen(double kulma){
 		this.annaNykyinen().ammu(kulma);
@@ -458,8 +458,8 @@ public class Maailma {
 	/**
 	 * Metodi lis‰‰ parametrina annettuun listaan kaikki parametrina annetun
 	 * kuplan naapurit rekursion avulla.
-	 * @param kupla, lis‰tt‰v‰ kupla
-	 * @param pysyvat, lista niist‰ kuplista, joita ei ole tarkoitus pudottaa
+	 * @param kupla lis‰tt‰v‰ kupla
+	 * @param pysyvat lista niist‰ kuplista, joita ei ole tarkoitus pudottaa
 	 */
 	public void lisaaPysyva(Kupla kupla, ArrayList<Kupla> pysyvat){
 

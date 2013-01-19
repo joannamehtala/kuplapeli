@@ -70,7 +70,7 @@ public class Hiirikuuntelija_Pelimaailma extends MouseAdapter {
 
 	/**
 	 * Palauttaa mouseMoved-metodissa lasketun kulman.
-	 * @return
+	 * @return kulma
 	 */
 	public double annaKulma(){
 		return this.kulma;

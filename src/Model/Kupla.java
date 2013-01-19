@@ -62,7 +62,9 @@ public class Kupla {
 	/**
 	 * Kuplan konstruktori. Alustetaan attribuutit; jokainen kupla on aluksi
 	 * ehjä ja sille arvotaan väri.
-	 * @param x-koordinaatti, y-koordinaatti, kuplan maailma
+	 * @param x x-koordinaatti
+	 * @param y y-koordinaatti
+	 * @param maailma
 	 */
 	public Kupla(double x, double y, Maailma maailma){
 
@@ -194,8 +196,8 @@ public class Kupla {
 
 	/**
 	 * Asetetaan kuplalle uusi sijainti.
-	 * @param x, x-koordinaatti
-	 * @param y, y-koordinaatti
+	 * @param x x-koordinaatti
+	 * @param y y-koordinaatti
 	 */
 	protected void asetaSijainti(double x, double y){
 		this.x = x;
@@ -246,7 +248,7 @@ public class Kupla {
 	/**
 	 * Metodi palauttaa boolean-arvon true, jos parametrina annettu kupla
 	 * on samanvärinen, ja false, jos se on eri värinen.
-	 * @param Kupla toinen
+	 * @param toinen Kupla, johon verrataan
 	 * @return true, jos samanvärinen, false, jos eri värinen
 	 */
 	public boolean onSamanVarinen(Kupla toinen){

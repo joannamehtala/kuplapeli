@@ -126,7 +126,7 @@ public class Aloitusnaytto extends JPanel {
 	 * Metodilla voi asettaa aloitusnapille kuvan. T‰t‰ tarvitaan, jotta
 	 * hiirikuntelijaluokassa voidaan asettaa napille uusi kuva, kun hiirt‰
 	 * liikutetaan napin p‰‰lle.
-	 * @param i, aloitusnapin kuva
+	 * @param i aloitusnapin kuva
 	 */
 	public void aloita_asetaKuva(ImageIcon i){
 		this.aloitus.setIcon(i);
@@ -136,7 +136,7 @@ public class Aloitusnaytto extends JPanel {
 	 * Metodilla voi asettaa ohjenapille kuvan. T‰t‰ tarvitaan, jotta
 	 * hiirikuntelijaluokassa voidaan asettaa napille uusi kuva, kun hiirt‰
 	 * liikutetaan napin p‰‰lle.
-	 * @param i, ohjenapin kuva
+	 * @param i ohjenapin kuva
 	 */
 	public void ohjeet_asetaKuva(ImageIcon i){
 		this.ohjeet.setIcon(i);
@@ -146,7 +146,7 @@ public class Aloitusnaytto extends JPanel {
 	 * Metodilla voi asettaa lopetusnapille kuvan. T‰t‰ tarvitaan, jotta
 	 * hiirikuuntelijaluokassa voidaan asettaa napille uusi kuva, kun hiiri
 	 * siirret‰‰n napin p‰‰lle.
-	 * @param i, lopetusnapin kuva
+	 * @param i lopetusnapin kuva
 	 */
 	public void lopeta_asetaKuva(ImageIcon i){
 		this.lopeta.setIcon(i);
