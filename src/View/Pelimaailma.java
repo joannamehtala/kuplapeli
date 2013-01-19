@@ -24,7 +24,7 @@ import Model.Maailma;
 
 /**
  * 
- * Pelimaailma-luokka: graafinen pelimaailma.
+ * Pelimaailma-luokka: graafinen paneeli, jossa pelaaminen tapahtuu.
  * @author 345480
  *
  */
@@ -74,6 +74,7 @@ public class Pelimaailma extends JPanel {
 	 * @param ikkuna
 	 */
 	public Pelimaailma(Ikkuna ikkuna){
+		
 		this.ikkuna = ikkuna;
 		this.maailma = new Maailma(this);
 		this.setPreferredSize(new Dimension(maailma.annaLeveys() + 50,

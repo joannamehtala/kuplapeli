@@ -25,9 +25,11 @@ import Controller.Hiirikuuntelija_Takaisin;
 @SuppressWarnings("serial")
 public class Ohjenaytto extends JPanel {
 
-	/** Ohjenäkymän taustakuva ja takaisin-napin kuva. */
+	/** Ohjenäkymän taustakuva. */
 	private static Image ohjenakyma = 
 			Toolkit.getDefaultToolkit().createImage("media/ohjenakyma.png");
+	
+	/** Takaisin-napin kuva. */
 	private static ImageIcon takaisin_normal = 
 			new ImageIcon("media/takaisin.png");
 	
@@ -37,8 +39,10 @@ public class Ohjenaytto extends JPanel {
 	/** Näkymän reunusten koot. */
 	private Insets insets;
 	
-	/** Takaisin-nappula ja sen reunukset. */
+	/** Takaisin-nappula. */
 	private JButton takaisin;
+	
+	/** Tyhjä reunus nappia varten. */
 	private Border reunus = BorderFactory.createEmptyBorder();
 	
 

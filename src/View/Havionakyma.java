@@ -22,18 +22,24 @@ import Controller.Hiirikuuntelija_Aloitusvalikkoon;
 @SuppressWarnings("serial")
 public class Havionakyma extends JPanel{
 	
-	/** Häviönäkymän taustakuva ja aloitusvalikkoon-napin kuva. */
+	/** Häviönäkymän taustakuva. */
 	private static Image havionakyma = 
 			Toolkit.getDefaultToolkit().createImage("media/havionakyma.png");
+	
+	/** Aloitusvalikkoon-napin kuva. */
 	private static ImageIcon aloitusvalikkoon_normal = 
 			new ImageIcon("media/aloitusvalikkoon.png");
 	
-	/** Ikkuna ja voittonäkymä. */
+	/** Ikkuna, jossa häviönäkymä sijaitsee. */
 	private Ikkuna ikkuna;
+	
+	/** Voittonäkymä. Tätä tarvitaan tiedon saamiseen. */
 	private Voittonakyma voittonakyma;
 	
-	/** Aloitusvalikkoon-nappi ja sen reunus. */
+	/** Aloitusvalikkoon-nappi. */
 	private JButton aloitusvalikkoon;
+	
+	/** Tyhjä reunus nappia varten. */
 	private Border reunus = BorderFactory.createEmptyBorder();
 	
 	/** Ikkunan reunusten koot. */

@@ -21,25 +21,40 @@ public class Ikkuna extends JFrame {
 	/** CardLayout näyttöjen vaihtelua varten. */
 	private CardLayout naytot;
 
-	/** Eri näytöt. */
+	/** Aloitusnäyttö. */
 	private Aloitusnaytto aloitusnaytto;
+	
+	/** Pelimaailma - paneeli, jossa peliä pelataan. */
 	private Pelimaailma pelimaailma;
+	
+	/** Ohjenäyttö. */
 	private Ohjenaytto ohjenaytto;
+	
+	/** Voittonäkymä. */
 	private Voittonakyma voittonakyma;
+	
+	/** Häviönäkymä. */
 	private Havionakyma havionakyma;
 
-	/** CardLayoutia varten vaaditut Stringit näyttöjä kuvaamaan.*/
+	/** CardLayoutia varten aloitusnäyttöä kuvaava merkkijono.*/
 	private static final String ALOITUSNAYTTO = "aloitusnaytto";
+	
+	/** CardLayoutia varten pelimaailmaa kuvaava merkkijono.*/
 	private static final String PELIMAAILMA = "pelimaailma";
+	
+	/** CardLayoutia varten ohjenäyttöä kuvaava merkkijono.*/
 	private static final String OHJENAYTTO = "ohjenaytto";
+	
+	/** CardLayoutia varten voittonäkymää kuvaava merkkijono.*/
 	private static final String VOITTONAKYMA = "voittonakyma";
+	
+	/** CardLayoutia varten häviönäkymää kuvaava merkkijono.*/
 	private static final String HAVIONAKYMA = "havionakyma";
 
 	/**
-	 * Ikkunan konstruktorissa alustetaan attribuutit ja lisätään ikkunaan
-	 * eri näkymät. Lisäksi asetetaan ikkunan koko ja otsikko ja laitetaan
-	 * se aukeamaan keskeltä. Asetetaan myös ohjelman suoritus loppumaan, kun
-	 * ikkuna suljetaan.
+	 * Ikkunan konstruktori. Luodaan näytöt ja cardlayout ja lisätään ne 
+	 * ikkunaan. Määritellään myös ikkunan koko ja asetetaan se aukeamaan
+	 * ruudun keskeltä.
 	 */
 	public Ikkuna() {
 

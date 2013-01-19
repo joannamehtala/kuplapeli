@@ -63,8 +63,9 @@ public class Maailma {
 
 	/**
 	 * Maailman konstruktori. Alustetaan attribuutit ja luodaan jonkin verran
-	 * kuplia ruudun yläreunaan.
-	 * @param 
+	 * kuplia ruudun yläreunaan sekä pisteet, joihin kuplat ammuttaessa
+	 * asettuvat.
+	 * @param pelimaailma
 	 */
 	public Maailma(Pelimaailma pelimaailma){
 

@@ -28,31 +28,43 @@ import Controller.Hiirikuuntelija_Ohjeet;
 @SuppressWarnings("serial")
 public class Aloitusnaytto extends JPanel {
 
-	/** Attribuutteina aloitusnäytön taustakuva ja nappuloiden kuvat.*/
+	/** Aloitusnäytön taustakuva. */
 	private static final Image kuplapeli =
 			Toolkit.getDefaultToolkit().createImage("media/kuplapeli.png");
+	
+	/** Aloita-napin kuva. */
 	private static final ImageIcon aloita_normal = 
 			new ImageIcon("media/aloita.png");
+	
+	/** Ohjenapin kuva. */
 	private static final ImageIcon ohjeet_normal = 
 			new ImageIcon("media/ohjeet.png");
+	
+	/** Lopeta-napin kuva. */
 	private static final ImageIcon lopeta_normal = 
 			new ImageIcon("media/lopeta.png");
 	
-	/** Asetetaan attribuuteiksi aloitusnäytön nappulat ja niille reunukset.*/
+	/** Aloitusnappi. */
 	private JButton aloitus;
+	
+	/** Ohjenappi. */
 	private JButton ohjeet;
+	
+	/** Lopetusnappi. */
 	private JButton lopeta;
+	
+	/** Näkymätön reunus nappeja varten. */
 	private Border reunus = BorderFactory.createEmptyBorder();
 	
-	/** Attribuutteina vielä ikkuna tiedonsaantia varten sekä ikkunan reunat.*/
+	/** Ikkuna, jossa aloitusnäyttö sijaitsee. */
 	private Ikkuna ikkuna;
+	
+	/** Ikkunan reunusten koot. */
 	private Insets insets;
 
 	/**
-	 * Konstruktorissa alustetaan attribuutteja ja asetetaan paneelille koko.
-	 * LayoutManager on null koska näin voidaan asettaa nappuloille paikat
-	 * pikseleiden avulla. Lisäksi määritellään nappuloiden ominaisuudet ja
-	 * lisätään ne paneeliin.
+	 * Aloitusnäytön konstruktori, jossa alustetaan attribuutit, asetetaan
+	 * paneelille koko ja lisätään sinne napit hiirikuuntelijoineen.
 	 * @param ikkuna
 	 */
 	public Aloitusnaytto(Ikkuna ikkuna){

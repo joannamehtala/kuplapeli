@@ -23,7 +23,7 @@ public class Kupla {
 
 	/** Kertoo, onko kupla ehj‰. */
 	private boolean ehja;
-	
+
 	/** Kertoo, onko kupla t‰ll‰ hetkell‰ putoava. */
 	private boolean putoava;
 
@@ -32,7 +32,7 @@ public class Kupla {
 
 	/** Kuplan x-koordinaatti. */
 	private double x;
-	
+
 	/** Kuplan y-koordinaatti. */
 	private double y;
 
@@ -42,19 +42,19 @@ public class Kupla {
 	/** Punaisen kuplan kuva. */
 	private static final Image punainen = 
 			Toolkit.getDefaultToolkit().createImage("media/punainenkupla.png");
-	
+
 	/** Sinisen kuplan kuva. */
 	private static final Image sininen =
 			Toolkit.getDefaultToolkit().createImage("media/sininenkupla.png");
-	
+
 	/** Vihre‰n kuplan kuva. */
 	private static final Image vihrea =
 			Toolkit.getDefaultToolkit().createImage("media/vihreakupla.png");
-	
+
 	/** Liilan kuplan kuva. */
 	private static final Image liila =
 			Toolkit.getDefaultToolkit().createImage("media/liilakupla.png");
-	
+
 	/** Keltaisen kuplan kuva. */
 	private static final Image keltainen =
 			Toolkit.getDefaultToolkit().createImage("media/keltainenkupla.png");
@@ -128,7 +128,7 @@ public class Kupla {
 			return true;
 		} return false;
 	}
-	
+
 	/**
 	 * Kertoo, onko kupla putoava.
 	 * @return true, jos kupla on putoava, false, jos ei ole.
@@ -136,7 +136,7 @@ public class Kupla {
 	public boolean onPutoava(){
 		return this.putoava;
 	}
-	
+
 	/**
 	 * Asettaa kuplan putoavaksi.
 	 */
@@ -164,15 +164,13 @@ public class Kupla {
 	 * alareunaan.
 	 */
 	public void putoa(long muutos) {
-		
+
 		this.y += muutos*0.4;
-		
+
 		if (this.y >= 450){
 			this.poksahda();
 		}
-		
 	}
-
 
 	/**
 	 * Palauttaa kuplan kuvan v‰rist‰ riippuen.
@@ -213,7 +211,7 @@ public class Kupla {
 		ArrayList<Kupla> naapurit = new ArrayList<Kupla>();
 
 		/* Tarkastelu tehd‰‰n vain, jos maailma ei ole null. */
-		
+
 		if (!(this.maailma == null)){
 
 			/*
@@ -225,7 +223,7 @@ public class Kupla {
 			}
 
 			/* K‰yd‰‰n l‰pi kaikki maailman kuplat. */
-			
+
 			for (int i = 0; i < this.maailma.annaKuplat().size(); i++){
 				Kupla tutkittava = this.maailma.annaKuplat().get(i);
 
@@ -272,7 +270,7 @@ public class Kupla {
 		 */
 		ArrayList<Kupla> poksautettavat = new ArrayList<Kupla>();
 		poksautettavat.add(this);
-		
+
 		/*
 		 * Luodaan jo tarkastettujen kuplien lista (ilman t‰t‰ saadaan aikaan
 		 * StackOverFlowError) ja lis‰t‰‰n tarkastettuihin t‰m‰ kupla.
@@ -286,16 +284,16 @@ public class Kupla {
 		if (this instanceof Superkupla){
 			poksautettavat = this.annaNaapurit();
 
-		/*
-		 * Muulloin...
-		 */
+			/*
+			 * Muulloin...
+			 */
 		} else {
 
 			/*
 			 * K‰yd‰‰n l‰pi poksautettavat kuplat, joita tulee lis‰‰ kun
 			 * silmukkaa k‰yd‰‰n l‰pi
 			 */
-			
+
 			for (int i = 0; i < poksautettavat.size(); i++){
 				Kupla tutkittava = poksautettavat.get(i);
 				ArrayList<Kupla> tempNaapurit = tutkittava.annaNaapurit();
@@ -333,7 +331,7 @@ public class Kupla {
 		 * kuplat, joihin kupla ja sen naapurit ja naapurin naapurin jne.
 		 * koskevat. Sitten vain poksautetaan ne!
 		 */
-		
+
 		if (!(this instanceof Superkupla)){
 
 			/*

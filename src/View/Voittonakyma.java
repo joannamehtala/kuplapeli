@@ -23,18 +23,24 @@ import Controller.Hiirikuuntelija_Aloitusvalikkoon;
 @SuppressWarnings("serial")
 public class Voittonakyma extends JPanel {
 
-	/** Taustakuva ja aloitusvalikkoon-napin kuva. */
+	/** Taustakuva. */
 	private static Image voittonakyma = 
 			Toolkit.getDefaultToolkit().createImage("media/voittonakyma.png");
+	
+	/** Aloitusvalikkoon-napin kuva. */
 	private static ImageIcon aloitusvalikkoon_normal = 
 			new ImageIcon("media/aloitusvalikkoon.png");
 	
-	/** Ikkuna ja sen reunusten mitat. */
+	/** Ikkuna. */
 	private Ikkuna ikkuna;
+	
+	/** Ikkunan reunusten koot. */
 	private Insets insets;
 	
-	/** Aloitusvalikkoon-nappi ja sen reunus. */
+	/** Aloitusvalikkoon-nappi. */
 	private JButton aloitusvalikkoon;
+	
+	/** Tyhjä reunus nappia varten. */
 	private Border reunus = BorderFactory.createEmptyBorder();
 	
 	/**

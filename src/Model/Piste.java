@@ -8,13 +8,13 @@ package Model;
  *
  */
 public class Piste {
-	
+
 	/** Pisteen x-koordinaatti. */
 	private double x;
-	
+
 	/** Pisteen y-koordinaatti. */
 	private double y;
-	
+
 	/**
 	 * Pisteen konstruktori, joka ottaa parametreinaan x:n ja y:n.
 	 * Nämä alustetaan.
@@ -28,20 +28,20 @@ public class Piste {
 
 	/**
 	 * Metodi palauttaa pisteen x-koordinaatin.
-	 * @return
+	 * @return x-koordinaatti
 	 */
 	public double annaX(){
 		return this.x;
 	}
-	
+
 	/**
 	 * Metodi palauttaa pisteen y-koordinaatin.
-	 * @return
+	 * @return y-koordinaatti
 	 */
 	public double annaY(){
 		return this.y;
 	}
-	
+
 	/**
 	 * Asettaa pisteelle sijainnin.
 	 */

@@ -24,13 +24,13 @@ public class Ohjaaja implements ActionListener{
 
 	/** Maailma */
 	private Maailma maailma;
-	
+
 	/** Pelimaailma */
 	private Pelimaailma pelimaailma;
 
 	/**
 	 * Ohjaajan konstruktori. Parametreina annetaan maailma ja pelimaailma.
-	 * Konstruktorissa k‰ynnistet‰‰n ajastin.
+	 * K‰ynnistet‰‰n ajastin.
 	 * @param maailma
 	 * @param pelimaailma
 	 */
@@ -62,12 +62,13 @@ public class Ohjaaja implements ActionListener{
 
 		if (!this.maailma.peliOhi()){
 
+			/* Ensin tutkitaan, onko pudotettavia yksin‰isi‰ kuplia. */
+			this.maailma.pudota(muutos);
+
 			/*
 			 * Jos nykyist‰ ammuttavaa kuplaa ei viel‰ ole ammuttu, piirret‰‰n
 			 * uudestaan eik‰ tehd‰ muuta.
 			 */
-			this.maailma.pudota(muutos);
-
 			if (!this.maailma.annaNykyinen().onAmmuttu()){
 				this.pelimaailma.repaint();
 				return;
