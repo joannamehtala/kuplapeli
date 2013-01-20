@@ -32,8 +32,8 @@ public class Hiirikuuntelija_Aloitusvalikkoon extends MouseAdapter {
 	
 	/**
 	 * Hiirikuuntelijan konstruktori. Alustetaan attribuutit.
-	 * @param voittonakyma
-	 * @param ikkuna
+	 * @param voittonakyma voittonäkymä, jossa aloitusvalikkoon-nappi sijaitsee
+	 * @param ikkuna pelin ikkuna
 	 */
 	public Hiirikuuntelija_Aloitusvalikkoon(Voittonakyma voittonakyma,
 			Ikkuna ikkuna){

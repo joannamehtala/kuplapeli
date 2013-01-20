@@ -50,7 +50,7 @@ public class Ohjenaytto extends JPanel {
 	 * Ohjenäytön konstruktori. Luodaan takaisin-nappi ja asetetaan taustakuva.
 	 * Lisäksi asetetaan haluttu koko ja käytetään tyhjää layoutmanageria jotta
 	 * saadaan nappula asetettua haluttuun paikkaan koordinaattien mukaan.
-	 * @param ikkuna
+	 * @param ikkuna pelin ikkuna
 	 */
 	public Ohjenaytto(Ikkuna ikkuna){
 
@@ -89,7 +89,7 @@ public class Ohjenaytto extends JPanel {
 	 * Metodi, jolla voidaan asettaa takaisin-nappulalle kuva. Tätä tarvitaan,
 	 * jotta hiirikuuntelijaluokassa voidaan asettaa uusi kuva kun hiiri
 	 * liikutetaan nappulan päälle.
-	 * @param i
+	 * @param i takaisin-napin kuva
 	 */
 	public void takaisin_asetaKuva(ImageIcon i){
 		this.takaisin.setIcon(i);

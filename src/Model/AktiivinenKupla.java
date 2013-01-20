@@ -41,7 +41,7 @@ public class AktiivinenKupla extends Kupla {
 
 	/**
 	 * Metodi, jolla kupla ammutaan liikkeelle maailmaan.
-	 * @param aste
+	 * @param aste kulma, jossa kupla liikkuu
 	 */
 	public void ammu(double aste){
 		
@@ -60,7 +60,7 @@ public class AktiivinenKupla extends Kupla {
 
 	/**
 	 * Metodi selvittää, koskeeko kupla jotain toista kuplaa.
-	 * @param aktiivinen
+	 * @param aktiivinen kupla jota tarkastellaan
 	 * @return true, jos koskee toista kuplaa, ja false, jos ei
 	 */
 	public boolean koskeeToista(Kupla aktiivinen){
@@ -99,8 +99,8 @@ public class AktiivinenKupla extends Kupla {
 	/**
 	 * Metodi palauttaa parametreina annettujen kuplan ja pisteen välisen
 	 * etäisyyden neliön.
-	 * @param kupla
-	 * @param piste
+	 * @param kupla kupla, jonka etäisyyttä pisteestä lasketaan
+	 * @param piste piste, jonka etäisyyttä kuplasta lasketaan
 	 * @return etäisyyden neliö
 	 */
 	public double annaEtaisyys(Kupla kupla, Piste piste){
@@ -115,7 +115,7 @@ public class AktiivinenKupla extends Kupla {
 	/**
 	 * Metodi tasaa pysähtyneen kuplan sijainnin niin, että se asettuu
 	 * lähimpään sopivaan pisteeseen.
-	 * @param kupla
+	 * @param kupla jonka sijaintia tasataan
 	 */
 	public void tasaaSijainti(Kupla kupla){
 		
@@ -156,7 +156,7 @@ public class AktiivinenKupla extends Kupla {
 	 * Metodi, jolla kuplaa liikutetaan. Kupla kimpoaa vasemmasta ja oikeasta
 	 * seinästä kulmassa, jonka asteluku on 180 - tulokulma. Liikkuminen
 	 * tapahtuu kasvattamalla x:n ja y:n arvoja haluttuun suuntaan.
-	 * @param muutos
+	 * @param muutos jonka arvolla kuplaa liikutetaan
 	 */
 	public void liiku(long muutos){
 		double x = this.annaX();

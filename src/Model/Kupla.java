@@ -91,7 +91,7 @@ public class Kupla {
 
 	/**
 	 * Palauttaa kuplan nykyisen x-koordinaatin (vasen yläkulma).
-	 * @return x-koord
+	 * @return x-koordinaatti
 	 */
 	public double annaX(){
 		return this.x;
@@ -99,7 +99,7 @@ public class Kupla {
 
 	/**
 	 * Palauttaa kuplan nykyisen y-koordinaatin (vasen yläkulma).
-	 * @return y-koord
+	 * @return y-koordinaatti
 	 */
 	public double annaY(){
 		return this.y;
@@ -148,7 +148,7 @@ public class Kupla {
 
 	/**
 	 * Palauttaa kuplan säteen.
-	 * @return sade
+	 * @return sade kuplan säde
 	 */
 	public double annaSade(){
 		return this.sade;

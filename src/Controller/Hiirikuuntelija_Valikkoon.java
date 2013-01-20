@@ -30,8 +30,8 @@ public class Hiirikuuntelija_Valikkoon extends MouseAdapter {
 
 	/**
 	 * Hiirikuuntelijan konstruktori. Alustetaan attribuutit.
-	 * @param pelimaailma
-	 * @param ikkuna
+	 * @param pelimaailma jossa valikkoon-nappi sijaitsee
+	 * @param ikkuna pelin ikkuna
 	 */
 	public Hiirikuuntelija_Valikkoon(Pelimaailma pelimaailma, Ikkuna ikkuna){
 		this.pelimaailma = pelimaailma;

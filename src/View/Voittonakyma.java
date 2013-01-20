@@ -45,7 +45,7 @@ public class Voittonakyma extends JPanel {
 	
 	/**
 	 * Voitton‰kym‰n konstruktori.
-	 * @param ikkuna
+	 * @param ikkuna jossa voitton‰kym‰ sijaitsee
 	 */
 	public Voittonakyma(Ikkuna ikkuna){
 		
@@ -84,7 +84,7 @@ public class Voittonakyma extends JPanel {
 	 * Metodi, jolla voidaan asettaa takaisin-nappulalle kuva. T‰t‰ tarvitaan,
 	 * jotta hiirikuuntelijaluokassa voidaan asettaa uusi kuva kun hiiri
 	 * liikutetaan nappulan p‰‰lle.
-	 * @param i
+	 * @param i aloitusvalikkoon-napin kuva
 	 */
 	public void aloitusvalikkoon_asetaKuva(ImageIcon i){
 		this.aloitusvalikkoon.setIcon(i);

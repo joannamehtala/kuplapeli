@@ -65,7 +65,7 @@ public class Maailma {
 	 * Maailman konstruktori. Alustetaan attribuutit ja luodaan jonkin verran
 	 * kuplia ruudun yläreunaan sekä pisteet, joihin kuplat ammuttaessa
 	 * asettuvat.
-	 * @param pelimaailma
+	 * @param pelimaailma joka kuvaa maailmaa
 	 */
 	public Maailma(Pelimaailma pelimaailma){
 
@@ -385,7 +385,7 @@ public class Maailma {
 	 * Liikutetaan nykyistä kuplaa parametrina nykyisen hetken ja edellisen
 	 * hetken välinen erotus. Jos kupla on pysähtynyt, arvotaan uusi
 	 * kupla ja mahdollisesti myös lisätään rivi kuplia.
-	 * @param muutos
+	 * @param muutos jonka arvolla kuplaa liikutetaan
 	 */
 	public void liikutaNykyista(long muutos){
 		this.annaNykyinen().liiku(muutos);
@@ -482,7 +482,7 @@ public class Maailma {
 	 * Metodi pudottaa kaikki maailman putoaviksi asetetut kuplat eli käynnistää 
 	 * niiden putoamisen käyttäen apunaan nykyisen hetken ja edellisen hetken 
 	 * välistä erotusta (joka annetaan ohjaaja-luokassa).
-	 * @param muutos
+	 * @param muutos jonka arvolla kuplaa liikutetaan
 	 */
 	public void pudota(long muutos){
 		for (int i = 0; i < this.kuplat.size(); i++){

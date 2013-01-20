@@ -65,7 +65,7 @@ public class Aloitusnaytto extends JPanel {
 	/**
 	 * Aloitusnäytön konstruktori, jossa alustetaan attribuutit, asetetaan
 	 * paneelille koko ja lisätään sinne napit hiirikuuntelijoineen.
-	 * @param ikkuna
+	 * @param ikkuna pelin ikkuna
 	 */
 	public Aloitusnaytto(Ikkuna ikkuna){
 		this.ikkuna = ikkuna;

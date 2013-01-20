@@ -26,8 +26,8 @@ public class Hiirikuuntelija_Pelimaailma extends MouseAdapter {
 
 	/**
 	 * Hiirikuuntelijan konstruktori, jossa alustetaan attribuutit.
-	 * @param pelimaailma
-	 * @param maailma
+	 * @param pelimaailma johon hiirikuuntelija asetetaan
+	 * @param maailma pelin maailma
 	 */
 	public Hiirikuuntelija_Pelimaailma(Pelimaailma pelimaailma, Maailma maailma){
 		this.pelimaailma = pelimaailma;
@@ -77,7 +77,7 @@ public class Hiirikuuntelija_Pelimaailma extends MouseAdapter {
 
 	/**
 	 * Palauttaa mouseMoved-metodissa lasketun kulman.
-	 * @return kulma
+	 * @return kulma jossa kuplaa liikutetaan
 	 */
 	public double annaKulma(){
 		return this.kulma;

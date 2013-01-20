@@ -71,7 +71,7 @@ public class Pelimaailma extends JPanel {
 	 * mouselistenerit. Luodaan myös valikkoon-nappi ja asetetaan sille
 	 * ominaisuuksia.
 	 * 
-	 * @param ikkuna
+	 * @param ikkuna pelin ikkuna, jossa pelimaailma sijaitsee
 	 */
 	public Pelimaailma(Ikkuna ikkuna){
 		
@@ -104,7 +104,7 @@ public class Pelimaailma extends JPanel {
 	/**
 	 * Asettaa valikkoon-napille kuvan (tämän avulla hiirikuuntelijaluokassa
 	 * voidaan muuttaa napin kuvaa).
-	 * @param i
+	 * @param i valikkoon-napin kuva
 	 */
 	public void valikkoon_asetaKuva(ImageIcon i){
 		this.valikkoon.setIcon(i);
@@ -149,6 +149,7 @@ public class Pelimaailma extends JPanel {
 	/**
 	 * Lopettaa pelin. Jos peli on voitettu, siirrytään voittonäkymään, ja jos
 	 * se on hävitty, siirrytään häviönäkymään.
+	 * @param voitettu true, jos peli on voitettu ja false, jos peli hävitty
 	 */
 	public void lopetaPeli(boolean voitettu){
 		if (voitettu){

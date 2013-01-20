@@ -27,7 +27,7 @@ public class Hiirikuuntelija_Lopeta extends MouseAdapter{
 	/**
 	 * Hiirikuuntelijan konstruktori, joka ottaa parametrinaan aloitusnäytön.
 	 * Aloitusnäyttö alustetaan konstruktorissa.
-	 * @param aloitusnaytto
+	 * @param aloitusnaytto aloitusnäyttö, jossa lopeta-nappi sijaitsee
 	 */
 	public Hiirikuuntelija_Lopeta(Aloitusnaytto aloitusnaytto){
 		this.aloitusnaytto = aloitusnaytto;

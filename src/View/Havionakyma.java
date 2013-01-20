@@ -48,8 +48,8 @@ public class Havionakyma extends JPanel{
 	/**
 	 * Häviönäkymän konstruktori, jossa luodaan näkymä ja sijoitetaan siihen
 	 * taustakuva ja aloitusvalikkoon-nappi.
-	 * @param ikkuna
-	 * @param voittonakyma
+	 * @param ikkuna pelin ikkuna
+	 * @param voittonakyma voittonäkymä
 	 */
 	public Havionakyma(Ikkuna ikkuna, Voittonakyma voittonakyma){
 		/*

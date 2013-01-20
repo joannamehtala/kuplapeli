@@ -31,8 +31,8 @@ public class Hiirikuuntelija_Takaisin extends MouseAdapter {
 	/**
 	 * Hiirikuuntelijan konstruktori, jossa alustetaan parametreina annetut
 	 * ohjenäyttö ja ikkuna.
-	 * @param ohjenaytto
-	 * @param ikkuna
+	 * @param ohjenaytto jossa takaisin-nappi sijaitsee
+	 * @param ikkuna pelin ikkuna
 	 */
 	public Hiirikuuntelija_Takaisin(Ohjenaytto ohjenaytto, Ikkuna ikkuna){
 		this.ohjenaytto = ohjenaytto;

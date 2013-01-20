@@ -31,8 +31,8 @@ public class Hiirikuuntelija_Ohjeet extends MouseAdapter{
 
 	/**
 	 * Hiirikuuntelijan konstruktori, jossa alustetaan attribuutit.
-	 * @param aloitusnaytto
-	 * @param ikkuna
+	 * @param aloitusnaytto jossa ohjenappi sijaitsee
+	 * @param ikkuna pelin ikkuna
 	 */
 	public Hiirikuuntelija_Ohjeet(Aloitusnaytto aloitusnaytto, Ikkuna ikkuna){
 		this.aloitusnaytto = aloitusnaytto;

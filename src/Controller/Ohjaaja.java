@@ -31,8 +31,8 @@ public class Ohjaaja implements ActionListener{
 	/**
 	 * Ohjaajan konstruktori. Parametreina annetaan maailma ja pelimaailma.
 	 * K‰ynnistet‰‰n ajastin.
-	 * @param maailma
-	 * @param pelimaailma
+	 * @param maailma johon ohjaaja asetetaan
+	 * @param pelimaailma jota piirret‰‰n uudestaan
 	 */
 	public Ohjaaja(Maailma maailma, Pelimaailma pelimaailma){
 		this.timer = new Timer(5, this);
